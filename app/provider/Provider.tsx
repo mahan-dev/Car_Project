@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ThemeProvider, CssBaseline } from "@mui/material";
-import theme from "@/theme";
-import { ThemeProvide } from "@emotion/react";
+import { CssBaseline } from "@mui/material";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = useState(false);
@@ -16,9 +14,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   if (!mounted) return null; // Avoid rendering until client mounts
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <CssBaseline />
       {children}
-    </ThemeProvider>
+    </>
   );
 }
