@@ -1,0 +1,38 @@
+
+
+.container {
+    display: flex;
+    margin-top: 12rem;
+    justify-content: center;
+    font-size: 0.9rem;
+
+}
+
+.container > ul {
+    display: flex ;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    
+}
+
+.container__listItem{
+    width: 160px;
+    height: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ccc;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+
+    svg {
+        font-size: 1.1rem;
+    }
+}

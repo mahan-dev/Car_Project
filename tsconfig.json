@@ -28,6 +28,7 @@
       "@/modules/*": ["./app/components/modules/*"],
       "@/layout/*": ["./app/components/layout/*"],
       "@/elements/*": ["./app/components/elements/*"],
+      "@/constants/*": ["./app/constants/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts","global.d.ts"],

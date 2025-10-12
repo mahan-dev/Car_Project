@@ -1,11 +1,11 @@
 import React from "react";
-import Banner from "@/modules/Banner";
+import Categories from "@/app/components/modules/Categories";
 
 const HomePage = () => {
   return (
     <section>
       <div>
-        <Banner />
+        <Categories />
       </div>
     </section>
   );
