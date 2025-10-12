@@ -1,5 +1,3 @@
-
-
 .container {
     display: flex;
     margin-top: 12rem;
@@ -8,15 +6,15 @@
 
 }
 
-.container > ul {
-    display: flex ;
+.container>ul {
+    display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
-    
+
 }
 
-.container__listItem{
+.card__listItem {
     width: 160px;
     height: 50px;
     display: flex;
@@ -34,5 +32,17 @@
 
     svg {
         font-size: 1.1rem;
+    }
+}
+
+.container__card {
+    width: 160px;
+
+    img {
+        border-radius: 0.3rem;
+        -webkit-border-radius: 0.3rem;
+        -moz-border-radius: 0.3rem;
+        -ms-border-radius: 0.3rem;
+        -o-border-radius: 0.3rem;
     }
 }
