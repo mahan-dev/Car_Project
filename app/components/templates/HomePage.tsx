@@ -1,6 +1,7 @@
 import React from "react";
 import Categories from "@/app/components/modules/Categories";
 import CarBanner from "@/modules/CarBanner";
+import CarGallery from "@/modules/CarGallery";
 
 const HomePage = () => {
   return (
@@ -8,6 +9,7 @@ const HomePage = () => {
       <div>
         <Categories />
         <CarBanner />
+        <CarGallery />
       </div>
     </section>
   );

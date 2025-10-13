@@ -1,5 +1,5 @@
 .container {
-    margin-top: 4rem;
+    margin-top: 6rem;
 }
 
 
@@ -7,7 +7,8 @@
     display: flex;
     gap: 1rem;
     margin-top: 2rem;
-    height: 200px;
+    /* align-items: stretch; */
+    /* height: 200px; */
 }
 
 .container__left{
@@ -17,4 +18,18 @@
 
 .container__left, .container__right{ 
     width: 50%;
+}
+
+.container__right{
+    position: relative;
+    /* min-height: 300px; */
+}
+
+.container__right > img {
+    height: 200px;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
 }

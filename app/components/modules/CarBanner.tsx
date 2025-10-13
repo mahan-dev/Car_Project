@@ -28,7 +28,7 @@ const CarBanner = () => {
         </div>
 
         <div className={styles.container__right}>
-          <Image src={carImage} alt="" sizes="100vw" style={{ width: "100%", height: "auto" }}/>
+          <Image src={carImage} alt="" fill style={{ objectFit:"cover" }}/>
         </div>
       </div>
     </div>

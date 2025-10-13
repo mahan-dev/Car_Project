@@ -27,7 +27,7 @@ const Layout = ({ children }: LayoutProps) => {
         <input type="text" placeholder="search" />
       </header>
 
-      <main>{children}</main>
+      <main className={styles.main}>{children}</main>
 
       {/* <footer>footer</footer> */}
     </Container>
