@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "@/layout/styles/layout.module.css";
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import steeringWheel from "@/images/steering-wheel.svg";
+import Link from "next/link";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -21,7 +22,7 @@ const Layout = ({ children }: LayoutProps) => {
       <header className={styles.header}>
         <div className={styles.header__left}>
           <Image src={steeringWheel} width={20} height={20} alt="" />
-          signIn
+          <Button href="/signin">Sign in</Button>
         </div>
 
         <input type="text" placeholder="search" />
