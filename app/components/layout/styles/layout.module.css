@@ -5,7 +5,7 @@
     border-radius: 0.3rem;
     display: flex;
     justify-content: space-between;
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     -webkit-border-radius: 0.3rem;
     -moz-border-radius: 0.3rem;
     -ms-border-radius: 0.3rem;
@@ -13,8 +13,8 @@
 }
 
 .header input {
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
-   background-color: rgb(216, 216, 216);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    background-color: rgb(216, 216, 216);
 }
 
 .header__left {
@@ -25,5 +25,25 @@
 
 
 .main {
-    height: 100vh;
+    min-height: 100vh;
+}
+
+.footer {
+    display: flex;
+    margin: 2rem 0;
+    padding: 1rem;
+    gap: 2rem;
+    justify-content: space-between;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    border-radius: 0.3rem;
+
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+
+    ul {
+        display: flex;
+        gap: 1rem;
+    }
 }

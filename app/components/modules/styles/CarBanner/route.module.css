@@ -11,25 +11,42 @@
     /* height: 200px; */
 }
 
-.container__left{
+.container__left {
     text-align: justify;
     line-height: 1.5;
 }
 
-.container__left, .container__right{ 
+.container__left,
+.container__right {
     width: 50%;
 }
 
-.container__right{
+.container__right {
     position: relative;
     /* min-height: 300px; */
 }
 
-.container__right > img {
+.container__right>img {
     height: 200px;
     border-radius: 0.3rem;
     -webkit-border-radius: 0.3rem;
     -moz-border-radius: 0.3rem;
     -ms-border-radius: 0.3rem;
     -o-border-radius: 0.3rem;
+}
+
+@media only screen and (max-width: 992px) {
+    .container__content {
+        flex-direction: column;
+    }
+
+    .container__right {
+        height: 200px;
+        order: -1;
+    }
+
+    .container__left,
+    .container__right {
+        width: auto;
+    }
 }

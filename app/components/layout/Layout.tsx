@@ -29,7 +29,15 @@ const Layout = ({ children }: LayoutProps) => {
 
       <main className={styles.main}>{children}</main>
 
-      {/* <footer>footer</footer> */}
+      <footer className={styles.footer}>
+        <ul>
+          <li>About-us</li>
+          <li>adv-services</li>
+          <li>agencies</li>
+        </ul>
+
+        <p> &copy; All copy rights reserved to Auto - Car </p>
+      </footer>
     </Container>
   );
 };
