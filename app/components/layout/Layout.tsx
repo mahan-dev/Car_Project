@@ -24,7 +24,7 @@ const Layout = ({ children }: LayoutProps) => {
           signIn
         </div>
 
-        <input type="text" />
+        <input type="text" placeholder="search" />
       </header>
 
       <main>{children}</main>

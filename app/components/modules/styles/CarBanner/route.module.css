@@ -1,0 +1,20 @@
+.container {
+    margin-top: 4rem;
+}
+
+
+.container__content {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    height: 200px;
+}
+
+.container__left{
+    text-align: justify;
+    line-height: 1.5;
+}
+
+.container__left, .container__right{ 
+    width: 50%;
+}
