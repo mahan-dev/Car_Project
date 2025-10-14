@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import React from "react";
 import Layout from "@/layout/Layout";
 import { Metadata } from "next";
+import Provider from "@/provider/Provider";
 
 const roboto = Roboto({
   weight: "400",
@@ -22,7 +23,9 @@ export default function RootLayout({ children }: Readonly<LayoutProps>) {
   return (
     <html lang="en" dir="ltr">
       <body className={roboto.className}>
-        <Layout>{children}</Layout>
+        <Provider>
+          <Layout>{children}</Layout>
+        </Provider>
       </body>
     </html>
   );

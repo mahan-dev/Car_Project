@@ -32,6 +32,8 @@
       "@/models/*": ["./app/models/*"],
       "@/helper/*": ["./app/helper/*"],
       "@/utils/*": ["./app/utils/*"],
+      "@/theme/*": ["./app/theme/*"],
+      "@/provider/*": ["./app/provider/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts","global.d.ts"],

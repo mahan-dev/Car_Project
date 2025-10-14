@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import styles from "@/modules/styles/form/route.module.css";
 import { useForm } from "react-hook-form";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import { FormValues } from "@/modules/interface/FormValues";
 
 interface FormProps {
@@ -29,14 +29,15 @@ const Form = ({ title }: FormProps) => {
       <h2>{title}</h2>
 
       <form className={styles.container__form} onSubmit={handleSubmit(submitHandler)}>
-        <input          
+        <TextField          
           type="text"
           name="email"
           onChange={changeHandler}
           value={formData.email}
           placeholder="email"
+          
         />
-        <input
+        <TextField
           type="password"
           name="password"
           onChange={changeHandler}
