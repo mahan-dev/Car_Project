@@ -1,14 +1,27 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { SetStateAction } from "react";
 import styles from "@/modules/styles/form/route.module.css";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormSetValue } from "react-hook-form";
 import { Button, TextField } from "@mui/material";
 import { FormValues } from "@/modules/interface/FormValues";
+import { authForm } from "@/templates/interface/authForm";
 
 interface FormProps {
   title: string;
+  button: string;
+  rePassword?: boolean;
+  submitHandler: (e: React.FormEvent) => void;
+  form: authForm;
+  setForm: UseFormSetValue<authForm>
 }
-const Form = ({ title }: FormProps) => {
+const Form = ({
+  title,
+  button,
+  rePassword,
+  submitHandler,
+  form,
+  setForm,
+}: FormProps) => {
   const { handleSubmit, setValue, watch } = useForm<FormValues>({
     defaultValues: {
       email: "",
@@ -16,36 +29,45 @@ const Form = ({ title }: FormProps) => {
     },
   });
 
-  const formData = watch();
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setValue(name as keyof FormValues, value);
-  };
+    const nameType = name as keyof FormValues;
 
-  const submitHandler = () => {};
+    setForm(nameType, value);
+  };
 
   return (
     <div className={styles.container}>
       <h2>{title}</h2>
 
-      <form className={styles.container__form} onSubmit={handleSubmit(submitHandler)}>
-        <TextField          
+      <form className={styles.container__form} onSubmit={submitHandler}>
+        <TextField
           type="text"
           name="email"
           onChange={changeHandler}
-          value={formData.email}
+          value={form.email}
           placeholder="email"
-          
         />
         <TextField
           type="password"
           name="password"
           onChange={changeHandler}
-          value={formData.password}
+          value={form.password}
           placeholder="password"
         />
+
+        {rePassword && (
+          <TextField
+            type="password"
+            name="rePassword"
+            onChange={changeHandler}
+            value={form.rePassword}
+            placeholder="rePassword"
+          />
+        )}
+
         <Button sx={{ width: "100%" }} variant="outlined" type="submit">
-          SiginIn
+          {button}
         </Button>
       </form>
     </div>
