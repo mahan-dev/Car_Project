@@ -31,6 +31,7 @@
       "@/constants/*": ["./app/constants/*"],
       "@/models/*": ["./app/models/*"],
       "@/helper/*": ["./app/helper/*"],
+      "@/utils/*": ["./app/utils/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts","global.d.ts"],
