@@ -1,16 +1,18 @@
 import axios from "axios";
 import { authForm } from "@/templates/interface/authForm";
 import toast from "react-hot-toast";
+import { SetStateAction } from "react";
 
 interface SignUp {
   form: authForm;
+  setLoading: React.Dispatch<SetStateAction<boolean>>;
 }
 interface SignUpResult {
   status: string;
   message: string;
 }
 
-export const signupHandler = async ({ form }: SignUp) => {
+export const signupHandler = async ({ form, setLoading }: SignUp) => {
   if (!form.email || !form.password || !form.rePassword) {
     toast.error("please fill out fields", { duration: 2000 });
     return;
@@ -27,6 +29,7 @@ export const signupHandler = async ({ form }: SignUp) => {
     return;
   }
   try {
+    setLoading(true);
     const res = await axios.post<SignUpResult>("/api/signup", form);
     console.log(res);
     if (res.status === 200) {
@@ -38,5 +41,7 @@ export const signupHandler = async ({ form }: SignUp) => {
     const errorMessage = error?.response?.data.error;
     toast.error(errorMessage, { duration: 2000 });
     return false;
+  } finally {
+    setLoading(false);
   }
 };

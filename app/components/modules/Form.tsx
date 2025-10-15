@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+import React, { SetStateAction } from "react";
 import styles from "@/modules/styles/form/route.module.css";
-import {  UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue } from "react-hook-form";
 import { Button, TextField } from "@mui/material";
 import { FormValues } from "@/modules/interface/FormValues";
 import { authForm } from "@/templates/interface/authForm";
+import Loader from "@/components/loader/Loader";
 
 interface FormProps {
   title: string;
@@ -12,7 +13,9 @@ interface FormProps {
   rePassword?: boolean;
   submitHandler: (e: React.FormEvent) => void;
   form: authForm;
-  setForm: UseFormSetValue<authForm>
+  setForm: UseFormSetValue<authForm>;
+  loading: boolean;
+  setLoading: React.Dispatch<SetStateAction<boolean>>;
 }
 const Form = ({
   title,
@@ -21,9 +24,8 @@ const Form = ({
   submitHandler,
   form,
   setForm,
+  loading,
 }: FormProps) => {
-
-
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     const nameType = name as keyof FormValues;
@@ -60,10 +62,13 @@ const Form = ({
             placeholder="rePassword"
           />
         )}
-
-        <Button sx={{ width: "100%" }} variant="outlined" type="submit">
-          {button}
-        </Button>
+        {loading ? (
+          <Loader />
+        ) : (
+          <Button sx={{ width: "100%" }} variant="outlined" type="submit">
+            {button}
+          </Button>
+        )}
       </form>
     </div>
   );

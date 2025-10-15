@@ -1,5 +1,5 @@
 "use client";
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import styles from "@/modules/styles/signin/route.module.css";
 import Form from "@/modules/Form";
 import Link from "next/link";
@@ -10,6 +10,8 @@ import { signinHandler } from "@/helper/signinHandler";
 import { useRouter } from "next/navigation";
 
 const SigninPage = () => {
+  const [loading, setLoading] = useState<boolean>(false);
+
   const { watch, setValue } = useForm<authForm>({
     defaultValues: {
       email: "",
@@ -21,7 +23,7 @@ const SigninPage = () => {
   const router = useRouter();
   const submitHandler = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
-    const res = await signinHandler({ form });
+    const res = await signinHandler({ form, setLoading });
     if (res) router.push("/dashboard");
   };
   return (
@@ -32,6 +34,8 @@ const SigninPage = () => {
         form={form}
         setForm={setValue}
         submitHandler={submitHandler}
+        loading={loading}
+        setLoading={setLoading}
       />
       <Typography sx={{ mt: "1rem" }} component={"p"}>
         {"don't have an account ?"}
