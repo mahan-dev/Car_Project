@@ -1,7 +1,7 @@
 "use client";
-import React, { SetStateAction } from "react";
+import React from "react";
 import styles from "@/modules/styles/form/route.module.css";
-import { useForm, UseFormSetValue } from "react-hook-form";
+import {  UseFormSetValue } from "react-hook-form";
 import { Button, TextField } from "@mui/material";
 import { FormValues } from "@/modules/interface/FormValues";
 import { authForm } from "@/templates/interface/authForm";
@@ -22,12 +22,7 @@ const Form = ({
   form,
   setForm,
 }: FormProps) => {
-  const { handleSubmit, setValue, watch } = useForm<FormValues>({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

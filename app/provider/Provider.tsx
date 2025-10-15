@@ -5,6 +5,7 @@ import theme from "@/theme/theme";
 
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
+import { Toaster } from "react-hot-toast";
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -25,6 +26,7 @@ const Provider = ({ children }: ProviderProps) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {children}
+        <Toaster />
       </ThemeProvider>
     </>
   );

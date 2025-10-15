@@ -28,15 +28,15 @@ export const authOptions: AuthOptions = {
         }
 
         if (!email || !password) {
-          throw new Error("لطفا اطلاعات خواسته شده را وارد کنید");
+          throw new Error("Please fill out fields");
         }
         const user = await UserModel.findOne({ email });
         if (!user) {
-          throw new Error("لطفا ابتدا ثبت نام کنید");
+          throw new Error("Please register first");
         }
         const isValid = await verifyPassword(password, user.password);
         if (!isValid) {
-          throw new Error("ایمیل یا رمز عبور اشتباه است");
+          throw new Error("Email or Password is incorrect");
         }
         return {
           id: user._id.toString(),

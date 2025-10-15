@@ -22,8 +22,9 @@ const SignupPage = () => {
 
   const submitHandler = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    const res = await signupHandler();
-    console.log(res);
+    const res = await signupHandler({form});
+    console.log(res)
+    
   };
 
   useEffect(() => {
