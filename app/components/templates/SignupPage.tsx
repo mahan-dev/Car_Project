@@ -8,6 +8,7 @@ import styles from "@/modules/styles/signup/route.module.css";
 import { signupHandler } from "@/helper/signupHandler";
 import { useForm } from "react-hook-form";
 import { authForm } from "@/templates/interface/authForm";
+import { useRouter } from "next/navigation";
 
 const SignupPage = () => {
   const { watch, setValue } = useForm<authForm>({
@@ -20,11 +21,11 @@ const SignupPage = () => {
 
   const form = watch();
 
+  const router = useRouter();
   const submitHandler = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    const res = await signupHandler({form});
-    console.log(res)
-    
+    const res = await signupHandler({ form });
+    if (res) router.push("/signin");
   };
 
   useEffect(() => {

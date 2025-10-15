@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 interface SigninProps {
   form: authForm;
 }
-
 export const signinHandler = async ({
   form,
 }: SigninProps): Promise<boolean> => {

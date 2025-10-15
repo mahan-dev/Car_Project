@@ -13,7 +13,7 @@ export const POST = async (req: Request) => {
     const user = await UserModel.findOne({ email });
     if (user)
       return NextResponse.json(
-        { status: "حساب کاربری وجود دارد" },
+        { status: "Failed", error: "This user exists" },
         { status: 422 }
       );
 
@@ -27,7 +27,7 @@ export const POST = async (req: Request) => {
     return NextResponse.json(
       {
         status: "Success",
-        message: "با موفیت انجام شد",
+        message: "successfully done",
         data: newUser,
       },
       { status: 200 }
@@ -36,7 +36,7 @@ export const POST = async (req: Request) => {
     return NextResponse.json(
       {
         status: "Failed",
-        error: "مشکلی در سرور رخ داده",
+        error: "Server side error",
       },
       { status: 500 }
     );
