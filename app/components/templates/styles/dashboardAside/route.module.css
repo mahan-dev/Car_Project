@@ -1,0 +1,26 @@
+.container {
+    display:  flex;
+    margin-top: 3rem;
+    gap: 2rem;
+}
+
+.container__aside {
+    width: 250px;
+    padding: 1rem;
+    border: 1px solid #e1e1e1;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+}
+
+.aside__title{
+    display: flex;
+    align-items: center; 
+    gap: 1rem;
+    margin: 1rem 0;
+    svg {
+        font-size: 1.5rem;
+    }
+}
