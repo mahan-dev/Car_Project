@@ -1,28 +1,28 @@
 import axios from "axios";
-import { authForm } from "@/templates/interface/authForm";
 import toast from "react-hot-toast";
-import { SetStateAction } from "react";
-
-interface SignUp {
-  form: authForm;
-  setLoading: React.Dispatch<SetStateAction<boolean>>;
-}
-interface SignUpResult {
-  status: string;
-  message: string;
-}
+import { SignUp, SignUpResult } from "@/helper/interface/signup/interface";
+import { emailRegex } from "@/constants/signup-helper/regex";
 
 export const signupHandler = async ({ form, setLoading }: SignUp) => {
-  if (!form.email || !form.password || !form.rePassword) {
+  const { email, password, rePassword } = form;
+  if (!email || !password || !rePassword) {
     toast.error("please fill out fields", { duration: 2000 });
     return;
   }
-  if (form.password !== form.rePassword) {
+
+  const isEmail = emailRegex.test(email);
+
+  if (!isEmail) {
+    toast.error("Please enter a valid email", { duration: 2000 });
+    return;
+  }
+
+  if (password !== rePassword) {
     toast.error("passwords are not match");
     return;
   }
 
-  if (form.password.length <= 4) {
+  if (password.length <= 4) {
     toast.error("password should be more than 4 character", {
       duration: 2000,
     });
