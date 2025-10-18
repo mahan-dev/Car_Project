@@ -59,7 +59,7 @@ const Form = ({
             name="rePassword"
             onChange={changeHandler}
             value={form.rePassword}
-            placeholder="rePassword"
+            placeholder="re Password"
           />
         )}
         {loading ? (

@@ -14,13 +14,13 @@ const AsideContent = () => {
   return (
     <ul className={styles.list}>
       <li>
-        <Link href={""}>
+        <Link href={"/dashboard"}>
           <MdAccountCircle />
           Account
         </Link>
       </li>
       <li>
-        <Link href={""}>
+        <Link href={"/dashboard/my-profiles"}>
           <RiFileList3Fill />
           My profiles
         </Link>
@@ -28,7 +28,7 @@ const AsideContent = () => {
       <li>
         <Link href={""}>
           <IoMdSettings />
-          settings
+          Settings
         </Link>
       </li>
       <li>

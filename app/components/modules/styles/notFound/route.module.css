@@ -1,0 +1,25 @@
+
+
+
+.container{
+    display: flex ;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 8rem;
+    color: red;
+    text-align: center;
+    h2 {
+        
+        font-size: clamp(1rem , 1vw + 1.2rem, 1.6rem);
+    }
+}
+
+
+
+
+@media only screen  and (max-width:768px) {
+    .container_image-wrapper img{
+        width: 200px;
+        height: 150px;
+    }
+}
