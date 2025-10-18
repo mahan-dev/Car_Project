@@ -15,8 +15,16 @@
         -o-border-radius: 0.3rem;
 
         svg {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
+    }
+}
+
+.list li:last-child {
+    color: red;
+    &:hover {
+       background: rgba(255, 0, 0, 0.15);
+        
     }
 }
 
@@ -34,6 +42,6 @@
 }
 
 .list li:hover {
-    background: #d7d7d7;
+    background: #d7d7d792;
     
 }

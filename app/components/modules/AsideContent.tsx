@@ -1,11 +1,15 @@
+"use client";
 import React from "react";
+import Link from "next/link";
 
 import styles from "@/modules/styles/asideContent/route.module.css";
 import { MdAccountCircle } from "react-icons/md";
 import { RiFileList3Fill } from "react-icons/ri";
 import { IoMdSettings } from "react-icons/io";
 import { BsFillBookmarkHeartFill } from "react-icons/bs";
-import Link from "next/link";
+import { IoExit } from "react-icons/io5";
+import { signOut } from "next-auth/react";
+
 const AsideContent = () => {
   return (
     <ul className={styles.list}>
@@ -31,6 +35,12 @@ const AsideContent = () => {
         <Link href={""}>
           <BsFillBookmarkHeartFill />
           Whish list
+        </Link>
+      </li>
+      <li>
+        <Link href={""} onClick={() => signOut()}>
+          <IoExit />
+          Exit
         </Link>
       </li>
     </ul>
