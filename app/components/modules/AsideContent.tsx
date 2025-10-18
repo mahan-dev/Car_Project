@@ -11,28 +11,30 @@ import { IoExit } from "react-icons/io5";
 import { signOut } from "next-auth/react";
 
 const AsideContent = () => {
+  const url = "/dashboard/";
+
   return (
     <ul className={styles.list}>
       <li>
-        <Link href={"/dashboard"}>
+        <Link href={`${url}`}>
           <MdAccountCircle />
           Account
         </Link>
       </li>
       <li>
-        <Link href={"/dashboard/my-profiles"}>
+        <Link href={`${url}my-profiles`}>
           <RiFileList3Fill />
           My profiles
         </Link>
       </li>
       <li>
-        <Link href={""}>
+        <Link href={`${url}settings`}>
           <IoMdSettings />
           Settings
         </Link>
       </li>
       <li>
-        <Link href={""}>
+        <Link href={`${url}whish-list`}>
           <BsFillBookmarkHeartFill />
           Whish list
         </Link>
