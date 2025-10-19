@@ -6,7 +6,7 @@ interface FetcherResponse {
   make: string;
   name: string;
 }
-interface Car {
+export interface Car {
   data: FetcherResponse[];
 }
 

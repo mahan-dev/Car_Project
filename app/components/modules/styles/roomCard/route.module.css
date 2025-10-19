@@ -1,0 +1,9 @@
+
+.card {
+    padding: 1rem;
+}
+
+
+.card__image {
+    border-radius: 0.3rem;
+}
