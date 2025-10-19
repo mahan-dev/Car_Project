@@ -1,33 +1,53 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
-import { Card } from "@mui/material";
-import { Car } from "@/helper/dataFetcher";
+import { Button, Card } from "@mui/material";
+import { FetcherResponse } from "@/helper/dataFetcher";
 import styles from "@/modules/styles/roomCard/route.module.css";
 
-const RoomCard = ({ data }: Car) => {
-  return data.map((item) => (
-    <Card
-      key={item.id}
-      sx={{ width: "200px", boxShadow: "0 0 12px rgba(0,0,0,0.1)" }}
-      className={styles.card}
-    >
-      <div key={item.id}>
-        <span>{item.make}</span>
+import { TbListDetails } from "react-icons/tb";
 
-        <Image
-        className={styles.card__image}
-          src={`/images/showRoom/${item.make}.jpg`}
-          sizes="100vw"
-          width={200}
-          height={110}
-          style={{ width: "100%", height: "200px" }}
-          alt={item.name}
-        />
+interface RoomCardProps {
+  Models: FetcherResponse[];
+}
+const RoomCard = ({ Models }: RoomCardProps) => {
+  console.log(Models);
 
-        <span>model {item.name}</span>
-      </div>
-    </Card>
-  ));
+  return (
+    <>
+      {Models &&
+        Models.map((item) => (
+          <Card
+            key={item.model_name}
+            sx={{ width: "200px", boxShadow: "0 0 12px rgba(0,0,0,0.1)" }}
+            className={styles.card}
+          >
+            <Image
+              className={styles.card__image}
+              src={`/images/showRoom/${item.model_make_id.toLowerCase()}.jpg`}
+              sizes="100vw"
+              width={200}
+              height={110}
+              style={{ width: "100%", height: "200px" }}
+              alt={item.model_make_id.toString()}
+            />
+
+            <span className={styles.card__details}>
+              <p>
+                {item.model_make_id} {item.model_name}
+              </p>
+
+              <Button
+                href={`/detail/${item.model_name}`}
+                className={styles.card__button}
+                sx={{ bgcolor: "black", color: "white" }}
+              >
+                <TbListDetails />
+              </Button>
+            </span>
+          </Card>
+        ))}
+    </>
+  );
 };
 
 export default RoomCard;

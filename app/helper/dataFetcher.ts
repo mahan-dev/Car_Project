@@ -1,31 +1,25 @@
 import axios from "axios";
 
-interface FetcherResponse {
-  id: number;
-  make_id: number;
-  make: string;
-  name: string;
+export interface FetcherResponse {
+  model_make_id: string;
+  model_name: string;
 }
 export interface Car {
-  data: FetcherResponse[];
+  Models: FetcherResponse[];
 }
 
-const model = ["Audi", "BMW"];
-
 export const dataFetcher = async (page: number = 1) => {
+  try {
+    const { data } = await axios.get<Car>(
+      "https://www.carqueryapi.com/api/0.3/?cmd=getModels&make=bmw"
+    );
+    // const res = await axios.get<Car>("https://carapi.app/api/models/v2");
 
-    try {
-      const { data } = await axios.get<Car>(
-        `https://carapi.app/api/models/v2?page=${page}`
-      );
-      const res = await axios.get<Car>("https://carapi.app/api/models/v2");
-      console.log("🚉 ~ dataFetcher.ts:18 -> res: ", res);
-
-      return data.data.filter((item) => model.includes(item.make));
-      // console.log(res);
-
-      // return data.data;
-    } catch (error) {
-      console.log(error);
-    }
+    // return data.data.filter((item) => model.includes(item.make));
+    // console.log(res);
+    console.log(data);
+    return data.Models;
+  } catch (error) {
+    // console.log(error);
+  }
 };
