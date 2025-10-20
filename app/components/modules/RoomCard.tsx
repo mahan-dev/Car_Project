@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { Button, Card } from "@mui/material";
-import { carDetail, FetcherResponse } from "@/helper/dataFetcher";
+import { Button, Card, Typography } from "@mui/material";
+import { FetcherResponse } from "@/helper/dataFetcher";
 import styles from "@/modules/styles/roomCard/route.module.css";
 
 import { TbListDetails } from "react-icons/tb";
@@ -12,10 +12,9 @@ interface RoomCardProps {
 const RoomCard = ({ data }: RoomCardProps) => {
   const carData = data.data;
 
-  console.log(data);
   return (
     <>
-      {data &&
+      {carData &&
         carData.map((item, index) => (
           <Card
             key={index}
@@ -54,6 +53,12 @@ const RoomCard = ({ data }: RoomCardProps) => {
             </span>
           </Card>
         ))}
+
+      {!carData.length && (
+        <Typography sx={{ fontSize: "1.2rem" }} component={"p"}>
+          something went wrong 🙁
+        </Typography>
+      )}
     </>
   );
 };

@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.container__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.container__box, .container__details {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    border-radius: 0.3rem;
+    padding: 1rem ;
+    
+}
+
+.container__details{
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+
+.box__content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}

@@ -22,10 +22,8 @@ export const dataFetcher = async () => {
     );
 
     const data = bmwData.Models.concat(audiData.Models);
-
-
     return {
-      data,
+      data: data || [],
     };
   } catch (error) {
     console.log(error);
@@ -43,4 +41,3 @@ export const carDetail = async (make: string, model: string) => {
     console.log(error);
   }
 };
-
