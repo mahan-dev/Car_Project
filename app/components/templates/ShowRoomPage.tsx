@@ -13,7 +13,7 @@ const ShowRoomPage = () => {
   });
 
   return (
-    <div className={styles.container}>{data && <RoomCard Models={data} />}</div>
+    <div className={styles.container}>{data && <RoomCard data={data} />}</div>
   );
 };
 

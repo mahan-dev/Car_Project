@@ -1,34 +1,41 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { Button, Card } from "@mui/material";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { carDetail, FetcherResponse } from "@/helper/dataFetcher";
 import styles from "@/modules/styles/roomCard/route.module.css";
 
 import { TbListDetails } from "react-icons/tb";
 
 interface RoomCardProps {
-  Models: FetcherResponse[];
+  data: { data: FetcherResponse[] };
 }
-const RoomCard = ({ Models }: RoomCardProps) => {
-  console.log(Models);
+const RoomCard = ({ data }: RoomCardProps) => {
+  const carData = data.data;
 
+  console.log(data);
   return (
     <>
-      {Models &&
-        Models.map((item) => (
+      {data &&
+        carData.map((item, index) => (
           <Card
-            key={item.model_name}
-            sx={{ width: "200px", boxShadow: "0 0 12px rgba(0,0,0,0.1)" }}
+            key={index}
+            sx={{
+              width: "200px",
+              boxShadow: "0 0 12px rgba(0,0,0,0.1)",
+              overflow: "hidden",
+            }}
             className={styles.card}
           >
             <Image
               className={styles.card__image}
               src={`/images/showRoom/${item.model_make_id.toLowerCase()}.jpg`}
-              sizes="100vw"
-              width={200}
-              height={110}
-              style={{ width: "100%", height: "200px" }}
               alt={item.model_make_id.toString()}
+              priority
+              width={200}
+              height={200}
+              style={{
+                objectFit: "cover",
+              }}
             />
 
             <span className={styles.card__details}>
@@ -37,9 +44,10 @@ const RoomCard = ({ Models }: RoomCardProps) => {
               </p>
 
               <Button
-                href={`/detail/${item.model_name}`}
+                href={`show-room/detail/${item.model_make_id}/${item.model_name}`}
                 className={styles.card__button}
                 sx={{ bgcolor: "black", color: "white" }}
+                // onClick={""}
               >
                 <TbListDetails />
               </Button>
