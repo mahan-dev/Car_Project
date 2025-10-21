@@ -21,9 +21,9 @@ export const dataFetcher = async () => {
       "https://www.carqueryapi.com/api/0.3/?cmd=getModels&make=audi"
     );
 
-    const data = bmwData.Models.concat(audiData.Models);
+    const data = (bmwData.Models || []).concat(audiData.Models || []);
     return {
-      data: data || [],
+      data: data,
     };
   } catch (error) {
     console.log(error);

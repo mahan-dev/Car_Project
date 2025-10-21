@@ -1,0 +1,15 @@
+.container__details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem ;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    border-radius: 0.3rem;
+}
+
+.box__content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
