@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
-import { IoSpeedometerOutline } from "react-icons/io5";
-import styles from "@/modules/styles/carDetail/route.module.css";
 
+import { IoSpeedometerOutline } from "react-icons/io5";
+import { FiSettings } from "react-icons/fi";
+import styles from "@/modules/styles/carDetail/route.module.css";
 import CarContent from "@/elements/CarContent";
 
 interface CarDetail {
@@ -18,11 +19,16 @@ const CarDetail = ({ data }: CarDetail) => {
       </div>
 
       <h2 className={styles.container__title}>
-        specification
+        Specification
         <IoSpeedometerOutline />
       </h2>
+      <CarContent data={data} specification={true} />
 
-      <CarContent data={data} />
+      <h2 className={styles.container__title}>
+        Performance
+        <FiSettings />
+      </h2>
+      <CarContent data={data} performance={true} />
     </div>
   );
 };

@@ -5,17 +5,22 @@
 }
 
 .container__title {
+    width: fit-content;
     display: flex;
+    margin-top: 2rem;
+    font-size: 1.3rem;
+    font-weight: 600;
     align-items: center;
     gap: 0.5rem;
+
 }
 
-.container__box, .container__details {
+.container__box,
+.container__details {
     display: flex;
     justify-content: space-between;
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     border-radius: 0.3rem;
-    padding: 1rem ;
-    
-}
+    padding: 1rem;
 
+}
