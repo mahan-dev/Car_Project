@@ -22,13 +22,13 @@ const CarDetail = ({ data }: CarDetail) => {
         Specification
         <IoSpeedometerOutline />
       </h2>
-      <CarContent data={data} specification={true} />
+      <CarContent data={data} title={"specification"} />
 
       <h2 className={styles.container__title}>
         Performance
         <FiSettings />
       </h2>
-      <CarContent data={data} performance={true} />
+      <CarContent data={data} title={"performance"} />
     </div>
   );
 };

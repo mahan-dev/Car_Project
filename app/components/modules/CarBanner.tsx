@@ -28,7 +28,13 @@ const CarBanner = () => {
         </div>
 
         <div className={styles.container__right}>
-          <Image src={carImage} alt="" fill style={{ objectFit:"cover" }}/>
+          <Image
+            src={carImage}
+            alt="CarBanner"
+            priority
+            fill
+            style={{ objectFit: "cover" }}
+          />
         </div>
       </div>
     </div>

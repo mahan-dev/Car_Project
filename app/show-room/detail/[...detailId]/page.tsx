@@ -1,7 +1,7 @@
 import React from "react";
 import CarDetailsPage from "@/templates/CarDetailsPage";
 
-import { carDetail } from "@/app/helper/dataFetcher";
+import { carDetail } from "@/helper/dataFetcher";
 
 interface DetailProps {
   params: Promise<{ detailId: string }>;

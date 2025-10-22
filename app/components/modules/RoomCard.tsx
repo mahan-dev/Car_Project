@@ -46,7 +46,6 @@ const RoomCard = ({ data }: RoomCardProps) => {
                 href={`show-room/detail/${item.model_make_id}/${item.model_name}`}
                 className={styles.card__button}
                 sx={{ bgcolor: "black", color: "white" }}
-                // onClick={""}
               >
                 <TbListDetails />
               </Button>

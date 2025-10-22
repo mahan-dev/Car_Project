@@ -1,5 +1,5 @@
 import React from "react";
-import ShowRoomPage from "@/app/components/templates/ShowRoomPage";
+import ShowRoomPage from "@/templates/ShowRoomPage";
 
 const page = () => {
   return <ShowRoomPage />;

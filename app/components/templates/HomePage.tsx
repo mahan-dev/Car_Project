@@ -6,11 +6,9 @@ import CarGallery from "@/modules/CarGallery";
 const HomePage = () => {
   return (
     <section>
-      <div>
         <Categories />
         <CarBanner />
         <CarGallery />
-      </div>
     </section>
   );
 };

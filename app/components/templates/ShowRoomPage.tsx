@@ -9,7 +9,7 @@ import RoomCard from "@/modules/RoomCard";
 const ShowRoomPage = () => {
   const { data } = useQuery({
     queryKey: ["Cars"],
-    queryFn: async () => await dataFetcher() ,
+    queryFn: async () => await dataFetcher(),
   });
 
   return (
