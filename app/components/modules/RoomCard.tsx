@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { SetStateAction, useState } from "react";
 import Image from "next/image";
 import { Button, Card, Typography } from "@mui/material";
 import { FetcherResponse } from "@/helper/dataFetcher";
@@ -8,14 +9,28 @@ import { TbListDetails } from "react-icons/tb";
 
 interface RoomCardProps {
   data: { data: FetcherResponse[] };
+  page: number;
 }
-const RoomCard = ({ data }: RoomCardProps) => {
+const RoomCard = ({ page , data }: RoomCardProps) => {
   const carData = data.data;
 
+
+  const carPerPage = 20;
+
+  const startIndex = (page - 1) * carPerPage;
+  const endIndex = startIndex + carPerPage;
+
+  const currentCars = data.data.slice(startIndex, endIndex);
+
+
+  const totalPage = Math.ceil(data.data.length / carPerPage);
+
+
+
   return (
-    <>
+    <section style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
       {carData &&
-        carData.map((item, index) => (
+        currentCars.map((item, index) => (
           <Card
             key={index}
             sx={{
@@ -58,7 +73,7 @@ const RoomCard = ({ data }: RoomCardProps) => {
           something went wrong 🙁
         </Typography>
       )}
-    </>
+    </section>
   );
 };
 

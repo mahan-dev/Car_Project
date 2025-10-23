@@ -12,15 +12,12 @@ export interface CarDetail {
   Trims: Array<{ [key: string]: string }>;
 }
 
+const Base_Url = "https://www.carqueryapi.com/api/0.3/?cmd=getModels&make=";
+
 export const dataFetcher = async () => {
   try {
-    const { data: bmwData } = await axios.get<Car>(
-      "https://www.carqueryapi.com/api/0.3/?cmd=getModels&make=bmw"
-    );
-    const { data: audiData } = await axios.get<Car>(
-      "https://www.carqueryapi.com/api/0.3/?cmd=getModels&make=audi"
-    );
-
+    const { data: bmwData } = await axios.get<Car>(`${Base_Url}bmw`);
+    const { data: audiData } = await axios.get<Car>(`${Base_Url}audi`);
     const data = (bmwData.Models || []).concat(audiData.Models || []);
     return {
       data: data,

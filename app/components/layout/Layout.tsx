@@ -17,7 +17,12 @@ const Layout = ({ children }: LayoutProps) => {
           <Link style={{ display: "flex" }} href={"/"}>
             <Image src={steeringWheel} width={20} height={20} alt="" />
           </Link>
-          <Button href="/signin">Sign in</Button>
+          <Button
+            href="/signin"
+            sx={{ color: "white", bgcolor: "black", padding: "0.2rem 0.5rem" }}
+          >
+            Sign in
+          </Button>
         </div>
 
         <div className={styles.header__right}>
