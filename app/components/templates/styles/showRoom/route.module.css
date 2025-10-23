@@ -1,7 +1,14 @@
 .container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     gap: 1rem;
     flex-wrap: wrap;
     margin-top: 4rem;
+}
+
+.container__footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
 }

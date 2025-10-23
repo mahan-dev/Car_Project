@@ -1,36 +1,26 @@
 "use client";
-import React, { SetStateAction, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Button, Card, Typography } from "@mui/material";
 import { FetcherResponse } from "@/helper/dataFetcher";
 import styles from "@/modules/styles/roomCard/route.module.css";
 
 import { TbListDetails } from "react-icons/tb";
+import { pageHandler } from "@/helper/carPerPage";
 
 interface RoomCardProps {
   data: { data: FetcherResponse[] };
   page: number;
 }
-const RoomCard = ({ page , data }: RoomCardProps) => {
+const RoomCard = ({ page, data }: RoomCardProps) => {
   const carData = data.data;
 
-
-  const carPerPage = 20;
-
-  const startIndex = (page - 1) * carPerPage;
-  const endIndex = startIndex + carPerPage;
-
-  const currentCars = data.data.slice(startIndex, endIndex);
-
-
-  const totalPage = Math.ceil(data.data.length / carPerPage);
-
-
+  const {cars} = pageHandler({page, data})
 
   return (
-    <section style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+    <section className={styles.container} >
       {carData &&
-        currentCars.map((item, index) => (
+        cars.map((item, index) => (
           <Card
             key={index}
             sx={{

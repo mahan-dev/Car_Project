@@ -1,3 +1,10 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -24,6 +31,7 @@
         align-self: flex-end;
     }
 }
-.card__button{
+
+.card__button {
     margin-top: auto;
 }
