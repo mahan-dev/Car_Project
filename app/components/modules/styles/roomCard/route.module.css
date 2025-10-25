@@ -8,7 +8,6 @@
 .card {
     display: flex;
     flex-direction: column;
-    align-items: start;
 }
 
 .card__details {
@@ -16,7 +15,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     justify-content: space-between;
     gap: 1rem;
     padding: 0.2rem 0.5rem;
@@ -32,6 +30,3 @@
     }
 }
 
-.card__button {
-    margin-top: auto;
-}

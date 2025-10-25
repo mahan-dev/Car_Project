@@ -7,6 +7,8 @@ interface PageInterface {
 export const pageHandler = ({ page, data }: PageInterface) => {
   const carPerPage = 20;
 
+  console.log(page)
+
   const startIndex = (page - 1) * carPerPage;
   const endIndex = startIndex + carPerPage;
 

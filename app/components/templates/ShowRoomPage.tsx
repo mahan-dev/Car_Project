@@ -1,12 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { dataFetcher } from "@/helper/dataFetcher";
 
 import styles from "@/templates/styles/showRoom/route.module.css";
 import RoomCard from "@/modules/RoomCard";
 import { Pagination } from "@mui/material";
-import { pageHandler } from "@/app/helper/carPerPage";
+import { pageHandler } from "@/helper/carPerPage";
+import { paginationHandler } from "@/helper/paginationHandler";
+import { initialPage } from "@/helper/initialPage";
 
 const ShowRoomPage = () => {
   const [page, setPage] = useState(1);
@@ -18,16 +20,11 @@ const ShowRoomPage = () => {
 
   const { totalPage } = pageHandler({ page, data });
 
-  const paginationHandler = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
-    if (value < page) {
-      setPage((prev) => prev - 1);
-    } else if (value > page) {
-      setPage((prev) => prev + 1);
-    }
-  };
+  
+
+  useEffect(() => {
+    initialPage(page, setPage);
+  }, [page]);
 
   return (
     <div className={styles.container}>
@@ -39,13 +36,15 @@ const ShowRoomPage = () => {
       {data && <RoomCard page={page} data={data} />}
 
       <div className={styles.container__footer}>
-        <Pagination
-          count={totalPage}
-          defaultPage={1}
-          siblingCount={0}
-          boundaryCount={2}
-          onChange={(e, value) => paginationHandler(e, value)}
-        />
+        {data && (
+          <Pagination
+            count={totalPage}
+            page={page}
+            siblingCount={0}
+            boundaryCount={2}
+            onChange={(event, value) => paginationHandler(page, setPage, value)}
+          />
+        )}
       </div>
     </div>
   );
