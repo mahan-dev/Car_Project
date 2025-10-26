@@ -11,7 +11,7 @@ interface LayoutProps {
 }
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <Container suppressHydrationWarning={true}>
+    <Container>
       <header className={styles.header}>
         <div className={styles.header__left}>
           <Link style={{ display: "flex" }} href={"/"}>

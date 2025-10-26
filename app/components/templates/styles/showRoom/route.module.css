@@ -1,11 +1,37 @@
 .container {
     min-height: 100vh;
-    justify-content: space-between;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 2rem;
     flex-wrap: wrap;
     margin-top: 4rem;
+}
+
+.container__error {
+    min-height: 100vh;
+    text-align: center;
+}
+
+
+.container__loader {
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    display: flex;
+}
+
+.main__aside {
+    width: 170px;
+    display: flex;
+    flex-shrink: 0;
+    padding: 1rem ;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    border-radius:0.3rem;
+    
 }
 
 .container__footer {

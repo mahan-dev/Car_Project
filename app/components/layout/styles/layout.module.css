@@ -14,17 +14,17 @@
 }
 
 .header input {
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 12px rgba(113, 54, 54, 0.1);
     background-color: rgb(216, 216, 216);
 }
 
 .header__left {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
     align-items: center;
 }
 
-.header__right{
+.header__right {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -41,7 +41,7 @@
     padding: 1rem;
     gap: 2rem;
     justify-content: space-between;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 12px rgba(214, 0, 0, 0.1);
     border-radius: 0.3rem;
 
     -webkit-border-radius: 0.3rem;
