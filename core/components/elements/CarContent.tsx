@@ -2,7 +2,7 @@ import React from "react";
 import { dataHandler } from "@/helper/carContent";
 
 import styles from "@/elements/styles/carContent/route.module.css";
-import { objectHelper } from "@/app/helper/carDetail";
+import { objectHelper } from "@/core/helper/carDetail";
 
 interface CarProps {
   data: { [key: string]: string };
