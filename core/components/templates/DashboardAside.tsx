@@ -18,7 +18,7 @@ const DashboardAside = ({ children }: DashboardAsideProps) => {
         </div>
         <AsideContent />
       </aside>
-      <div>{children}</div>
+      <div className={styles.container__main}>{children}</div>
     </div>
   );
 };

@@ -15,6 +15,10 @@
     -o-border-radius: 0.3rem;
 }
 
+.container__main{
+    width: 100%;
+}
+
 .aside__title{
     display: flex;
     align-items: center; 

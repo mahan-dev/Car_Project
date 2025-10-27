@@ -18,6 +18,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "none",
+          padding: "0.1rem 0.8rem",
         },
       },
     },
@@ -30,7 +31,6 @@ const theme = createTheme({
         },
       },
     },
-   
   },
 });
 

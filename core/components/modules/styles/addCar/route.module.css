@@ -1,0 +1,10 @@
+
+.container {
+    width: 100%;
+}
+
+.container__title {
+    background-color: black;
+    padding:  0.5rem 0.5rem;
+    
+}

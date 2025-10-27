@@ -17,18 +17,14 @@ const Layout = ({ children }: LayoutProps) => {
           <Link style={{ display: "flex" }} href={"/"}>
             <Image src={steeringWheel} width={20} height={20} alt="" />
           </Link>
-          <Button
-            href="/signin"
-            sx={{ color: "white", bgcolor: "black", padding: "0.1rem 0.8rem" }}
-          >
+          <Button href="/signin" sx={{ color: "white", bgcolor: "black" }}>
             Sign in
           </Button>
         </div>
 
         <div className={styles.header__right}>
-          <Button sx={{ color: "black" }} href="/show-room">
-            Gallery
-          </Button>
+          <Button href="/show-room">Marketplace</Button>
+          <Button href="/show-room">Showroom</Button>
 
           <input type="text" placeholder="search" />
         </div>

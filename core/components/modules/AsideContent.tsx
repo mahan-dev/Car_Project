@@ -7,6 +7,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { RiFileList3Fill } from "react-icons/ri";
 import { IoMdSettings } from "react-icons/io";
 import { BsFillBookmarkHeartFill } from "react-icons/bs";
+import { FaCirclePlus } from "react-icons/fa6";
 import { IoExit } from "react-icons/io5";
 import { signOut } from "next-auth/react";
 
@@ -19,6 +20,12 @@ const AsideContent = () => {
         <Link href={`${url}`}>
           <MdAccountCircle />
           Account
+        </Link>
+      </li>
+      <li>
+        <Link href={`${url}add`}>
+          <FaCirclePlus />
+          Add your car
         </Link>
       </li>
       <li>
