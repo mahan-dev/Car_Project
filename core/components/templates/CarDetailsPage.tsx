@@ -3,7 +3,7 @@ import React from "react";
 
 import styles from "@/templates/styles/carDetailsPage/route.module.css";
 
-import CarDetail from "../modules/CarDetail";
+import CarDetail from "@/modules/CarDetail";
 import { Typography } from "@mui/material";
 
 interface CarDetails {

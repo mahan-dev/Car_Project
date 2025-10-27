@@ -13,7 +13,12 @@ const CheckBox = ({ name, label, checked, onChange }) => {
       <FormControlLabel
         name={name}
         label={label}
-        control={<Checkbox checked={checked === label} onChange={onChange} />}
+        control={
+          <Checkbox
+            checked={checked === label}
+            onChange={onChange}
+          />
+        }
       />
     </ListItemButton>
   );

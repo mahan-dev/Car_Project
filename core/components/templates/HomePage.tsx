@@ -1,5 +1,5 @@
 import React from "react";
-import Categories from "@/app/components/modules/Categories";
+import Categories from "@/core/components/modules/Categories";
 import CarBanner from "@/modules/CarBanner";
 import CarGallery from "@/modules/CarGallery";
 

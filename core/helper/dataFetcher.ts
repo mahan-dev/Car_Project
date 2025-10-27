@@ -32,7 +32,6 @@ export const carDetail = async (make: string, model: string) => {
     const { data } = await axios.get<CarDetail>(
       `https://www.carqueryapi.com/api/0.3/?&cmd=getTrims&make=${make}&model=${model}`
     );
-    console.log(data.Trims[0]);
     return data.Trims[0];
   } catch (error) {
     console.log(error);

@@ -1,6 +1,6 @@
 import { AuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { connectDb, verifyPassword } from "@/app/utils/auth";
+import { connectDb, verifyPassword } from "@/core/utils/auth";
 import { UserModel } from "@/models/user";
 
 interface UserCredentials {

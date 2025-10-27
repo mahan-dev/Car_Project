@@ -8,6 +8,11 @@ const theme = createTheme({
     },
   },
 
+  palette: {
+    primary: {
+      main: "#000000",
+    },
+  },
   components: {
     MuiButton: {
       styleOverrides: {
@@ -18,13 +23,14 @@ const theme = createTheme({
     },
     MuiOutlinedInput: {
       styleOverrides: {
-        root:{
-            input: {
-                padding: "0.6rem 1rem"
-            }
-        }
-      }
+        root: {
+          input: {
+            padding: "0.6rem 1rem",
+          },
+        },
+      },
     },
+   
   },
 });
 

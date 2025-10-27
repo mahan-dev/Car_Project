@@ -22,10 +22,12 @@
 
 .main {
     display: flex;
+    gap: 1rem;
 }
 
 .main__aside {
     width: 170px;
+    height: fit-content;
     display: flex;
     flex-shrink: 0;
     padding: 1rem ;

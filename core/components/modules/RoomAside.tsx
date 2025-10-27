@@ -1,12 +1,25 @@
-import React, { useState } from "react";
-import { Collapse, List, ListItemButton, ListItemText } from "@mui/material";
+import React, { SetStateAction, useState } from "react";
+import {
+  Collapse,
+  Divider,
+  List,
+  ListItemButton,
+  ListItemText,
+  Slider,
+} from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import CheckBox from "./CheckBox";
 
-const RoomAside = () => {
+interface RoomProps {
+  checked: string;
+  setChecked: React.Dispatch<SetStateAction<string>>;
+}
+
+const RoomAside = ({ checked, setChecked }: RoomProps) => {
   const [open, setOpen] = useState(false);
-  const [checked, setChecked] = useState("");
+
+  const [value, setValue] = useState<number[]>([1950, 2025]);
 
   const clickHandler = () => {
     setOpen((prev) => !prev);
@@ -17,6 +30,11 @@ const RoomAside = () => {
     const { name } = e.target;
 
     setChecked(name);
+  };
+
+  const rangeHandler = (event: Event, newValue: number[]) => {
+    setValue(newValue);
+    console.log(event, newValue);
   };
 
   const checkBox = [
@@ -53,6 +71,15 @@ const RoomAside = () => {
           ))}
         </List>
       </Collapse>
+      <Divider sx={{ my: "0.5rem" }} />
+      <Slider
+        getAriaLabel={() => "Temperature range"}
+        value={value}
+        onChange={rangeHandler}
+        min={1950}
+        max={2025}
+        valueLabelDisplay="auto"
+      />
     </List>
   );
 };

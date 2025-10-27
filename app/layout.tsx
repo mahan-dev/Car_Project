@@ -1,9 +1,9 @@
 import { Roboto } from "next/font/google";
 import "@/app/globals.css";
 import React from "react";
-import Layout from "@/layout/Layout";
+import Layout from "@/core/components/layout/Layout";
 import { Metadata } from "next";
-import Provider from "@/provider/Provider";
+import Provider from "@/core/provider/Provider";
 
 const roboto = Roboto({
   weight: "400",

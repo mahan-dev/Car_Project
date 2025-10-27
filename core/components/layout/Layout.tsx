@@ -19,14 +19,16 @@ const Layout = ({ children }: LayoutProps) => {
           </Link>
           <Button
             href="/signin"
-            sx={{ color: "white", bgcolor: "black", padding: "0.2rem 0.5rem" }}
+            sx={{ color: "white", bgcolor: "black", padding: "0.1rem 0.8rem" }}
           >
             Sign in
           </Button>
         </div>
 
         <div className={styles.header__right}>
-          <Link href={"/show-room"}>show room</Link>
+          <Button sx={{ color: "black" }} href="/show-room">
+            Gallery
+          </Button>
 
           <input type="text" placeholder="search" />
         </div>

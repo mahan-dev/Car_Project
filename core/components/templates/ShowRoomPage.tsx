@@ -6,7 +6,6 @@ import styles from "@/templates/styles/showRoom/route.module.css";
 import { Pagination } from "@mui/material";
 
 import RoomCard from "@/modules/RoomCard";
-import RoomAside from "@/modules/RoomAside";
 
 import { dataFetcher } from "@/helper/dataFetcher";
 import { pageHandler } from "@/helper/carPerPage";
@@ -28,6 +27,8 @@ const ShowRoomPage = () => {
     initialPage(page, setPage);
   }, [page]);
 
+  if (!data) return;
+
   return (
     <div className={styles.container}>
       {isFetching && (
@@ -35,22 +36,20 @@ const ShowRoomPage = () => {
           <Loader />
         </div>
       )}
-      {isError && !isFetching && (
-        <p className={styles.container__error}>something went wrong</p>
-      )}
+
+      {(isError && !isFetching) ||
+        (data.data.length === 0 && (
+          <p className={styles.container__error}>something went wrong</p>
+        ))}
+
       <div className={styles.main}>
-        {data && (
-          <>
-            <aside className={styles.main__aside}>
-              <RoomAside />
-            </aside>
-            <RoomCard page={page} data={data} />
-          </>
+        {data.data.length > 0 && !isFetching && (
+          <RoomCard page={page} data={data} />
         )}
       </div>
 
       <div className={styles.container__footer}>
-        {data && (
+        {data.data.length > 0 && (
           <Pagination
             count={totalPage}
             page={page}

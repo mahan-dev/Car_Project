@@ -15,10 +15,10 @@ interface RoomCardProps {
 const RoomCard = ({ page, data }: RoomCardProps) => {
   const carData = data.data;
 
-  const {cars} = pageHandler({page, data})
+  const { cars } = pageHandler({ page, data });
 
   return (
-    <section className={styles.container} >
+    <section className={styles.container}>
       {carData &&
         cars.map((item, index) => (
           <Card
@@ -59,7 +59,10 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
         ))}
 
       {!carData.length && (
-        <Typography sx={{ fontSize: "1.2rem" }} component={"p"}>
+        <Typography
+          sx={{ width: "100%", fontSize: "1.2rem", textAlign: "center" }}
+          component={"p"}
+        >
           something went wrong 🙁
         </Typography>
       )}

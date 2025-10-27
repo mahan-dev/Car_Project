@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/modules/styles/cartGallery/route.module.css";
 import Image from "next/image";
 
-import { carImages } from "@/app/constants/carGallery/CarGallery";
+import { carImages } from "@/core/constants/carGallery/CarGallery";
 import { Button } from "@mui/material";
 
 const CarGallery = () => {

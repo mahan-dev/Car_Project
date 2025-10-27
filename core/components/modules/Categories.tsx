@@ -5,12 +5,10 @@ import {
   CarImage,
   CarModels,
 } from "@/constants/Categories/Categories";
-import { LetterUpperCase } from "@/app/helper/LetterUpperCase";
+import { LetterUpperCase } from "@/core/helper/LetterUpperCase";
 
 import styles from "@/modules/styles/categories/categories.module.css";
 import CategoryIcon from "@/modules/CategoryIcon";
-
-// import SUVImage from "@/public/images/categories/suv.jpg";
 import Image from "next/image";
 
 type CartKey = keyof typeof CarIcon;
