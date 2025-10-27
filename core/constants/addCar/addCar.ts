@@ -4,7 +4,7 @@ export const inputProps = [
     title: "Car year",
   },
   {
-    name: "gearBox",
+    name: "gearbox",
     title: "Gear box",
   },
   {

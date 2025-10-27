@@ -2,7 +2,7 @@ export interface ProfileInterface {
   year: string;
   gearbox: string;
   engine: string;
-  cylinder: number;
+  cylinder: string;
   description: string;
   addDate: Date;
   userId: object;

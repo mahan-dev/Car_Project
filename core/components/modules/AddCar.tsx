@@ -1,10 +1,12 @@
 "use client";
-import React, { useEffect } from "react";
+
+import React, { FormEvent } from "react";
 import styles from "@/modules/styles/addCar/route.module.css";
 import { alpha, Button, TextField, Typography } from "@mui/material";
 import { inputProps } from "@/constants/addCar/addCar";
 import { useForm } from "react-hook-form";
 import { AddForm } from "@/modules/interface/FormValues";
+import {  submitFormHandler } from "@/core/helper/submitForm";
 
 interface AddCarProps {
   title: string;
@@ -13,7 +15,7 @@ const AddCar = ({ title }: AddCarProps) => {
   const { watch, setValue } = useForm<AddForm>({
     defaultValues: {
       year: "",
-      cylinder: 0,
+      cylinder: "",
       gearbox: "",
       engine: "",
       description: "",
@@ -24,17 +26,18 @@ const AddCar = ({ title }: AddCarProps) => {
   const profileData = watch();
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
     const { name, value } = e.target;
     const nameType = name as keyof AddForm;
-
     setValue(nameType, value);
   };
+  const submitHandler = (e: FormEvent) => {
+    e.preventDefault();
 
-
+    submitFormHandler({profileData});
+  };
 
   return (
-    <form className={styles.container}>
+    <form onSubmit={submitHandler} className={styles.container}>
       <Typography
         className={styles.container__title}
         sx={{

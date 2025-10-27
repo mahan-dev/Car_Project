@@ -17,7 +17,7 @@ const profileSchema = new Schema<ProfileInterface>(
     },
     cylinder: {
       required: true,
-      type: Number,
+      type: String,
     },
     description: {
       required: true,
