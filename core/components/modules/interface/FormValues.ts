@@ -3,3 +3,12 @@ export interface FormValues {
   password: string;
   rePassword?: string;
 }
+
+export interface AddForm {
+  year: string;
+  gearbox: string;
+  engine: string;
+  cylinder: number;
+  description: string;
+  addDate: Date;
+}
