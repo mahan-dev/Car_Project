@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardAside from "@/app/components/templates/DashboardAside";
+import DashboardAside from "@/templates/DashboardAside";
 
 interface layoutProps {
   children: React.ReactNode;
