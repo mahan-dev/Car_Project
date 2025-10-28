@@ -27,6 +27,11 @@ const profileSchema = new Schema<ProfileInterface>(
       required: true,
       type: Date,
     },
+    category: {
+      required: true,
+      type: String,
+      enum: ["suv", "sedan", "coupe", "hatchback", "convertible", "sport"],
+    },
 
     userId: {
       type: Schema.Types.ObjectId,
@@ -37,4 +42,5 @@ const profileSchema = new Schema<ProfileInterface>(
 );
 
 export const Profile: Model<ProfileInterface> =
-  models.carProfile || model<ProfileInterface>("carProfile", profileSchema);
+  models.carProfile ||
+  model<ProfileInterface>("carProfile", profileSchema, "Car");

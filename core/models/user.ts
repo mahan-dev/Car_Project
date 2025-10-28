@@ -13,4 +13,4 @@ const userSchema = new mongoose.Schema<userInterface>({
 });
 
 export const UserModel: Model<userInterface> =
-  models.carDb || model<userInterface>("carDb", userSchema);
+  models.carDb || model<userInterface>("carDb", userSchema, "Car");

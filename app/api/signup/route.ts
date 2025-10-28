@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 
-import { connectDb, hashPassword } from "@/utils/auth";
+import { hashPassword } from "@/utils/auth";
 import { authForm } from "@/templates/interface/authForm";
 import { UserModel } from "@/models/user";
+import { connectDb } from "@/utils/connectDb";
 
 export const POST = async (req: Request) => {
   try {

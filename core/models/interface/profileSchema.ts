@@ -6,4 +6,5 @@ export interface ProfileInterface {
   description: string;
   addDate: Date;
   userId: object;
+  category: string;
 }
