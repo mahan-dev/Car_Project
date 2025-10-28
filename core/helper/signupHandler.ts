@@ -31,7 +31,6 @@ export const signupHandler = async ({ form, setLoading }: SignUp) => {
   try {
     setLoading(true);
     const res = await axios.post<SignUpResult>("/api/signup", form);
-    console.log(res);
     if (res.status === 200) {
       toast.success(res.data.message);
       return true;

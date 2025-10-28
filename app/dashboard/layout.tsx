@@ -14,7 +14,6 @@ const layout = async ({ children }: layoutProps) => {
   if (!session) redirect("/signup");
 
   await connectDb();
-
   return <DashboardAside>{children}</DashboardAside>;
 };
 

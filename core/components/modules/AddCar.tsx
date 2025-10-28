@@ -1,17 +1,21 @@
 "use client";
 
-import React, { FormEvent } from "react";
+import React, { FormEvent, useState } from "react";
 import styles from "@/modules/styles/addCar/route.module.css";
 import { alpha, Button, TextField, Typography } from "@mui/material";
 import { inputProps } from "@/constants/addCar/addCar";
 import { useForm } from "react-hook-form";
 import { AddForm } from "@/modules/interface/FormValues";
-import {  submitFormHandler } from "@/core/helper/submitForm";
+import { submitFormHandler } from "@/helper/submitForm";
 
 interface AddCarProps {
   title: string;
 }
 const AddCar = ({ title }: AddCarProps) => {
+  const [image, setImage] = useState<File | null>(null);
+
+  const formData = new FormData();
+
   const { watch, setValue } = useForm<AddForm>({
     defaultValues: {
       year: "",
@@ -33,7 +37,7 @@ const AddCar = ({ title }: AddCarProps) => {
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
 
-    submitFormHandler({profileData});
+    submitFormHandler({ profileData, formData, image });
   };
 
   return (

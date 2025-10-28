@@ -22,6 +22,14 @@
     display: flex;
     gap: 1rem;
     align-items: center;
+    a{
+        display: flex;
+        align-items: center;
+    }
+}
+
+.header__account{
+    font-size: 1.5rem;
 }
 
 .header__right {
