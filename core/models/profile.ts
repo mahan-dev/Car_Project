@@ -27,6 +27,12 @@ const profileSchema = new Schema<ProfileInterface>(
       required: true,
       type: Date,
     },
+
+    image: {
+      required: true,
+      type: String,
+    },
+
     category: {
       required: true,
       type: String,

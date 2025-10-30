@@ -1,4 +1,5 @@
 import { AddForm } from "@/modules/interface/FormValues";
+import axios from "axios";
 import toast from "react-hot-toast";
 
 interface SubmitProps {
@@ -23,7 +24,7 @@ export const submitFormHandler = async ({ profileData }: SubmitProps) => {
 
   if (gearbox !== "Manual" && gearbox !== "Automatic") {
     console.log(gearbox);
-    toast("Please enter a valid entity");
+    toast.error("Please enter a valid entity");
     return;
   }
 
@@ -37,5 +38,13 @@ export const submitFormHandler = async ({ profileData }: SubmitProps) => {
   } else if (cylinder.length > 2) {
     toast.error("cylinder shouldn't be more than 2 ");
     return;
+  }
+
+
+  try {
+    const res = await axios.post("/api/add", profileData)
+    console.log(res)
+  } catch {
+    console.log("error")
   }
 };
