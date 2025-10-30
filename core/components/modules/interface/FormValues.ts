@@ -10,5 +10,6 @@ export interface AddForm {
   engine: string;
   cylinder: string;
   description: string;
+  imageUrl: string | null;
   addDate: Date;
 }

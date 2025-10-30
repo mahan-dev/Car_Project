@@ -2,19 +2,20 @@
 
 import React, { FormEvent, useState } from "react";
 import styles from "@/modules/styles/addCar/route.module.css";
-import { alpha, Button, TextField, Typography } from "@mui/material";
-import { inputProps } from "@/constants/addCar/addCar";
+import { alpha, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { AddForm } from "@/modules/interface/FormValues";
 import { submitFormHandler } from "@/helper/submitForm";
+import TextInput from "@/modules/TextInput";
+
+import ImageElement from "../elements/ImageElement";
+import Image from "next/image";
 
 interface AddCarProps {
   title: string;
 }
 const AddCar = ({ title }: AddCarProps) => {
-  const [image, setImage] = useState<File | null>(null);
-
-  const formData = new FormData();
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
   const { watch, setValue } = useForm<AddForm>({
     defaultValues: {
@@ -23,21 +24,28 @@ const AddCar = ({ title }: AddCarProps) => {
       gearbox: "",
       engine: "",
       description: "",
+      imageUrl: "",
       addDate: new Date(),
     },
   });
 
   const profileData = watch();
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
     const nameType = name as keyof AddForm;
     setValue(nameType, value);
   };
-  const submitHandler = (e: FormEvent) => {
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    submitFormHandler({ profileData, formData, image });
+    submitFormHandler({
+      profileData,
+      formData: null,
+      image: imageUrl,
+      setValue,
+    });
   };
 
   return (
@@ -55,18 +63,21 @@ const AddCar = ({ title }: AddCarProps) => {
       >
         {title}
       </Typography>
-      <div className={styles.container__main}>
-        {inputProps.map((item) => (
-          <div key={item.title} className={styles.main__content}>
-            <span>{item.title}</span>
-            <TextField
-              name={item.name}
-              variant="outlined"
-              onChange={changeHandler}
-            />
-          </div>
-        ))}
-      </div>
+
+      <TextInput changeHandler={changeHandler} />
+
+      <ImageElement
+        name="imageUrl"
+        imageUrl={imageUrl}
+        setValue={setValue}
+        setImageUrl={setImageUrl}
+      />
+
+    {
+      imageUrl && (
+        <Image src={imageUrl} alt="uploaded_image" width={200} height={200} />
+      )
+    }
 
       <Button type="submit">Submit</Button>
     </form>
