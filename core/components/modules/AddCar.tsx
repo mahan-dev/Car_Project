@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import styles from "@/modules/styles/addCar/route.module.css";
 import { alpha, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -8,8 +8,9 @@ import { AddForm } from "@/modules/interface/FormValues";
 import { submitFormHandler } from "@/helper/submitForm";
 import TextInput from "@/modules/TextInput";
 
-import ImageElement from "../elements/ImageElement";
-import Image from "next/image";
+import ImageElement from "@/elements/ImageElement";
+
+import DeleteButton from "@/elements/DeleteButton";
 
 interface AddCarProps {
   title: string;
@@ -31,7 +32,7 @@ const AddCar = ({ title }: AddCarProps) => {
 
   const profileData = watch();
 
-  const changeHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     const nameType = name as keyof AddForm;
@@ -41,10 +42,10 @@ const AddCar = ({ title }: AddCarProps) => {
     e.preventDefault();
 
     submitFormHandler({
-      profileData,
-      formData: null,
-      image: imageUrl,
-      setValue,
+      profileData: {
+        ...profileData,
+        imageUrl,
+      },
     });
   };
 
@@ -73,13 +74,14 @@ const AddCar = ({ title }: AddCarProps) => {
         setImageUrl={setImageUrl}
       />
 
-    {
-      imageUrl && (
-        <Image src={imageUrl} alt="uploaded_image" width={200} height={200} />
-      )
-    }
+      <DeleteButton imageUrl={imageUrl} setImageUrl={setImageUrl} />
 
-      <Button type="submit">Submit</Button>
+      <Button
+        type="submit"
+        sx={{ width: "100%", mt: "2rem", bgcolor: "black", color: "white" }}
+      >
+        Submit
+      </Button>
     </form>
   );
 };

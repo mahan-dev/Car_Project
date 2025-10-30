@@ -1,10 +1,11 @@
+"use client";
 import React from "react";
 import { inputProps } from "@/constants/addCar/addCar";
 import { TextField } from "@mui/material";
 import styles from "@/modules/styles/addCar/route.module.css";
 
 interface TextProps {
-  changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void
+  changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 const TextInput = ({ changeHandler }: TextProps) => {
   return (
@@ -16,6 +17,7 @@ const TextInput = ({ changeHandler }: TextProps) => {
             name={item.name}
             variant="outlined"
             onChange={changeHandler}
+            placeholder={item.name === "gearbox" ? "Automatic | Manual " : ""}
           />
         </div>
       ))}

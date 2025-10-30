@@ -1,19 +1,25 @@
+"use client";
+import React, { Dispatch, SetStateAction } from "react";
+import { UseFormSetValue } from "react-hook-form";
+
 import {
   CldUploadWidget,
   CloudinaryUploadWidgetResults,
 } from "next-cloudinary";
-import React, { SetStateAction, useState } from "react";
-import { UseFormSetValue } from "react-hook-form";
+
 import { AddForm } from "@/modules/interface/FormValues";
+import { urlHandler } from "@/helper/ImageElement";
 import toast from "react-hot-toast";
-import { urlHandler } from "@/core/helper/ImageElement";
+
+import { Button } from "@mui/material";
 
 interface ImageProps {
   name: string;
   imageUrl: string | null;
   setValue: UseFormSetValue<AddForm>;
-  setImageUrl: React.Dispatch<SetStateAction<string | null>>;
+  setImageUrl: Dispatch<SetStateAction<string | null>>;
 }
+
 const ImageElement = ({
   name,
   imageUrl,
@@ -25,7 +31,6 @@ const ImageElement = ({
   };
 
   const QueuesHandler = () => {
-    console.log("hi");
     toast.success("successfully added");
   };
 
@@ -34,7 +39,7 @@ const ImageElement = ({
   };
 
   return (
-    <section>
+    <>
       <CldUploadWidget
         uploadPreset="unsigned_upload"
         onSuccess={(result: CloudinaryUploadWidgetResults, { widget }) =>
@@ -44,10 +49,20 @@ const ImageElement = ({
         onError={errorHandler}
       >
         {({ open }) => {
-          return <button onClick={() => open() } type="button">Upload an Image</button>;
+          return (
+            !imageUrl && (
+              <Button
+                sx={{ bgcolor: "black", color: "white" }}
+                onClick={() => open()}
+                type="button"
+              >
+                Upload an Image
+              </Button>
+            )
+          );
         }}
       </CldUploadWidget>
-    </section>
+    </>
   );
 };
 
