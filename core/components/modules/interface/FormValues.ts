@@ -1,3 +1,5 @@
+import { Dayjs } from "dayjs";
+
 export interface FormValues {
   email: string;
   password: string;
@@ -11,6 +13,6 @@ export interface AddForm {
   cylinder: string;
   description: string;
   imageUrl: string | null;
-  category: string;
-  addDate: Date;
+  category: string
+  addDate: Dayjs;
 }

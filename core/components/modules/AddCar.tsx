@@ -14,6 +14,9 @@ import DeleteButton from "@/elements/DeleteButton";
 import Loader from "@/components/loader/Loader";
 import toast from "react-hot-toast";
 
+import dayjs from "dayjs";
+import DatePicker from "@/elements/DatePicker";
+
 interface AddCarProps {
   title: string;
 }
@@ -29,7 +32,7 @@ const AddCar = ({ title }: AddCarProps) => {
       engine: "",
       description: "",
       imageUrl: "",
-      addDate: new Date(),
+      addDate: dayjs(),
     },
   });
 
@@ -69,11 +72,7 @@ const AddCar = ({ title }: AddCarProps) => {
         {title}
       </Typography>
 
-      <TextInput
-        setValue={setValue}
-        register={register}
-        control={control}
-      />
+      <TextInput setValue={setValue} register={register} control={control} />
 
       <ImageElement
         name="imageUrl"
@@ -84,6 +83,8 @@ const AddCar = ({ title }: AddCarProps) => {
 
       <DeleteButton imageUrl={imageUrl} setImageUrl={setImageUrl} />
 
+      <DatePicker control={control} />
+      
       {loading ? (
         <div className={styles.container__loader}>
           <Loader />

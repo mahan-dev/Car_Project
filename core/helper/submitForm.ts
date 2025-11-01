@@ -43,6 +43,12 @@ export const submitFormHandler = async ({
     toast.error("years should be number");
     return;
   }
+
+  if (isNaN(+engine)) {
+    toast.error("engine should be a number");
+    return;
+  }
+
   if (isNaN(+cylinder)) {
     toast.error("cylinder should be number");
     return;

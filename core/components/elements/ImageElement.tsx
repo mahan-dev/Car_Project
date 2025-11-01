@@ -13,6 +13,8 @@ import toast from "react-hot-toast";
 
 import { Button } from "@mui/material";
 
+import styles from "@/elements/styles/imageElement/route.module.css";
+
 interface ImageProps {
   name: string;
   imageUrl: string | null;
@@ -39,7 +41,7 @@ const ImageElement = ({
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <CldUploadWidget
         uploadPreset="unsigned_upload"
         onSuccess={(result: CloudinaryUploadWidgetResults, { widget }) =>
@@ -62,7 +64,7 @@ const ImageElement = ({
           );
         }}
       </CldUploadWidget>
-    </>
+    </div>
   );
 };
 
