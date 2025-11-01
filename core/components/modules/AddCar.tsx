@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import styles from "@/modules/styles/addCar/route.module.css";
 import { alpha, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
@@ -11,14 +11,17 @@ import TextInput from "@/modules/TextInput";
 import ImageElement from "@/elements/ImageElement";
 
 import DeleteButton from "@/elements/DeleteButton";
+import Loader from "@/components/loader/Loader";
+import toast from "react-hot-toast";
 
 interface AddCarProps {
   title: string;
 }
 const AddCar = ({ title }: AddCarProps) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const { watch, setValue } = useForm<AddForm>({
+  const { watch, setValue, reset, register, control } = useForm<AddForm>({
     defaultValues: {
       year: "",
       cylinder: "",
@@ -32,21 +35,22 @@ const AddCar = ({ title }: AddCarProps) => {
 
   const profileData = watch();
 
-  const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    const nameType = name as keyof AddForm;
-    setValue(nameType, value);
-  };
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    submitFormHandler({
+    const res = await submitFormHandler({
       profileData: {
         ...profileData,
         imageUrl,
       },
+      setLoading,
     });
+
+    if (res) {
+      toast.success("Done");
+      reset();
+      setImageUrl("");
+    }
   };
 
   return (
@@ -65,7 +69,11 @@ const AddCar = ({ title }: AddCarProps) => {
         {title}
       </Typography>
 
-      <TextInput changeHandler={changeHandler} />
+      <TextInput
+        setValue={setValue}
+        register={register}
+        control={control}
+      />
 
       <ImageElement
         name="imageUrl"
@@ -76,12 +84,18 @@ const AddCar = ({ title }: AddCarProps) => {
 
       <DeleteButton imageUrl={imageUrl} setImageUrl={setImageUrl} />
 
-      <Button
-        type="submit"
-        sx={{ width: "100%", mt: "2rem", bgcolor: "black", color: "white" }}
-      >
-        Submit
-      </Button>
+      {loading ? (
+        <div className={styles.container__loader}>
+          <Loader />
+        </div>
+      ) : (
+        <Button
+          type="submit"
+          sx={{ width: "100%", mt: "2rem", bgcolor: "black", color: "white" }}
+        >
+          Submit
+        </Button>
+      )}
     </form>
   );
 };

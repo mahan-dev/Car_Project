@@ -31,19 +31,18 @@ export const POST = async (req: Request) => {
         { status: 404 }
       );
 
-
-    await Profile.create({
+    const resProfile = await Profile.create({
       year: +year,
       gearbox,
       engine,
       cylinder: +cylinder,
       description,
       image: imageUrl,
-      category: "suv",
+      category: "sedan",
       addDate,
       userId: new Types.ObjectId(user._id),
     });
-   
+    console.log("🎮 ~ route.ts:35 -> resProfile: ", resProfile);
 
     return NextResponse.json({ status: "Success", message: "success" });
   } catch (error) {

@@ -49,4 +49,4 @@ const profileSchema = new Schema<ProfileInterface>(
 
 export const Profile: Model<ProfileInterface> =
   models.carProfile ||
-  model<ProfileInterface>("carProfile", profileSchema, "Car");
+  model<ProfileInterface>("carProfile", profileSchema);

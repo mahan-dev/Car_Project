@@ -20,3 +20,12 @@ export const inputProps = [
     title: "Description",
   },
 ];
+
+export const categoryName = [
+  "suv",
+  "sedan",
+  "coupe",
+  "hatchback",
+  "convertible",
+  "sport",
+];

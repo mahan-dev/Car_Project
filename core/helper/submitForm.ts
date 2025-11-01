@@ -1,30 +1,41 @@
-import { AddForm } from "@/modules/interface/FormValues";
+import { Dispatch, SetStateAction } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+import { AddForm } from "@/modules/interface/FormValues";
+
 interface SubmitProps {
   profileData: AddForm;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
-export const submitFormHandler = async ({ profileData }: SubmitProps) => {
-  const { year, gearbox, engine, cylinder, description, imageUrl } =
+export const submitFormHandler = async ({
+  profileData,
+  setLoading,
+}: SubmitProps): Promise<boolean> => {
+  const { year, gearbox, engine, cylinder, description, imageUrl, category } =
     profileData;
-  console.log(imageUrl);
+  console.log(profileData);
 
   const duration = {
     duration: 2000,
   };
 
-  if (!year || !gearbox || !engine || !cylinder || !description || !imageUrl) {
+  if (
+    !year ||
+    !gearbox ||
+    !engine ||
+    !cylinder ||
+    !description ||
+    !imageUrl ||
+    !category
+  ) {
     toast.error("please fill out fields", duration);
-
-    console.log(profileData);
     return;
   }
 
   if (gearbox !== "Manual" && gearbox !== "Automatic") {
-    console.log(gearbox);
-    toast.error("Please enter a valid entity");
+    toast.error("Error  Manual | Automatic");
     return;
   }
 
@@ -40,11 +51,15 @@ export const submitFormHandler = async ({ profileData }: SubmitProps) => {
     return;
   }
 
-
   try {
-    const res = await axios.post("/api/add", profileData)
-    console.log(res)
+    setLoading(true);
+    await axios.post("/api/profile", profileData);
+
+    return true;
   } catch {
-    console.log("error")
+    console.log("error");
+    return false;
+  } finally {
+    setLoading(false);
   }
 };

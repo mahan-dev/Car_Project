@@ -11,5 +11,6 @@ export interface AddForm {
   cylinder: string;
   description: string;
   imageUrl: string | null;
+  category: string;
   addDate: Date;
 }
