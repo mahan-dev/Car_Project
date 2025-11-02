@@ -7,9 +7,10 @@ export interface Profiles extends AddForm {
   _id: string;
   createdAt: Date;
   updatedAt: Date;
+  image: string;
 }
 
-interface ProfileProps {
+export interface ProfileProps {
   userId: Types.ObjectId;
   _id: Types.ObjectId;
   createdAt: Date;
