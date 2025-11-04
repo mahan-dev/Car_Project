@@ -15,7 +15,7 @@ export const submitFormHandler = async ({
 }: SubmitProps): Promise<boolean> => {
   const { year, gearbox, engine, cylinder, description, imageUrl, category } =
     profileData;
-  console.log(profileData);
+
 
   const duration = {
     duration: 2000,

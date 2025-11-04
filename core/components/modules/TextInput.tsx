@@ -33,12 +33,26 @@ const TextInput = ({ register, control, setValue }: TextProps) => {
       {inputProps.map((item) => (
         <div key={item.title} className={styles.main__content}>
           <span>{item.title}</span>
-          {item.name !== "description" ? (
+          {item.name === "gearbox" ? (
+            <FormControl>
+              <InputLabel id="gearbox">select</InputLabel>
+              <Controller
+                name={nameHandler(item.name)}
+                control={control}
+                defaultValue={""}
+                render={({ field }) => (
+                  <Select label="select" labelId="gearbox" {...field}>
+                    <MenuItem value="Manual">Manual</MenuItem>
+                    <MenuItem value="Automatic">Automatic</MenuItem>
+                  </Select>
+                )}
+              />
+            </FormControl>
+          ) : item.name !== "description" ? (
             <TextField
               name={item.name}
               {...register(nameHandler(item.name))}
               variant="outlined"
-              placeholder={item.name === "gearbox" ? "Automatic | Manual " : ""}
             />
           ) : (
             <textarea
