@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Button, Card, Typography } from "@mui/material";
 import { FetcherResponse } from "@/helper/dataFetcher";
@@ -7,9 +7,7 @@ import styles from "@/modules/styles/roomCard/route.module.css";
 
 import { TbListDetails } from "react-icons/tb";
 import { pageHandler } from "@/helper/carPerPage";
-import { FiStar } from "react-icons/fi";
-import { GoStarFill } from "react-icons/go";
-import { whishListHandler } from "@/helper/whishList";
+import StarCard from "@/elements/StarCard";
 
 interface RoomCardProps {
   data: { data: FetcherResponse[] };
@@ -19,22 +17,6 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
   const carData = data.data;
 
   const { cars } = pageHandler({ page, data });
-
-  const [whishList, setWhishList] = useState<FetcherResponse[]>(() => {
-    const data = localStorage.getItem("whishList");
-    return data ? JSON.parse(data) : [];
-  });
-
-
-  const isWhishList = (modelName, makeId) => {
-    const getList: FetcherResponse[] =
-      JSON.parse(localStorage.getItem("whishList")) || [];
-    const result = getList.some(
-      (item) => item.model_name === modelName && item.model_make_id === makeId
-    );
-
-    return result;
-  };
 
   return (
     <section className={styles.container}>
@@ -51,21 +33,7 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
             className={styles.card}
           >
             <div style={{ position: "absolute", top: "5px", left: "5px" }}>
-              {isWhishList(item.model_name, item.model_make_id) ? (
-                <GoStarFill
-                  style={{ color: "white" }}
-                  onClick={() =>
-                    whishListHandler(item, { whishList, setWhishList })
-                  }
-                />
-              ) : (
-                <FiStar
-                  style={{ color: "white" }}
-                  onClick={() =>
-                    whishListHandler(item, { whishList, setWhishList })
-                  }
-                />
-              )}
+              <StarCard data={item} />
             </div>
             <Image
               className={styles.card__image}
