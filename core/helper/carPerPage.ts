@@ -2,17 +2,25 @@ import { FetcherResponse } from "@/helper/dataFetcher";
 
 interface PageInterface {
   page: number;
-  data: { data: FetcherResponse[] };
+  carData: { data: FetcherResponse[] } | FetcherResponse[];
 }
-export const pageHandler = ({ page, data }: PageInterface) => {
+export const pageHandler = ({ page, carData }: PageInterface) => {
+  const data = Array.isArray(carData) ? carData : carData?.data;
+  if (!data || data.length === 0) {
+    return {
+      cars: [],
+      totalPage: 1,
+    };
+  }
+
   const carPerPage = 20;
 
   const startIndex = (page - 1) * carPerPage;
   const endIndex = startIndex + carPerPage;
 
-  const currentCars = data?.data.slice(startIndex, endIndex);
+  const currentCars = data.slice(startIndex, endIndex);
 
-  const totalPage = Math.ceil(data?.data.length / carPerPage);
+  const totalPage = Math.ceil(data.length / carPerPage);
 
   return {
     cars: currentCars,

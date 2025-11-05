@@ -21,7 +21,7 @@ const ShowRoomPage = () => {
     queryFn: async () => await dataFetcher(),
   });
 
-  const { totalPage } = pageHandler({ page, data });
+  const { totalPage } = pageHandler({ page, carData:data });
 
   useEffect(() => {
     initialPage(page, setPage);

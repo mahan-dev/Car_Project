@@ -4,6 +4,7 @@ import { FetcherResponse } from "@/helper/dataFetcher";
 import { whishListHandler } from "@/helper/whishList";
 import { GoStarFill } from "react-icons/go";
 import { FiStar } from "react-icons/fi";
+import styles from "@/elements/styles/starCard/route.module.css"
 
 const isWhishList = (modelName, makeId) => {
   const getList: FetcherResponse[] =
@@ -26,7 +27,7 @@ const StarCard = ({ data }: StarProps) => {
   });
 
   return (
-    <div>
+    <div className={styles.star}> 
       {isWhishList(data.model_name, data.model_make_id) ? (
         <GoStarFill
           style={{ color: "white" }}

@@ -10,18 +10,22 @@ import { pageHandler } from "@/helper/carPerPage";
 import StarCard from "@/elements/StarCard";
 
 interface RoomCardProps {
-  data: { data: FetcherResponse[] };
-  page: number;
+  data: { data: FetcherResponse[] } | FetcherResponse[];
+  page?: number;
+  whishList?: boolean;
 }
-const RoomCard = ({ page, data }: RoomCardProps) => {
-  const carData = data.data;
+const RoomCard = ({ page, data, whishList }: RoomCardProps) => {
+  const carData = Array.isArray(data) ? data : data.data
 
-  const { cars } = pageHandler({ page, data });
+  const { cars } = pageHandler({ page, carData });
+
+
+  const cardStatus = whishList ? carData : cars;
 
   return (
     <section className={styles.container}>
       {carData &&
-        cars.map((item, index) => (
+        cardStatus.map((item, index) => (
           <Card
             key={index}
             sx={{
@@ -63,7 +67,7 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
           </Card>
         ))}
 
-      {!carData.length && (
+      {!carData.length && !whishList &&(
         <Typography
           sx={{ width: "100%", fontSize: "1.2rem", textAlign: "center" }}
           component={"p"}
