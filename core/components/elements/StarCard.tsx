@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { FetcherResponse } from "@/helper/dataFetcher";
 import { whishListHandler } from "@/helper/whishList";
 import { GoStarFill } from "react-icons/go";
@@ -18,13 +18,15 @@ const isWhishList = (modelName, makeId) => {
 
 interface StarProps {
   data: FetcherResponse;
+  whishList: FetcherResponse[]
+  setWhishList: Dispatch<SetStateAction<FetcherResponse[]>>
 }
 
-const StarCard = ({ data }: StarProps) => {
-  const [whishList, setWhishList] = useState<FetcherResponse[]>(() => {
-    const data = localStorage.getItem("whishList");
-    return data ? JSON.parse(data) : [];
-  });
+const StarCard = ({ data, whishList, setWhishList }: StarProps) => {
+  // const [whishList, setWhishList] = useState<FetcherResponse[]>(() => {
+  //   const data = localStorage.getItem("whishList");
+  //   return data ? JSON.parse(data) : [];
+  // });
 
   return (
     <div className={styles.star}> 

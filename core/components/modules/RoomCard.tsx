@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button, Card, Typography } from "@mui/material";
 import { FetcherResponse } from "@/helper/dataFetcher";
@@ -8,19 +8,32 @@ import styles from "@/modules/styles/roomCard/route.module.css";
 import { TbListDetails } from "react-icons/tb";
 import { pageHandler } from "@/helper/carPerPage";
 import StarCard from "@/elements/StarCard";
+import { useRouter } from "next/navigation";
+import {WhishListHook} from "@/core/hooks/WhishList";
 
 interface RoomCardProps {
   data: { data: FetcherResponse[] } | FetcherResponse[];
   page?: number;
-  whishList?: boolean;
 }
-const RoomCard = ({ page, data, whishList }: RoomCardProps) => {
-  const carData = Array.isArray(data) ? data : data.data
+const RoomCard = ({ page, data }: RoomCardProps) => {
+  const carData = Array.isArray(data) ? data : data.data;
 
   const { cars } = pageHandler({ page, carData });
 
+  const whishListDb: FetcherResponse[] = JSON.parse(
+    localStorage.getItem("whishList")
+  );
 
-  const cardStatus = whishList ? carData : cars;
+  const {whishList, setWhishList} = WhishListHook()
+
+  const cardStatus = whishListDb ? carData : cars;
+
+  const router = useRouter();
+  console.log("rendered");
+  useEffect(() => {
+    router.refresh();
+  
+  }, [ whishList, router]);
 
   return (
     <section className={styles.container}>
@@ -37,7 +50,7 @@ const RoomCard = ({ page, data, whishList }: RoomCardProps) => {
             className={styles.card}
           >
             <div style={{ position: "absolute", top: "5px", left: "5px" }}>
-              <StarCard data={item} />
+              <StarCard data={item} whishList={whishList} setWhishList={setWhishList} />
             </div>
             <Image
               className={styles.card__image}
@@ -67,7 +80,7 @@ const RoomCard = ({ page, data, whishList }: RoomCardProps) => {
           </Card>
         ))}
 
-      {!carData.length && !whishList &&(
+      {!carData.length && (
         <Typography
           sx={{ width: "100%", fontSize: "1.2rem", textAlign: "center" }}
           component={"p"}

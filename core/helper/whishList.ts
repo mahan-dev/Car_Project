@@ -9,6 +9,9 @@ export const whishListHandler = (
   cardData: FetcherResponse,
   { whishList, setWhishList }: WhishListProps
 ) => {
+  const whishListDb: FetcherResponse[] =
+    JSON.parse(localStorage.getItem("whishList")) || [];
+
   const { model_make_id, model_name } = cardData;
 
   const exists = whishList.some(
@@ -18,12 +21,12 @@ export const whishListHandler = (
 
   let updateWhish = [];
   if (exists) {
-    updateWhish = whishList.filter(
+    updateWhish = whishListDb.filter(
       (item) =>
         item.model_make_id !== model_make_id || item.model_name !== model_name
     );
   } else {
-    updateWhish = [...whishList, cardData];
+    updateWhish = [...whishListDb, cardData];
   }
   setWhishList(updateWhish);
   localStorage.setItem("whishList", JSON.stringify(updateWhish));

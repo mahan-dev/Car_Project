@@ -1,8 +1,11 @@
-import WhishList from "@/templates/WhishList";
 import React from "react";
 
 const page = () => {
-  return <WhishList />;
+  return (
+    <div>
+      <h2>hi</h2>
+    </div>
+  );
 };
 
 export default page;
