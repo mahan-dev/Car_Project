@@ -3,6 +3,7 @@ import axios from "axios";
 export interface FetcherResponse {
   model_make_id: string;
   model_name: string;
+  image?: string;
 }
 export interface Car {
   Models: FetcherResponse[];

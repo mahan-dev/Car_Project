@@ -42,50 +42,54 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
   return (
     <section className={styles.container}>
       {carData &&
-        cardStatus.map((item, index) => (
-          <Card
-            key={index}
-            sx={{
-              width: "200px",
-              boxShadow: "0 0 12px rgba(0,0,0,0.1)",
-              overflow: "hidden",
-              position: "relative",
-            }}
-            className={styles.card}
-          >
-            <StarCard
-              data={item}
-              whishList={whishList}
-              setWhishList={setWhishList}
-            />
+        cardStatus.map((item, index) => {
+          const imagePath: string = item.model_make_id
+            ? `/images/showRoom/${item.model_make_id.toLowerCase()}.jpg`
+            : item.image;
 
-            <Image
-              className={styles.card__image}
-              src={`/images/showRoom/${item.model_make_id.toLowerCase()}.jpg`}
-              alt={item.model_make_id.toString()}
-              priority
-              width={200}
-              height={200}
-              style={{
-                objectFit: "cover",
+          return (
+            <Card
+              key={index}
+              sx={{
+                width: "200px",
+                boxShadow: "0 0 12px rgba(0,0,0,0.1)",
+                overflow: "hidden",
+                position: "relative",
               }}
-            />
+              className={styles.card}
+            >
+              <StarCard
+                data={item}
+                whishList={whishList}
+                setWhishList={setWhishList}
+              />
 
-            <span className={styles.card__details}>
-              <p>
-                {item.model_make_id} {item.model_name}
-              </p>
+              <Image
+                className={styles.card__image}
+                src={imagePath}
+                alt={item.model_make_id?.toString() || "card_image"}
+                priority
+                sizes="100vw"
+                width={200}
+                height={200}
+              />
 
-              <Button
-                href={`show-room/detail/${item.model_make_id}/${item.model_name}`}
-                className={styles.card__button}
-                sx={{ bgcolor: "black", color: "white", padding: "0.3rem 0" }}
-              >
-                <TbListDetails />
-              </Button>
-            </span>
-          </Card>
-        ))}
+              <span className={styles.card__details}>
+                <p>
+                  {item.model_make_id} {item.model_name}
+                </p>
+
+                <Button
+                  href={`show-room/detail/${item.model_make_id}/${item.model_name}`}
+                  className={styles.card__button}
+                  sx={{ bgcolor: "black", color: "white", padding: "0.3rem 0" }}
+                >
+                  <TbListDetails />
+                </Button>
+              </span>
+            </Card>
+          );
+        })}
 
       {!carData.length && (
         <Typography
