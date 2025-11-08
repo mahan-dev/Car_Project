@@ -19,7 +19,8 @@ const MyProfilesPage = ({ profiles }: ProfileInterface) => {
                 src={item.image}
                 alt={"cardPic"}
                 fill
-                sizes="100vw"
+                sizes="(max-width:576px) 100vw, 100vw"
+                priority={true}
                 style={{ objectFit: "cover" }}
               />
             </div>

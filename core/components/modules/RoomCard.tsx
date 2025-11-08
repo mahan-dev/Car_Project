@@ -1,7 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
-import { Button, Card, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  Typography,
+  unstable_ClassNameGenerator,
+} from "@mui/material";
 import { FetcherResponse } from "@/helper/dataFetcher";
 import styles from "@/modules/styles/roomCard/route.module.css";
 
@@ -9,7 +14,7 @@ import { TbListDetails } from "react-icons/tb";
 import { pageHandler } from "@/helper/carPerPage";
 import StarCard from "@/elements/StarCard";
 import { useRouter } from "next/navigation";
-import {WhishListHook} from "@/core/hooks/WhishList";
+import { WhishListHook } from "@/core/hooks/WhishList";
 
 interface RoomCardProps {
   data: { data: FetcherResponse[] } | FetcherResponse[];
@@ -24,16 +29,15 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
     localStorage.getItem("whishList")
   );
 
-  const {whishList, setWhishList} = WhishListHook()
+  const { whishList, setWhishList } = WhishListHook();
 
   const cardStatus = whishListDb ? carData : cars;
 
   const router = useRouter();
-  console.log("rendered");
+
   useEffect(() => {
     router.refresh();
-  
-  }, [ whishList, router]);
+  }, [whishList, router]);
 
   return (
     <section className={styles.container}>
@@ -49,9 +53,12 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
             }}
             className={styles.card}
           >
-            <div style={{ position: "absolute", top: "5px", left: "5px" }}>
-              <StarCard data={item} whishList={whishList} setWhishList={setWhishList} />
-            </div>
+            <StarCard
+              data={item}
+              whishList={whishList}
+              setWhishList={setWhishList}
+            />
+
             <Image
               className={styles.card__image}
               src={`/images/showRoom/${item.model_make_id.toLowerCase()}.jpg`}

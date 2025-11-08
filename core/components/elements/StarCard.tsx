@@ -23,10 +23,7 @@ interface StarProps {
 }
 
 const StarCard = ({ data, whishList, setWhishList }: StarProps) => {
-  // const [whishList, setWhishList] = useState<FetcherResponse[]>(() => {
-  //   const data = localStorage.getItem("whishList");
-  //   return data ? JSON.parse(data) : [];
-  // });
+
 
   return (
     <div className={styles.star}> 

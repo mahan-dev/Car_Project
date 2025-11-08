@@ -1,3 +1,8 @@
+.star {
+    position:  absolute;
+    top: 5px;
+    left: 5px;
+}
 .star svg {
     cursor: pointer;
 }

@@ -39,7 +39,7 @@ const Layout = ({ children }: LayoutProps) => {
         </div>
 
         <div className={styles.header__right}>
-          <Button href="/show-room">Marketplace</Button>
+          <Button href="/marketplace">Marketplace</Button>
           <Button href="/show-room">Showroom</Button>
 
           <input type="text" placeholder="search" />
