@@ -8,7 +8,6 @@ import styles from "@/modules/styles/roomCard/route.module.css";
 import { TbListDetails } from "react-icons/tb";
 import { pageHandler } from "@/helper/carPerPage";
 import StarCard from "@/elements/StarCard";
-import { useRouter } from "next/navigation";
 import { WhishListHook } from "@/core/hooks/WhishList";
 
 interface RoomCardProps {
@@ -28,7 +27,8 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
 
   const { whishList, setWhishList } = WhishListHook();
 
-  const cardStatus = WhishListDb.length > 0 ? carData : cars;
+  const cardStatus = WhishListDb ? carData : cars;
+  console.log(cardStatus)
 
   useEffect(() => {
     WhishListCallback();
@@ -41,7 +41,7 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
           const imagePath: string = item.model_make_id
             ? `/images/showRoom/${item.model_make_id.toLowerCase()}.jpg`
             : item.image;
-
+          
           return (
             <Card
               key={index}
