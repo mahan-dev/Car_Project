@@ -11,8 +11,18 @@ export const POST = async (req: Request) => {
   try {
     await connectDb();
     const res: AddForm = await req.json();
-    const { year, gearbox, engine, cylinder, description, imageUrl, addDate } =
-      res;
+    const {
+      model_name,
+      model_make_id,
+      year,
+      gearbox,
+      category,
+      engine,
+      cylinder,
+      description,
+      imageUrl,
+      addDate,
+    } = res;
 
     const session = await getServerSession(authOptions);
     if (!session)
@@ -31,18 +41,19 @@ export const POST = async (req: Request) => {
         { status: 404 }
       );
 
-    const resProfile = await Profile.create({
+    await Profile.create({
+      model_name,
+      model_make_id,
       year: +year,
       gearbox,
       engine,
       cylinder: +cylinder,
       description,
       image: imageUrl,
-      category: "sedan",
+      category,
       addDate,
       userId: new Types.ObjectId(user._id),
     });
-    console.log("🎮 ~ route.ts:35 -> resProfile: ", resProfile);
 
     return NextResponse.json({ status: "Success", message: "success" });
   } catch (error) {

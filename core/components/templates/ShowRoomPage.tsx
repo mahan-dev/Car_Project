@@ -21,7 +21,7 @@ const ShowRoomPage = () => {
     queryFn: async () => await dataFetcher(),
   });
 
-  const { totalPage } = pageHandler({ page, carData:data });
+  const { totalPage } = pageHandler({ page, carData: data });
 
   useEffect(() => {
     initialPage(page, setPage);
@@ -55,7 +55,7 @@ const ShowRoomPage = () => {
             page={page}
             siblingCount={0}
             boundaryCount={2}
-            onChange={(event, value) => paginationHandler(page, setPage, value)}
+            onChange={(event, value) => paginationHandler( setPage, value)}
           />
         )}
       </div>

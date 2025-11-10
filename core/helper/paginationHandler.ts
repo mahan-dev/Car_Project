@@ -2,7 +2,6 @@ import React, { SetStateAction } from "react";
 
 type SetPage = React.Dispatch<SetStateAction<number>>;
 export const paginationHandler = (
-  page: number,
   setPage: SetPage,
   value: number
 ) => {

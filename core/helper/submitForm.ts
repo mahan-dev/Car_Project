@@ -13,15 +13,25 @@ export const submitFormHandler = async ({
   profileData,
   setLoading,
 }: SubmitProps): Promise<boolean> => {
-  const { year, gearbox, engine, cylinder, description, imageUrl, category } =
-    profileData;
-
+  const {
+    model_name,
+    model_make_id,
+    year,
+    gearbox,
+    engine,
+    cylinder,
+    description,
+    imageUrl,
+    category,
+  } = profileData;
 
   const duration = {
     duration: 2000,
   };
 
   if (
+    !model_make_id ||
+    !model_name ||
     !year ||
     !gearbox ||
     !engine ||
@@ -30,6 +40,7 @@ export const submitFormHandler = async ({
     !imageUrl ||
     !category
   ) {
+    console.log(category)
     toast.error("please fill out fields", duration);
     return;
   }

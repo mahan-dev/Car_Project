@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { categoryName, inputProps } from "@/constants/addCar/addCar";
 import {
   FormControl,
@@ -27,7 +27,6 @@ const TextInput = ({ register, control, setValue }: TextProps) => {
   const nameHandler = (name: string): keyof AddForm => {
     return name as keyof AddForm;
   };
-
   return (
     <div className={styles.container__main}>
       {inputProps.map((item) => (
@@ -77,7 +76,9 @@ const TextInput = ({ register, control, setValue }: TextProps) => {
                 {...field}
                 label="category"
                 labelId="category"
-                onChange={(e) => field.onChange(e.target.value)}
+                onChange={(e) => {
+                  field.onChange(e.target.value);
+                }}
               >
                 {categoryName.map((item) => (
                   <MenuItem key={item} value={item}>

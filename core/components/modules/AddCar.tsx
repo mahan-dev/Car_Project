@@ -26,6 +26,8 @@ const AddCar = ({ title }: AddCarProps) => {
 
   const { watch, setValue, reset, register, control } = useForm<AddForm>({
     defaultValues: {
+      model_make_id: "",
+      model_name: "",
       year: "",
       cylinder: "",
       gearbox: "",
@@ -84,7 +86,7 @@ const AddCar = ({ title }: AddCarProps) => {
       <DeleteButton imageUrl={imageUrl} setImageUrl={setImageUrl} />
 
       <DatePicker control={control} />
-      
+
       {loading ? (
         <div className={styles.container__loader}>
           <Loader />

@@ -7,6 +7,8 @@ export interface FormValues {
 }
 
 export interface AddForm {
+  model_name: string;
+  model_make_id: string;
   year: string;
   gearbox: string;
   engine: string;

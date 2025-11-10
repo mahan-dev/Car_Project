@@ -3,6 +3,14 @@ import { ProfileInterface } from "@/models/interface/profileSchema";
 
 const profileSchema = new Schema<ProfileInterface>(
   {
+    model_name: {
+      required: true,
+      type: String,
+    },
+    model_make_id: {
+      required: true,
+      type: String,
+    },
     year: {
       required: true,
       type: String,
@@ -48,5 +56,4 @@ const profileSchema = new Schema<ProfileInterface>(
 );
 
 export const Profile: Model<ProfileInterface> =
-  models.carProfile ||
-  model<ProfileInterface>("carProfile", profileSchema);
+  models.carProfile || model<ProfileInterface>("carProfile", profileSchema);

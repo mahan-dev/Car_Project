@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Button, Card, Typography } from "@mui/material";
 import { FetcherResponse } from "@/helper/dataFetcher";
@@ -8,7 +8,7 @@ import styles from "@/modules/styles/roomCard/route.module.css";
 import { TbListDetails } from "react-icons/tb";
 import { pageHandler } from "@/helper/carPerPage";
 import StarCard from "@/elements/StarCard";
-import { WhishListHook } from "@/core/hooks/WhishList";
+import { WhishListHook } from "@/hooks/WhishList";
 
 interface RoomCardProps {
   data: { data: FetcherResponse[] } | FetcherResponse[];
@@ -16,23 +16,12 @@ interface RoomCardProps {
 }
 const RoomCard = ({ page, data }: RoomCardProps) => {
   const carData = Array.isArray(data) ? data : data.data;
-  const [WhishListDb, setWhishListDb] = useState<FetcherResponse[]>([]);
 
   const { cars } = pageHandler({ page, carData });
 
-  const WhishListCallback = useCallback(() => {
-    const save = localStorage.getItem("whishList");
-    setWhishListDb(save ? JSON.parse(save) : []);
-  }, []);
-
   const { whishList, setWhishList } = WhishListHook();
 
-  const cardStatus = WhishListDb ? carData : cars;
-  console.log(cardStatus)
-
-  useEffect(() => {
-    WhishListCallback();
-  }, [whishList, WhishListCallback]);
+  const cardStatus = cars;
 
   return (
     <section className={styles.container}>
@@ -41,7 +30,7 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
           const imagePath: string = item.model_make_id
             ? `/images/showRoom/${item.model_make_id.toLowerCase()}.jpg`
             : item.image;
-          
+
           return (
             <Card
               key={index}

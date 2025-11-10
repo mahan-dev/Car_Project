@@ -4,11 +4,11 @@ export const inputProps = [
     title: "Car year",
   },
   {
-    name: "model",
+    name: "model_name",
     title: "Model",
   },
   {
-    name: "make",
+    name: "model_make_id",
     title: "Make",
   },
   {
