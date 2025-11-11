@@ -12,6 +12,7 @@ interface CarDetails {
 
 const CarDetailsPage = ({ data }: CarDetails) => {
   const { model_name, model_make_id } = data || {};
+  console.log(data)
 
   return (
     <div className={styles.container}>

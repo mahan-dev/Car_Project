@@ -7,7 +7,9 @@ interface DetailProps {
   params: Promise<{ detailId: string }>;
 }
 const DetailPage = async ({ params }: DetailProps) => {
+
   const { detailId } = await params;
+  console.log(detailId)
 
   const make = detailId[0];
   const model = detailId[1];

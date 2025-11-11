@@ -26,7 +26,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
     <section className={styles.container}>
       {!!cars.length ? (
         <div className={styles.container__main}>
-          <aside>
+          <aside className={styles.main__aside}>
             <MarketPlaceAside />
           </aside>
           <div className={styles.container__content}>

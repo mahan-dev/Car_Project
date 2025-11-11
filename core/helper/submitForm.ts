@@ -52,6 +52,7 @@ export const submitFormHandler = async ({
     return;
   }
 
+
   if (isNaN(+year)) {
     toast.error("years should be number");
     return;

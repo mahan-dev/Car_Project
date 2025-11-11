@@ -1,5 +1,14 @@
 .list {
-    width: 200px;
-    flex-shrink: 0;
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    
+}
+
+.list__item {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    &:first-child {
+        font-weight: 600;
+        letter-spacing: 0.04rem;
+    }
 }

@@ -8,6 +8,16 @@
     display: flex;
     gap: 1rem;
 }
+
+
+.main__aside{
+    width: 200px;
+    height: fit-content;
+    flex-shrink: 0;
+    padding: 1rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
 .container__content{
     min-height: 100vh;
     display: flex;

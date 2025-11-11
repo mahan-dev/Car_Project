@@ -20,12 +20,11 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
   const { cars } = pageHandler({ page, carData });
 
   const { whishList, setWhishList } = WhishListHook();
-  console.log(cars)
-
+  const carsCard: FetcherResponse[] = page ? cars : whishList;
   return (
     <section className={styles.container}>
       {carData &&
-        cars.map((item, index) => {
+        carsCard.map((item, index) => {
           const imagePath: string = !item.image
             ? `/images/showRoom/${item.model_make_id.toLowerCase()}.jpg`
             : item.image;
@@ -63,8 +62,9 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
                 </p>
 
                 <Button
-                  href={`show-room/detail/${item.model_make_id}/${item.model_name}`}
+                  // href={`show-room/detail/${item.model_make_id}/${item.model_name}`}
                   className={styles.card__button}
+                  onClick={()=> console.log(item)}
                   sx={{ bgcolor: "black", color: "white", padding: "0.3rem 0" }}
                 >
                   <TbListDetails />
