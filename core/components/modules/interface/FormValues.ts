@@ -10,11 +10,12 @@ export interface AddForm {
   model_name: string;
   model_make_id: string;
   year: string;
+  price: string;
   gearbox: string;
   engine: string;
   cylinder: string;
   description: string;
   imageUrl: string | null;
-  category: string
+  category: string;
   addDate: Dayjs;
 }

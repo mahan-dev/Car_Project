@@ -1,6 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import { categoryName, inputProps } from "@/constants/addCar/addCar";
+
 import {
   FormControl,
   InputLabel,
@@ -9,13 +10,14 @@ import {
   TextField,
 } from "@mui/material";
 
-import styles from "@/modules/styles/textInput/route.module.css";
 import {
   Control,
   Controller,
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
+
+import styles from "@/modules/styles/textInput/route.module.css";
 import { AddForm } from "@/modules/interface/FormValues";
 
 interface TextProps {
@@ -23,10 +25,12 @@ interface TextProps {
   control: Control<AddForm>;
   setValue: UseFormSetValue<AddForm>;
 }
+
 const TextInput = ({ register, control, setValue }: TextProps) => {
   const nameHandler = (name: string): keyof AddForm => {
     return name as keyof AddForm;
   };
+  
   return (
     <div className={styles.container__main}>
       {inputProps.map((item) => (

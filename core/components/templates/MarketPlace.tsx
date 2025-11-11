@@ -7,6 +7,7 @@ import { Pagination, Typography } from "@mui/material";
 import { pageHandler } from "@/helper/carPerPage";
 import { paginationHandler } from "@/helper/paginationHandler";
 import { initialPage } from "@/helper/initialPage";
+import MarketPlaceAside from "@/modules/MarketPlaceAside";
 
 interface MarketPlaceInterface {
   profile: FetcherResponse[];
@@ -24,9 +25,12 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   return (
     <section className={styles.container}>
       {!!cars.length ? (
-        <>
-          <RoomCard data={cars} page={1} />
-
+        <div className={styles.container__main}>
+          <aside>
+            <MarketPlaceAside />
+          </aside>
+          <div className={styles.container__content}>
+            <RoomCard data={cars} page={1} />
           <div className={styles.container__pagination}>
             <Pagination
               count={totalPage}
@@ -36,10 +40,16 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
               onChange={(event, value) => paginationHandler(setPage, value)}
             />
           </div>
-        </>
+          </div>
+        </div>
       ) : (
         <Typography
-          sx={{ display: "flex", justifyContent: "center", fontSize: "1.3rem" }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            fontSize: "1.3rem",
+            fontWeight: "600",
+          }}
           variant="h2"
         >
           {" "}

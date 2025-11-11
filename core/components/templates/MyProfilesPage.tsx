@@ -8,10 +8,10 @@ import styles from "@/templates/styles/myProfiles/route.module.css";
 interface ProfileInterface {
   profiles: ProfileProps;
 }
-const MyProfilesPage = ({ profiles }: ProfileInterface) => {
+const MyProfilesPage = ({ profiles: { profiles } }: ProfileInterface) => {
   return (
     <Grid container spacing={2}>
-      {profiles.profiles.map((item, index) => (
+      {profiles.map((item, index) => (
         <Grid key={index} size={{ xs: 6, md: 4 }}>
           <div className={styles.container}>
             <div className={styles.container__image}>
@@ -19,7 +19,7 @@ const MyProfilesPage = ({ profiles }: ProfileInterface) => {
                 src={item.image}
                 alt={"cardPic"}
                 fill
-                sizes="(max-width:576px) 100vw, 100vw"
+                sizes="(max-width:576px) 100vw, 30vw"
                 priority={true}
                 style={{ objectFit: "cover" }}
               />

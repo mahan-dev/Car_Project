@@ -12,6 +12,11 @@ export const inputProps = [
     title: "Make",
   },
   {
+    name: "price",
+    title: "Price",
+  },
+
+  {
     name: "gearbox",
     title: "Gear box",
   },

@@ -1,5 +1,20 @@
 .container {
+  
     margin: 4rem 0;
+}
+
+
+.container__main {
+    display: flex;
+    gap: 1rem;
+}
+.container__content{
+    min-height: 100vh;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+
 }
 
 .container__pagination{

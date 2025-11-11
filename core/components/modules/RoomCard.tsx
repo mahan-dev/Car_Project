@@ -20,14 +20,13 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
   const { cars } = pageHandler({ page, carData });
 
   const { whishList, setWhishList } = WhishListHook();
-
-  const cardStatus = cars;
+  console.log(cars)
 
   return (
     <section className={styles.container}>
       {carData &&
-        cardStatus.map((item, index) => {
-          const imagePath: string = item.model_make_id
+        cars.map((item, index) => {
+          const imagePath: string = !item.image
             ? `/images/showRoom/${item.model_make_id.toLowerCase()}.jpg`
             : item.image;
 

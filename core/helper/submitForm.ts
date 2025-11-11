@@ -17,6 +17,7 @@ export const submitFormHandler = async ({
     model_name,
     model_make_id,
     year,
+    price,
     gearbox,
     engine,
     cylinder,
@@ -33,6 +34,7 @@ export const submitFormHandler = async ({
     !model_make_id ||
     !model_name ||
     !year ||
+    !price ||
     !gearbox ||
     !engine ||
     !cylinder ||
@@ -40,7 +42,7 @@ export const submitFormHandler = async ({
     !imageUrl ||
     !category
   ) {
-    console.log(category)
+    console.log(category);
     toast.error("please fill out fields", duration);
     return;
   }
@@ -52,6 +54,10 @@ export const submitFormHandler = async ({
 
   if (isNaN(+year)) {
     toast.error("years should be number");
+    return;
+  }
+  if (isNaN(+price)) {
+    toast.error("price should be number");
     return;
   }
 

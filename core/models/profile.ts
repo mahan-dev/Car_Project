@@ -15,6 +15,10 @@ const profileSchema = new Schema<ProfileInterface>(
       required: true,
       type: String,
     },
+    price: {
+      required: true,
+      type: String,
+    },
     gearbox: {
       required: true,
       type: String,
