@@ -1,29 +1,26 @@
-"use client";
-import React from "react";
-
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { FiSettings } from "react-icons/fi";
 import styles from "@/modules/styles/carDetail/route.module.css";
 import CarContent from "@/elements/CarContent";
 import { objectHelper } from "@/helper/carDetail";
 import { ProfileInterface } from "@/models/interface/profileSchema";
+import { sp } from "@/utils/numberFormatter";
 
 interface CarDetail {
-  data: { [key: string]: string } | ProfileInterface;
+  data: { [key: string]: string } & Partial<ProfileInterface>;
 }
 const CarDetail = ({ data }: CarDetail) => {
-  if (!("make_country" in data) || !("model_year" in data)) return;
-  const { make_country, model_year } = data;
-
+  console.log(data);
+  if (!data) return;
   return (
     <div className={styles.container}>
       <div className={styles.container__box}>
         Country
-        <p>{make_country}</p>
+        <p>{objectHelper(data.make_country)}</p>
       </div>
       <div className={styles.container__box}>
         Year
-        <p>{objectHelper(model_year)}</p>
+        <p>{objectHelper(sp(data.model_year || data.year))}</p>
       </div>
 
       <h2 className={styles.container__title}>

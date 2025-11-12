@@ -20,7 +20,7 @@ const DetailPage = async ({ params }: DetailProps) => {
   interface FinalData {
     [key: string]: string;
   }
-  let finalData: ProfileInterface | FinalData = data || {};
+  let finalData: Partial<ProfileInterface> & FinalData = data || {};
   if (!data) {
     const profile = await Profile.findOne({
       model_name: model,

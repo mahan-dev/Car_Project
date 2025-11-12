@@ -1,9 +1,12 @@
-import { objectHelper } from "./carDetail";
+import { ProfileInterface } from "@/models/interface/profileSchema";
+import { objectHelper } from "@/helper/carDetail";
 
 interface DataProps {
-  data: { [key: string]: string };
+  data: { [key: string]: string } | ProfileInterface;
 }
 export const dataHandler = ({ data }: DataProps) => {
+
+  
   const {
     model_transmission_type,
     model_drive,
@@ -14,16 +17,18 @@ export const dataHandler = ({ data }: DataProps) => {
     model_0_to_100_kph,
     model_top_speed_kph,
     model_lkm_mixed,
-  } = data;
+    gearbox,
+    cylinder,
+  } = data as { [key: string]: string };
 
   return {
     carDetail: [
       {
         specification: {
-          "Gear Box": model_transmission_type,
+          "Gear Box": model_transmission_type || gearbox,
           "Drive Model": model_drive,
-          "Motor Cylinder": model_engine_cyl,
-          "Engine Volume": objectHelper(model_engine_cc, "cc"),
+          "Motor Cylinder": model_engine_cyl || cylinder,
+          "Engine Volume": objectHelper(model_engine_cc || data.engine, "cc"),
         },
 
         performance: {

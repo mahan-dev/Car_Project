@@ -11,4 +11,5 @@ export interface ProfileInterface {
   userId: object;
   category: string;
   image: string;
+  _id: string
 }

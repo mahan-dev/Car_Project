@@ -3,9 +3,10 @@ import { dataHandler } from "@/helper/carContent";
 
 import styles from "@/elements/styles/carContent/route.module.css";
 import { objectHelper } from "@/core/helper/carDetail";
+import { ProfileInterface } from "@/models/interface/profileSchema";
 
 interface CarProps {
-  data: { [key: string]: string };
+  data: { [key: string]: string } | ProfileInterface;
 
   title: "specification" | "performance";
 }

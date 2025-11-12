@@ -7,11 +7,16 @@ import CarDetail from "@/modules/CarDetail";
 import { Typography } from "@mui/material";
 import { ProfileInterface } from "@/models/interface/profileSchema";
 
-interface CarDetails {data: { [key: string]: string } | ProfileInterface}
+interface CarDetails {
+  data: { [key: string]: string } & Partial<ProfileInterface>;
+}
 
 const CarDetailsPage = ({ data }: CarDetails) => {
   const { model_name, model_make_id } = data || {};
-  console.log(data)
+
+  const carImage = !data._id
+    ? `/images/showRoom/${model_make_id}.jpg`
+    : data.image;
 
   return (
     <div className={styles.container}>
@@ -19,7 +24,7 @@ const CarDetailsPage = ({ data }: CarDetails) => {
         <>
           <div className={styles["container__wrapper-image"]}>
             <Image
-              src={`/images/showRoom/${model_make_id}.jpg`}
+              src={carImage}
               fill
               priority
               alt={model_name}

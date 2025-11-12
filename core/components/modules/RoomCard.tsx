@@ -10,7 +10,6 @@ import { pageHandler } from "@/helper/carPerPage";
 import StarCard from "@/elements/StarCard";
 import { WhishListHook } from "@/hooks/WhishList";
 import { useRouter } from "next/navigation";
-import { AddForm } from "@/modules/interface/FormValues";
 
 interface RoomCardProps {
   data: { data: FetcherResponse[] } | FetcherResponse[];
@@ -18,7 +17,6 @@ interface RoomCardProps {
 }
 const RoomCard = ({ page, data }: RoomCardProps) => {
   const carData = Array.isArray(data) ? data : data.data;
-
   const { cars } = pageHandler({ page, carData });
 
   const { whishList, setWhishList } = WhishListHook();

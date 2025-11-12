@@ -1,14 +1,11 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import DashboardAside from "@/templates/DashboardAside";
-import { connectDb } from "@/core/utils/connectDb";
+import { connectDb } from "@/utils/connectDb";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 import { redirect } from "next/navigation";
 
-interface layoutProps {
-  children: React.ReactNode;
-}
-const layout = async ({ children }: layoutProps) => {
+const layout = async ({ children }: PropsWithChildren) => {
   const session = await getServerSession(authOptions);
 
   if (!session) redirect("/signup");
