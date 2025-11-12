@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AddForm } from "@/modules/interface/FormValues";
 
 export interface FetcherResponse {
   model_make_id: string;
@@ -33,6 +34,7 @@ export const carDetail = async (make: string, model: string) => {
     const { data } = await axios.get<CarDetail>(
       `https://www.carqueryapi.com/api/0.3/?&cmd=getTrims&make=${make}&model=${model}`
     );
+  
     return data.Trims[0];
   } catch (error) {
     console.log(error);

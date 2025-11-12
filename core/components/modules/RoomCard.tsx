@@ -9,6 +9,8 @@ import { TbListDetails } from "react-icons/tb";
 import { pageHandler } from "@/helper/carPerPage";
 import StarCard from "@/elements/StarCard";
 import { WhishListHook } from "@/hooks/WhishList";
+import { useRouter } from "next/navigation";
+import { AddForm } from "@/modules/interface/FormValues";
 
 interface RoomCardProps {
   data: { data: FetcherResponse[] } | FetcherResponse[];
@@ -21,6 +23,17 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
 
   const { whishList, setWhishList } = WhishListHook();
   const carsCard: FetcherResponse[] = page ? cars : whishList;
+
+  const router = useRouter();
+
+  type ClickType = (
+    model_make_id: string,
+    model_name: string
+  ) => void;
+  const clickHandler: ClickType = (model_make_id, model_name) => {
+    router.push(`show-room/detail/${model_make_id}/${model_name}`);
+  };
+
   return (
     <section className={styles.container}>
       {carData &&
@@ -64,7 +77,9 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
                 <Button
                   // href={`show-room/detail/${item.model_make_id}/${item.model_name}`}
                   className={styles.card__button}
-                  onClick={()=> console.log(item)}
+                  onClick={() =>
+                    clickHandler(item.model_make_id, item.model_name)
+                  }
                   sx={{ bgcolor: "black", color: "white", padding: "0.3rem 0" }}
                 >
                   <TbListDetails />

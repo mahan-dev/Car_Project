@@ -6,12 +6,15 @@ import { FiSettings } from "react-icons/fi";
 import styles from "@/modules/styles/carDetail/route.module.css";
 import CarContent from "@/elements/CarContent";
 import { objectHelper } from "@/helper/carDetail";
+import { ProfileInterface } from "@/models/interface/profileSchema";
 
 interface CarDetail {
-  data: { [key: string]: string };
+  data: { [key: string]: string } | ProfileInterface;
 }
 const CarDetail = ({ data }: CarDetail) => {
+  if (!("make_country" in data) || !("model_year" in data)) return;
   const { make_country, model_year } = data;
+
   return (
     <div className={styles.container}>
       <div className={styles.container__box}>

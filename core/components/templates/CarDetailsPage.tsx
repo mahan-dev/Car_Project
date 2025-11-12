@@ -5,10 +5,9 @@ import styles from "@/templates/styles/carDetailsPage/route.module.css";
 
 import CarDetail from "@/modules/CarDetail";
 import { Typography } from "@mui/material";
+import { ProfileInterface } from "@/models/interface/profileSchema";
 
-interface CarDetails {
-  data: { [key: string]: string };
-}
+interface CarDetails {data: { [key: string]: string } | ProfileInterface}
 
 const CarDetailsPage = ({ data }: CarDetails) => {
   const { model_name, model_make_id } = data || {};
