@@ -5,8 +5,7 @@ import { Button, Typography } from "@mui/material";
 import React from "react";
 const WhishList = () => {
   const data: FetcherResponse[] = JSON.parse(localStorage.getItem("whishList"));
-  console.log('hi')
-  console.log(data)
+
   
   if (!data?.length)
     return (

@@ -9,7 +9,7 @@ import { TbListDetails } from "react-icons/tb";
 import { pageHandler } from "@/helper/carPerPage";
 import StarCard from "@/elements/StarCard";
 import { WhishListHook } from "@/hooks/WhishList";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface RoomCardProps {
   data: { data: FetcherResponse[] } | FetcherResponse[];
@@ -22,14 +22,16 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
   const { whishList, setWhishList } = WhishListHook();
   const carsCard: FetcherResponse[] = page ? cars : whishList;
 
+  type ClickType = (model_make_id: string, model_name: string) => void;
   const router = useRouter();
+  const pathName = usePathname();
 
-  type ClickType = (
-    model_make_id: string,
-    model_name: string
-  ) => void;
   const clickHandler: ClickType = (model_make_id, model_name) => {
-    router.push(`show-room/detail/${model_make_id}/${model_name}`);
+    if (pathName.includes("show-room")) {
+      router.push(`show-room/detail/${model_make_id}/${model_name}`);
+    } else if (pathName.includes("marketplace")) {
+      router.push(`marketplace/detail/${model_make_id}/${model_name}`);
+    }
   };
 
   return (
@@ -73,7 +75,6 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
                 </p>
 
                 <Button
-                  // href={`show-room/detail/${item.model_make_id}/${item.model_name}`}
                   className={styles.card__button}
                   onClick={() =>
                     clickHandler(item.model_make_id, item.model_name)

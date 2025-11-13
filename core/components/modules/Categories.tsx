@@ -5,7 +5,7 @@ import {
   CarImage,
   CarModels,
 } from "@/constants/Categories/Categories";
-import { LetterUpperCase } from "@/core/helper/LetterUpperCase";
+import { LetterLowerCase } from "@/helper/LetterLowerCase";
 
 import styles from "@/modules/styles/categories/categories.module.css";
 import CategoryIcon from "@/modules/CategoryIcon";
@@ -29,8 +29,8 @@ const Categories = () => {
 
             <li className={styles.card__listItem} key={item}>
               {item}
-              {CarIcon[LetterUpperCase(item) as CartKey] ? (
-                CarIcon[LetterUpperCase(item) as CartKey]
+              {CarIcon[LetterLowerCase(item) as CartKey] ? (
+                CarIcon[LetterLowerCase(item) as CartKey]
               ) : (
                 <CategoryIcon item={item} />
               )}

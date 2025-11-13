@@ -14,7 +14,7 @@ interface CarDetails {
 const CarDetailsPage = ({ data }: CarDetails) => {
   const { model_name, model_make_id } = data || {};
 
-  const carImage = !data._id
+  const carImage = !data.image
     ? `/images/showRoom/${model_make_id}.jpg`
     : data.image;
 

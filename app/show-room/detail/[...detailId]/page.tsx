@@ -1,36 +1,26 @@
-import React from "react";
 import CarDetailsPage from "@/templates/CarDetailsPage";
-
-import { carDetail } from "@/helper/dataFetcher";
-import { Profile } from "@/models/profile";
 import { ProfileInterface } from "@/models/interface/profileSchema";
+import { carDetail } from "@/helper/dataFetcher";
 
 interface DetailProps {
   params: Promise<{ detailId: string }>;
 }
+
+interface resultInterface {
+  [key: string]: string & Partial<ProfileInterface>;
+}
+
 const DetailPage = async ({ params }: DetailProps) => {
   const { detailId } = await params;
-  console.log(detailId);
 
   const make = detailId[0];
   const model = detailId[1];
 
   const data = await carDetail(make, model);
 
-  interface FinalData {
-    [key: string]: string;
-  }
-  let finalData: Partial<ProfileInterface> & FinalData = data || {};
-  if (!data) {
-    const profile = await Profile.findOne({
-      model_name: model,
-      model_make_id: make,
-    }).select("-userId");
-    if (!profile) return;
-    finalData = JSON.parse(JSON.stringify(profile));
-  }
+  const result: resultInterface = JSON.parse(JSON.stringify(data));
 
-  return <CarDetailsPage data={finalData} />;
+  return <CarDetailsPage data={result} />;
 };
 
 export default DetailPage;

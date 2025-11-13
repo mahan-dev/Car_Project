@@ -12,8 +12,6 @@ export const whishListHandler = (
   const whishListDb: FetcherResponse[] =
     JSON.parse(localStorage.getItem("whishList")) || [];
 
-  console.log("hi");
-
   const { model_make_id, model_name } = cardData;
 
   const exists = whishList.some(
