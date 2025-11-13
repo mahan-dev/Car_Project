@@ -5,6 +5,7 @@ export interface FetcherResponse {
   model_name: string;
   image?: string;
   _id?: string;
+  price: number;
 }
 export interface Car {
   Models: FetcherResponse[];

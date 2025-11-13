@@ -1,6 +1,7 @@
 import CarDetailsPage from "@/templates/CarDetailsPage";
 import { ProfileInterface } from "@/models/interface/profileSchema";
 import { Profile } from "@/models/profile";
+import { connectDb } from "@/core/utils/connectDb";
 
 interface pageInterface {
   params: Promise<{ detailId: string }>;
@@ -15,7 +16,7 @@ const page = async ({ params }: pageInterface) => {
   const make = detailId[0];
   const model = detailId[1];
   const id = detailId[2];
-
+  await connectDb();
   const profile = await Profile.findOne({
     $and: [
       { model_make_id: make },
