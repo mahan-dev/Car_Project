@@ -7,7 +7,7 @@ import { ProfileInterface } from "@/models/interface/profileSchema";
 import { sp } from "@/utils/numberFormatter";
 
 interface CarDetail {
-  data: { [key: string]: string } & Partial<ProfileInterface>;
+  data: { [key: string]: string } | ProfileInterface;
 }
 const CarDetail = ({ data }: CarDetail) => {
   console.log(data);
@@ -16,11 +16,11 @@ const CarDetail = ({ data }: CarDetail) => {
     <div className={styles.container}>
       <div className={styles.container__box}>
         Country
-        <p>{objectHelper(data.make_country)}</p>
+        <p>{objectHelper(data["make_country"])}</p>
       </div>
       <div className={styles.container__box}>
         Year
-        <p>{objectHelper(sp(data.model_year || data.year))}</p>
+        <p>{objectHelper(sp(data["model_year"] || data.year))}</p>
       </div>
 
       <h2 className={styles.container__title}>

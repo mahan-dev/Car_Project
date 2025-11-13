@@ -14,9 +14,16 @@ const page = async ({ params }: pageInterface) => {
   const { detailId } = await params;
   const make = detailId[0];
   const model = detailId[1];
+  const id = detailId[2];
 
   const profile = await Profile.findOne({
-    $and: [{ model_make_id: make }, { model_name: model }],
+    $and: [
+      { model_make_id: make },
+      { model_name: model },
+      {
+        _id: id,
+      },
+    ],
   });
 
   const data: resultInterface = JSON.parse(JSON.stringify(profile));

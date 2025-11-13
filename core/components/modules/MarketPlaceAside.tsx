@@ -9,6 +9,7 @@ const MarketPlaceAside = () => {
         <FaFilter />
         Filter
       </li>
+      
     </ul>
   );
 };

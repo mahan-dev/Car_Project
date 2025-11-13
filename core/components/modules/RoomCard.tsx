@@ -22,15 +22,15 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
   const { whishList, setWhishList } = WhishListHook();
   const carsCard: FetcherResponse[] = page ? cars : whishList;
 
-  type ClickType = (model_make_id: string, model_name: string) => void;
+  type ClickType = (model_make_id: string, model_name: string, id: string) => void;
   const router = useRouter();
   const pathName = usePathname();
 
-  const clickHandler: ClickType = (model_make_id, model_name) => {
+  const clickHandler: ClickType = (model_make_id, model_name, id) => {
     if (pathName.includes("show-room")) {
-      router.push(`show-room/detail/${model_make_id}/${model_name}`);
+      router.push(`show-room/detail/${model_make_id}/${model_name}/${id}`);
     } else if (pathName.includes("marketplace")) {
-      router.push(`marketplace/detail/${model_make_id}/${model_name}`);
+      router.push(`marketplace/detail/${model_make_id}/${model_name}/${id}`);
     }
   };
 
@@ -77,7 +77,7 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
                 <Button
                   className={styles.card__button}
                   onClick={() =>
-                    clickHandler(item.model_make_id, item.model_name)
+                    clickHandler(item.model_make_id, item.model_name, item._id)
                   }
                   sx={{ bgcolor: "black", color: "white", padding: "0.3rem 0" }}
                 >
