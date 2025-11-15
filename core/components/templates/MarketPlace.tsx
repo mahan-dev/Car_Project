@@ -17,11 +17,12 @@ interface MarketPlaceInterface {
 const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   const [page, setPage] = useState<number>(1);
   const [price, setPrice] = useState<number[]>([0, 0]);
+  const [gearBox, setGearBox] = useState<string>("");
 
   const { totalPage, cars } = pageHandler({ page, carData: profile });
 
   const filteredCars: FetcherResponse[] | { data: FetcherResponse[] } =
-    filterCards(price, cars);
+    filterCards(price, cars, gearBox);
 
   useEffect(() => {}, [price]);
   useEffect(() => {
@@ -33,7 +34,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
       {!!cars.length ? (
         <div className={styles.container__main}>
           <aside className={styles.main__aside}>
-            <MarketPlaceAside setPrice={setPrice} />
+            <MarketPlaceAside setPrice={setPrice} setGearBox={setGearBox} />
           </aside>
           <div className={styles.container__content}>
             <RoomCard data={filteredCars} page={1} />
