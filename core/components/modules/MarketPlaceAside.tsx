@@ -1,8 +1,8 @@
 import React, {
   ChangeEvent,
+  MouseEvent,
   Dispatch,
   SetStateAction,
-  useRef,
   useState,
 } from "react";
 import styles from "@/modules/styles/marketPlaceAside/route.module.css";
@@ -29,10 +29,7 @@ const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
     gearBox: false,
   });
 
-  const changeHandler = (
-    event: Event | ChangeEvent<HTMLInputElement>,
-    newValue: number[]
-  ) => {
+  const changeHandler = (event: Event, newValue: number[]) => {
     if (Array.isArray(newValue)) {
       setRange(newValue);
       setPrice(range);
@@ -45,6 +42,14 @@ const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
     setGearBox(value);
   };
 
+  const clickHandler = (e: MouseEvent<HTMLLIElement>) => {
+    const name = e.currentTarget.dataset.name;
+    setToggle((prev) => ({
+      ...prev,
+      [name]: prev[name] ? !prev[name] : true,
+    }));
+  };
+
   return (
     <ul className={styles.list}>
       <li className={styles.list__item}>
@@ -54,7 +59,8 @@ const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
 
       <li
         className={styles.list__item}
-        onClick={() => setToggle((prev) => ({ ...prev, price: !prev.price }))}
+        data-name="price"
+        onClick={clickHandler}
       >
         <span className={styles.list__item__header}>
           Price Range
@@ -75,15 +81,16 @@ const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
 
       <li
         className={styles.list__item}
-        onClick={() =>
-          setToggle((prev) => ({ ...prev, gearBox: !prev.gearBox }))
-        }
+        data-name="gearBox"
+        onClick={clickHandler}
       >
         <span className={styles.list__item__header}>
           GearBox
           <KeyboardArrowDownRoundedIcon />
         </span>
-        <div className={toggle.gearBox ? styles.open__item : styles.close__item}>
+        <div
+          className={toggle.gearBox ? styles.open__item : styles.close__item}
+        >
           <FormControl fullWidth>
             <InputLabel id="gearBox">GearBox</InputLabel>
 
