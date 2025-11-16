@@ -24,7 +24,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   const filteredCars: FetcherResponse[] | { data: FetcherResponse[] } =
     filterCards(price, cars, gearBox);
 
-  useEffect(() => {}, [price]);
   useEffect(() => {
     initialPage(page, setPage);
   }, [page]);

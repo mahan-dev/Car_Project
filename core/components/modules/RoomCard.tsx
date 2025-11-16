@@ -22,13 +22,20 @@ const RoomCard = ({ page, data }: RoomCardProps) => {
   const { whishList, setWhishList } = WhishListHook();
   const carsCard: FetcherResponse[] = page ? cars : whishList;
 
-  type ClickType = (model_make_id: string, model_name: string, id: string) => void;
+  type ClickType = (
+    model_make_id: string,
+    model_name: string,
+    id: string
+  ) => void;
   const router = useRouter();
   const pathName = usePathname();
 
   const clickHandler: ClickType = (model_make_id, model_name, id) => {
     if (pathName.includes("show-room")) {
-      router.push(`show-room/detail/${model_make_id}/${model_name}/${id}`);
+      
+      router.push(
+        `show-room/detail/${model_make_id}/${model_name}`
+      );
     } else if (pathName.includes("marketplace")) {
       router.push(`marketplace/detail/${model_make_id}/${model_name}/${id}`);
     }

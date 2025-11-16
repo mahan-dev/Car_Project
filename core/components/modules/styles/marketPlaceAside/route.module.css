@@ -1,24 +1,27 @@
-.list {
-    
-}
 
 .list__item {
     display: flex;
     gap: 0.5rem;
     align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 1rem;
+    
     padding: 1rem 0;
     cursor: pointer;
     border-bottom: 1px solid #ccc;
 
     &:first-child {
+        padding: 0;
+        margin-bottom: 1rem;
         font-weight: 600;
         letter-spacing: 0.04rem;
-         padding: 0;
         border-bottom: none;
     }
+   
+     &:nth-last-of-type(-n + 2){
+        border-bottom: none;
+     }
 }
+
 
 .list__item__header {
     display: flex;

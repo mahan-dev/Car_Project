@@ -57,12 +57,12 @@ const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
         Filter
       </li>
 
-      <li
-        className={styles.list__item}
-        data-name="price"
-        onClick={clickHandler}
-      >
-        <span className={styles.list__item__header}>
+      <li className={styles.list__item}>
+        <span
+          className={styles.list__item__header}
+          data-name="price"
+          onClick={clickHandler}
+        >
           Price Range
           <KeyboardArrowDownRoundedIcon />
         </span>
@@ -79,12 +79,12 @@ const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
         </div>
       </li>
 
-      <li
-        className={styles.list__item}
-        data-name="gearBox"
-        onClick={clickHandler}
-      >
-        <span className={styles.list__item__header}>
+      <li className={styles.list__item}>
+        <span
+          className={styles.list__item__header}
+          data-name="gearBox"
+          onClick={clickHandler}
+        >
           GearBox
           <KeyboardArrowDownRoundedIcon />
         </span>
