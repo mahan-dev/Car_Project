@@ -33,3 +33,53 @@
     margin: 2rem 0;
 
 }
+
+
+
+@media only screen and (max-width: 768px) {
+   .main__aside {
+    display: none;
+   } 
+   .main__filter {
+    display: block;
+    transition: all 0.5s ease-in-out;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 15px;
+    left: 20px;
+    color:white;
+    background: black;
+    border-radius: 100%;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+    
+}
+
+@media only screen and (min-width: 768px) {
+   .main__filter {
+    display: none;
+   }
+    
+}
+
+
+
+.show__aside {
+    
+    width: 100%;
+    position:  fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    
+    backdrop-filter: blur(5px);
+}

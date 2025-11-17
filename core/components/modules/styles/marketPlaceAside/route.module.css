@@ -6,7 +6,6 @@
     flex-wrap: wrap;
     
     padding: 1rem 0;
-    cursor: pointer;
     border-bottom: 1px solid #ccc;
 
     &:first-child {
@@ -24,8 +23,10 @@
 
 
 .list__item__header {
+    width: 100%;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .open__item{
@@ -37,4 +38,14 @@
 
 .close__item {
     display: none;
+}
+
+.list__visible{
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    background: #cecece;
+    padding: 2rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
 }

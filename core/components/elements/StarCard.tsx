@@ -8,7 +8,7 @@ import styles from "@/elements/styles/starCard/route.module.css";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 
-const isWhishList = (modelName: string, makeId: string) => {
+const isWhishList = (modelName: string, makeId: string): boolean => {
   const getList: FetcherResponse[] =
     JSON.parse(localStorage.getItem("whishList")) || [];
   const result = getList.some(

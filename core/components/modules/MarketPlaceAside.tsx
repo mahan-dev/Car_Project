@@ -19,15 +19,17 @@ import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownR
 interface AsideProps {
   setPrice: Dispatch<SetStateAction<number[]>>;
   setGearBox: Dispatch<SetStateAction<string>>;
+  asideVisible: boolean;
 }
 
-const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
+const MarketPlaceAside = ({
+  setPrice,
+  setGearBox,
+  asideVisible,
+}: AsideProps) => {
   const [range, setRange] = useState<number[]>([0, 1000000]);
   const [value, setValue] = useState<string>("");
-  const [toggle, setToggle] = useState<{ [key: string]: boolean }>({
-    price: false,
-    gearBox: false,
-  });
+  const [toggle, setToggle] = useState<{ [key: string]: boolean }>({});
 
   const changeHandler = (event: Event, newValue: number[]) => {
     if (Array.isArray(newValue)) {
@@ -42,7 +44,7 @@ const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
     setGearBox(value);
   };
 
-  const clickHandler = (e: MouseEvent<HTMLLIElement>) => {
+  const clickHandler = (e: MouseEvent<HTMLDivElement>) => {
     const name = e.currentTarget.dataset.name;
     setToggle((prev) => ({
       ...prev,
@@ -51,21 +53,21 @@ const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
   };
 
   return (
-    <ul className={styles.list}>
+    <ul className={`${asideVisible ? styles.list__visible : styles.list}`}>
       <li className={styles.list__item}>
         <FaFilter />
         Filter
       </li>
 
       <li className={styles.list__item}>
-        <span
+        <div
           className={styles.list__item__header}
           data-name="price"
           onClick={clickHandler}
         >
           Price Range
           <KeyboardArrowDownRoundedIcon />
-        </span>
+        </div>
         <div className={toggle.price ? styles.open__item : styles.close__item}>
           <Slider
             value={range}
@@ -80,14 +82,14 @@ const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
       </li>
 
       <li className={styles.list__item}>
-        <span
+        <div
           className={styles.list__item__header}
           data-name="gearBox"
           onClick={clickHandler}
         >
           GearBox
           <KeyboardArrowDownRoundedIcon />
-        </span>
+        </div>
         <div
           className={toggle.gearBox ? styles.open__item : styles.close__item}
         >
@@ -107,8 +109,6 @@ const MarketPlaceAside = ({ setPrice, setGearBox }: AsideProps) => {
           </FormControl>
         </div>
       </li>
-
-      <li></li>
     </ul>
   );
 };

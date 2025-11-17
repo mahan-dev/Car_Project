@@ -9,6 +9,8 @@ import { paginationHandler } from "@/helper/paginationHandler";
 import { initialPage } from "@/helper/initialPage";
 import MarketPlaceAside from "@/modules/MarketPlaceAside";
 import { filterCards } from "@/helper/filterCard";
+import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 interface MarketPlaceInterface {
   profile: FetcherResponse[];
@@ -20,11 +22,19 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   const [page, setPage] = useState<number>(1);
   const [price, setPrice] = useState<number[]>([0, 0]);
   const [gearBox, setGearBox] = useState<string>("");
-
+  const [asideVisible, setAsideVisible] = useState<boolean>(false);
   const { totalPage, cars } = pageHandler({ page, carData: profile });
 
   const filteredCars: FilteredCars = filterCards(price, cars, gearBox);
-  console.log(filteredCars);
+
+  const asideHandler = () => {
+    setAsideVisible(!asideVisible);
+    if (!asideVisible) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  };
 
   useEffect(() => {
     initialPage(page, setPage);
@@ -34,9 +44,21 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
     <section className={styles.container}>
       {!!cars.length ? (
         <div className={styles.container__main}>
-          <aside className={styles.main__aside}>
-            <MarketPlaceAside setPrice={setPrice} setGearBox={setGearBox} />
+          <aside
+            className={`${
+              asideVisible ? styles.show__aside : styles.main__aside
+            }`}
+          >
+            <MarketPlaceAside
+              setPrice={setPrice}
+              asideVisible={asideVisible}
+              setGearBox={setGearBox}
+            />
           </aside>
+
+          <div className={styles.main__filter} onClick={asideHandler}>
+            {!asideVisible ? <FilterListRoundedIcon /> : <CloseRoundedIcon />}
+          </div>
           <div className={styles.container__content}>
             <RoomCard data={filteredCars} page={1} />
             <div className={styles.container__pagination}>

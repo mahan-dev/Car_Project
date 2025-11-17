@@ -9,6 +9,7 @@ import styles from "@/layout/styles/layout.module.css";
 import { Button, Container } from "@mui/material";
 import steeringWheel from "@/images/steering-wheel.svg";
 import { RiAccountBoxFill } from "react-icons/ri";
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -41,8 +42,8 @@ const Layout = ({ children }: LayoutProps) => {
         <div className={styles.header__right}>
           <Button href="/marketplace">Marketplace</Button>
           <Button href="/show-room">Showroom</Button>
-
-          <input type="text" placeholder="search" />
+          
+          <SearchRoundedIcon />
         </div>
       </header>
 
