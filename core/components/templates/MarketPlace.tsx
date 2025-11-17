@@ -14,6 +14,8 @@ interface MarketPlaceInterface {
   profile: FetcherResponse[];
 }
 
+type FilteredCars = FetcherResponse[] | { data: FetcherResponse[] };
+
 const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   const [page, setPage] = useState<number>(1);
   const [price, setPrice] = useState<number[]>([0, 0]);
@@ -21,8 +23,8 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
 
   const { totalPage, cars } = pageHandler({ page, carData: profile });
 
-  const filteredCars: FetcherResponse[] | { data: FetcherResponse[] } =
-    filterCards(price, cars, gearBox);
+  const filteredCars: FilteredCars = filterCards(price, cars, gearBox);
+  console.log(filteredCars);
 
   useEffect(() => {
     initialPage(page, setPage);
