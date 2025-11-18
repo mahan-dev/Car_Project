@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FetcherResponse } from "@/helper/dataFetcher";
 import RoomCard from "@/modules/RoomCard";
 import styles from "@/templates/styles/marketPlace/route.module.css";
@@ -11,6 +11,7 @@ import MarketPlaceAside from "@/modules/MarketPlaceAside";
 import { filterCards } from "@/helper/filterCard";
 import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { clickHandler } from "@/helper/MarketClickHandler";
 
 interface MarketPlaceInterface {
   profile: FetcherResponse[];
@@ -19,22 +20,31 @@ interface MarketPlaceInterface {
 type FilteredCars = FetcherResponse[] | { data: FetcherResponse[] };
 
 const MarketPlace = ({ profile }: MarketPlaceInterface) => {
+  //! States
   const [page, setPage] = useState<number>(1);
   const [price, setPrice] = useState<number[]>([0, 0]);
   const [gearBox, setGearBox] = useState<string>("");
   const [asideVisible, setAsideVisible] = useState<boolean>(false);
   const { totalPage, cars } = pageHandler({ page, carData: profile });
+  //! States
+
+  const asideContentRef = useRef<HTMLDivElement>(null);
 
   const filteredCars: FilteredCars = filterCards(price, cars, gearBox);
 
   const asideHandler = () => {
-    setAsideVisible(!asideVisible);
-    if (!asideVisible) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    const status = !asideVisible;
+    setAsideVisible(status);
+    document.body.style.overflow = status ? "hidden" : "auto";
   };
+
+  const listener = (e: MouseEvent) =>
+    clickHandler({ e, asideVisible, asideContentRef, setAsideVisible });
+
+  useEffect(() => {
+    window.addEventListener("mousedown", listener);
+    return () => window.removeEventListener("mousedown", listener);
+  }, [asideVisible]);
 
   useEffect(() => {
     initialPage(page, setPage);
@@ -49,11 +59,16 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
               asideVisible ? styles.show__aside : styles.main__aside
             }`}
           >
-            <MarketPlaceAside
-              setPrice={setPrice}
-              asideVisible={asideVisible}
-              setGearBox={setGearBox}
-            />
+            <div
+              style={{ display: asideVisible ? "block" : "" }}
+              ref={asideContentRef}
+            >
+              <MarketPlaceAside
+                setPrice={setPrice}
+                asideVisible={asideVisible}
+                setGearBox={setGearBox}
+              />
+            </div>
           </aside>
 
           <div className={styles.main__filter} onClick={asideHandler}>
