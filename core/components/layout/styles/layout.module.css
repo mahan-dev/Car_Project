@@ -14,8 +14,7 @@
 }
 
 .header input {
-    box-shadow: 0 0 12px rgba(113, 54, 54, 0.1);
-    background-color: rgb(216, 216, 216);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
 }
 
 .header__left {
@@ -36,6 +35,13 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.right__search-container{
+    position: absolute;
+    top: 120%;
+    right: 0;
+    
 }
 
 

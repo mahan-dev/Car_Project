@@ -4,15 +4,11 @@ import { Dispatch, SetStateAction } from "react";
 interface WhishListProps {
   whishList: FetcherResponse[];
   setWhishList: Dispatch<SetStateAction<FetcherResponse[]>>;
-  click?: boolean;
-  setClick?: Dispatch<SetStateAction<boolean>>;
 }
 export const whishListHandler = (
   cardData: FetcherResponse,
-  { whishList, setWhishList, click }: WhishListProps
+  { whishList, setWhishList }: WhishListProps
 ) => {
-  console.log(click)
-  if (!click) return;
   const whishListDb: FetcherResponse[] =
     JSON.parse(localStorage.getItem("whishList")) || [];
 
