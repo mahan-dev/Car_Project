@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -9,25 +9,34 @@ import styles from "@/layout/styles/layout.module.css";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import steeringWheel from "@/images/steering-wheel.svg";
 
+import { searchHandler } from "@/helper/searchHandler";
+import SearchBox from "@/elements/SearchBox";
+
 interface HeaderProps {
   data: Session;
 }
 const Header = ({ data }: HeaderProps) => {
-  const [open, setOpen] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
-
-  const searchHandler = (e: MouseEvent) => {
-    if (!open) return;
-    const target = e.target as Node;
-    if (searchRef.current && !searchRef.current.contains(target)) {
-      setOpen(false);
-    }
-  };
+  const [open, setOpen] = useState<boolean>(false);
+  const [value, setValue] = useState<string>("");
+  const [debouncedValue, setDebouncedValue] = useState<string>("");
 
   useEffect(() => {
-    window.addEventListener("mousedown", searchHandler);
-    return () => window.removeEventListener("mousedown", searchHandler);
-  }, [open]);
+    searchHandler({ debouncedValue, value });
+    return debouncing(value);
+  }, [debouncedValue, value]);
+
+  const debouncing = (value: string) => {
+    const timer = setTimeout(() => {
+      setDebouncedValue(value);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  };
+
+  const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setValue(value.trim());
+  };
 
   return (
     <>
@@ -65,15 +74,12 @@ const Header = ({ data }: HeaderProps) => {
           <SearchRoundedIcon />
         </Button>
 
-        <div
-          className={styles["right__search-container"]}
-          ref={searchRef}
-          style={{
-            display: open ? "block" : "none",
-          }}
-        >
-          <input type="text" placeholder="search..." />
-        </div>
+        <SearchBox
+          changeHandler={changeHandler}
+          value={value}
+          open={open}
+          setOpen={setOpen}
+        />
       </div>
     </>
   );
