@@ -18,7 +18,7 @@ export const SearchQuery = async (
 
       return matchedModel && validBrand;
     });
-    console.log(res);
+
     return res;
   } catch (error) {
     toast.error("Something went wrong!", { duration: 2000 });

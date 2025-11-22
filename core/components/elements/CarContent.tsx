@@ -16,14 +16,30 @@ const CarContent = ({ data, title }: CarProps) => {
   });
 
   const selectData = carDetail[0][title];
+  const specification = title === "specification";
+  const { category, description } = data;
+
   return (
     <div className={styles.container__details}>
+      {category && specification && (
+        <div className={styles.box__content}>
+          <p>{category && specification && "Model Type"}</p>
+          <p>{category && specification && category}</p>
+        </div>
+      )}
+
       {Object.entries(selectData).map(([key, value]) => (
         <div key={key} className={styles.box__content}>
           <p>{key}</p>
           <p> {objectHelper(value)}</p>
         </div>
       ))}
+
+      {description && (
+        <div>
+          Description :<p>{description}</p>
+        </div>
+      )}
     </div>
   );
 };
