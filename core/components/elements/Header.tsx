@@ -11,7 +11,7 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import steeringWheel from "@/images/steering-wheel.svg";
 import SearchBox from "@/elements/SearchBox";
 import { useQuery } from "@tanstack/react-query";
-import { SearchQuery } from "@/core/helper/SearchQueryFunction";
+import { SearchQuery } from "@/helper/SearchQueryFunction";
 
 interface HeaderProps {
   data: Session;
@@ -36,9 +36,8 @@ const Header = ({ data }: HeaderProps) => {
 
   const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setValue(value.trim());
+    setValue(value);
   };
-
   return (
     <>
       <div className={styles.header__left}>
