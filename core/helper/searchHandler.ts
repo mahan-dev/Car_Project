@@ -1,4 +1,4 @@
-import { dataFetcher } from "@/helper/dataFetcher";
+import { dataFetcher, FetcherResponse } from "@/helper/dataFetcher";
 import toast from "react-hot-toast";
 
 const carModels: string[] = ["bmw", "audi"];
@@ -11,8 +11,8 @@ interface SearchProps {
 export const searchHandler = async ({
   debouncedValue,
   value,
-}: SearchProps): Promise<boolean | void> => {
-  if (!debouncedValue) return;
+}: SearchProps): Promise<FetcherResponse[]> => {
+  if (!debouncedValue.trim()) return;
 
   const { data } = await dataFetcher();
   try {
@@ -24,7 +24,8 @@ export const searchHandler = async ({
 
       return matchedModel && validBrand;
     });
-    console.log(res);
+    console.log(res)
+    return res;
   } catch (error) {
     toast.error("Something went wrong!", { duration: 2000 });
     console.log("error =>", error);

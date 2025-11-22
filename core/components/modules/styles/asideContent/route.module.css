@@ -8,11 +8,6 @@
         align-items: center;
         gap: 0.5rem;
         padding: 0.4rem 1rem;
-        border-radius: 0.3rem;
-        -webkit-border-radius: 0.3rem;
-        -moz-border-radius: 0.3rem;
-        -ms-border-radius: 0.3rem;
-        -o-border-radius: 0.3rem;
 
         svg {
             font-size: 1.3rem;

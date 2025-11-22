@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+"use client";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -11,6 +12,7 @@ import steeringWheel from "@/images/steering-wheel.svg";
 
 import { searchHandler } from "@/helper/searchHandler";
 import SearchBox from "@/elements/SearchBox";
+import { FetcherResponse } from "@/helper/dataFetcher";
 
 interface HeaderProps {
   data: Session;
@@ -18,10 +20,18 @@ interface HeaderProps {
 const Header = ({ data }: HeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
+  const [carData, setCarData] = useState<FetcherResponse[]>(null);
   const [debouncedValue, setDebouncedValue] = useState<string>("");
 
+  const fetchData = async (): Promise<FetcherResponse[]> => {
+    return await searchHandler({ debouncedValue, value });
+  };
+
   useEffect(() => {
-    searchHandler({ debouncedValue, value });
+    if (value === "") return;
+    fetchData()
+      .then((res) => setCarData(res))
+      .catch((err) => console.log(err));
     return debouncing(value);
   }, [debouncedValue, value]);
 
@@ -79,6 +89,7 @@ const Header = ({ data }: HeaderProps) => {
           value={value}
           open={open}
           setOpen={setOpen}
+          carData={carData}
         />
       </div>
     </>
