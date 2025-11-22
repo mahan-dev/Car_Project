@@ -8,7 +8,7 @@ import { ProfileInterface } from "@/models/interface/profileSchema";
 interface CarProps {
   data: { [key: string]: string } | ProfileInterface;
 
-  title: "specification" | "performance";
+  title: "specification" | "performance" ;
 }
 const CarContent = ({ data, title }: CarProps) => {
   const { carDetail } = dataHandler({
@@ -17,14 +17,14 @@ const CarContent = ({ data, title }: CarProps) => {
 
   const selectData = carDetail[0][title];
   const specification = title === "specification";
-  const { category, description } = data;
+  const { category } = data;
 
   return (
     <div className={styles.container__details}>
       {category && specification && (
         <div className={styles.box__content}>
-          <p>{category && specification && "Model Type"}</p>
-          <p>{category && specification && category}</p>
+          <p>Model Type</p>
+          <p>{category}</p>
         </div>
       )}
 
@@ -35,11 +35,7 @@ const CarContent = ({ data, title }: CarProps) => {
         </div>
       ))}
 
-      {description && (
-        <div>
-          Description :<p>{description}</p>
-        </div>
-      )}
+     
     </div>
   );
 };

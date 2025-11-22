@@ -16,7 +16,7 @@
 }
 
 .container__box,
-.container__details {
+.container__details, .description {
     display: flex;
     justify-content: space-between;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
