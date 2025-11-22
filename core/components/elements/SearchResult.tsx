@@ -1,5 +1,5 @@
 "use client";
-import React, { MouseEvent } from "react";
+
 import styles from "@/elements/styles/searchResult/route.module.css";
 import { FetcherResponse } from "@/core/helper/dataFetcher";
 import { useRouter } from "next/navigation";

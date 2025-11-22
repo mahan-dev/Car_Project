@@ -10,7 +10,7 @@ interface CarDetail {
   data: { [key: string]: string } | ProfileInterface;
 }
 const CarDetail = ({ data }: CarDetail) => {
-  console.log(data);
+
   if (!data) return;
   return (
     <div className={styles.container}>

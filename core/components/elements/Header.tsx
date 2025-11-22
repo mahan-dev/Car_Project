@@ -9,10 +9,9 @@ import { RiAccountBoxFill } from "react-icons/ri";
 import styles from "@/layout/styles/layout.module.css";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import steeringWheel from "@/images/steering-wheel.svg";
-
-import { searchHandler } from "@/helper/searchHandler";
 import SearchBox from "@/elements/SearchBox";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { useQuery } from "@tanstack/react-query";
+import { SearchQuery } from "@/core/helper/SearchQueryFunction";
 
 interface HeaderProps {
   data: Session;
@@ -20,28 +19,20 @@ interface HeaderProps {
 const Header = ({ data }: HeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
-  const [carData, setCarData] = useState<FetcherResponse[]>(null);
   const [debouncedValue, setDebouncedValue] = useState<string>("");
 
-  const fetchData = async (): Promise<FetcherResponse[]> => {
-    return await searchHandler({ debouncedValue, value });
-  };
+  const { data: fetchedData } = useQuery({
+    queryKey: ["searchData", debouncedValue],
+    queryFn: async () => SearchQuery(debouncedValue, value),
+  });
 
   useEffect(() => {
-    if (value === "") return;
-    fetchData()
-      .then((res) => setCarData(res))
-      .catch((err) => console.log(err));
-    return debouncing(value);
-  }, [debouncedValue, value]);
-
-  const debouncing = (value: string) => {
     const timer = setTimeout(() => {
       setDebouncedValue(value);
     }, 500);
 
     return () => clearTimeout(timer);
-  };
+  }, [value]);
 
   const changeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -89,7 +80,7 @@ const Header = ({ data }: HeaderProps) => {
           value={value}
           open={open}
           setOpen={setOpen}
-          carData={carData}
+          carData={fetchedData}
         />
       </div>
     </>

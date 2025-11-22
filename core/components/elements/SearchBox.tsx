@@ -9,6 +9,7 @@ import React, {
 import styles from "@/layout/styles/layout.module.css";
 import { FetcherResponse } from "@/core/helper/dataFetcher";
 import SearchResult from "./SearchResult";
+import { searchClick } from "@/core/helper/searchBoxClick";
 
 interface SearchProps {
   changeHandler: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -28,24 +29,13 @@ const SearchBox = ({
   const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.addEventListener("mousedown", clickHandler);
-    return () => window.removeEventListener("mousedown", clickHandler);
+    window.addEventListener("mousedown", searchClickHandler);
+    return () => window.removeEventListener("mousedown", searchClickHandler);
   }, [open]);
 
-  const clickHandler = async(e: MouseEvent) => {
-    if (!open) return;
-    const target = e.target as Node;
-    if (searchRef.current && !searchRef.current.contains(target)) {
-      setOpen(false);
-    }
+  const searchClickHandler = (e: MouseEvent | HTMLElement) =>
+    searchClick({ e, searchRef, open, setOpen });
 
-    const liTag = target as HTMLElement;
-
-    if (liTag.closest("li")) {
-      await new Promise((resolver) => setTimeout(resolver, 200));
-      setOpen(false);
-    }
-  };
   return (
     <>
       <div

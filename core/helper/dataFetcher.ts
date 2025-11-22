@@ -20,9 +20,15 @@ const Base_Url = "https://www.carqueryapi.com/api/0.3/?cmd=getModels&make=";
 
 export const dataFetcher = async () => {
   try {
-    const { data: bmwData } = await axios.get<Car>(`${Base_Url}bmw`);
-    const { data: audiData } = await axios.get<Car>(`${Base_Url}audi`);
-    const data = (bmwData.Models || []).concat(audiData.Models || []);
+    const [bmwData, audiData] = await Promise.all([
+      axios.get<Car>(`${Base_Url}bmw`),
+      axios.get<Car>(`${Base_Url}audi`),
+    ]);
+
+    const bmwRes = bmwData.data;
+    const audiRes = audiData.data;
+    const data = [...(bmwRes.Models || []), ...(audiRes.Models || [])];
+
     return {
       data: data,
     };
