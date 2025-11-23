@@ -1,15 +1,15 @@
 import { FetcherResponse } from "@/helper/dataFetcher";
+import { Dispatch, SetStateAction } from "react";
 
 export const filterCards = (
   price: number[],
   cars: FetcherResponse[],
   gearBox: string,
-  reset: boolean
+  reset: boolean,
+  setReset: Dispatch<SetStateAction<boolean>>
 ): FetcherResponse[] => {
-  const data = cars;
-
-  console.log(price);
   let result = [...cars];
+
   if (!cars.length) return [];
 
   if (price && price.length === 2) {
@@ -19,9 +19,16 @@ export const filterCards = (
         (item) => item.price >= minPrice && item.price <= maxPrice
       );
     }
-  } else if (gearBox) {
+  }
+
+  if (gearBox) {
     result = result.filter((item) => item.gearbox === gearBox);
-  } else if (reset) return data;
+  }
+
+  if (reset) {
+    setReset(false);
+    return cars;
+  }
 
   return result;
 };

@@ -16,9 +16,6 @@ export const clickHandler = ({
   const content = asideContentRef.current;
   const target = e.target as Node;
 
-  const menu = document.getElementById("_r_4_");
-  if (menu && menu.contains(target)) return;
-
   if (content && !content.contains(target)) {
     setAsideVisible(false);
     document.body.style.overflow = "auto";

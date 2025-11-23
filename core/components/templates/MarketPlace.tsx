@@ -30,7 +30,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
 
   const { totalPage, cars } = pageHandler({ page, carData: profile });
 
-
   useEffect(() => {
     window.addEventListener("mousedown", listener);
     return () => window.removeEventListener("mousedown", listener);
@@ -42,7 +41,13 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
 
   const asideContentRef = useRef<HTMLDivElement>(null);
 
-  const filteredCars: FilteredCars = filterCards(price, cars, gearBox, reset);
+  const filteredCars: FilteredCars = filterCards(
+    price,
+    cars,
+    gearBox,
+    reset,
+    setReset
+  );
 
   const asideHandler = () => {
     const status = !asideVisible;
@@ -52,7 +57,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
 
   const listener = (e: MouseEvent) =>
     clickHandler({ e, asideVisible, asideContentRef, setAsideVisible });
-
 
   return (
     <section className={styles.container}>
