@@ -7,15 +7,10 @@ import React, {
 } from "react";
 import styles from "@/modules/styles/marketPlaceAside/route.module.css";
 import { FaFilter } from "react-icons/fa6";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Slider,
-} from "@mui/material";
+import { Button, Slider } from "@mui/material";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import GearBoxAside from "@/modules/GearBoxAside";
+import ButtonReset from "@/elements/ButtonReset";
 
 interface AsideProps {
   setPrice: Dispatch<SetStateAction<number[]>>;
@@ -60,7 +55,7 @@ const MarketPlaceAside = ({
 
   const resetHandler = () => {
     setValue("");
-    setPrice([0, 1000000]);
+    setPrice([0, 0]);
     setRange([0, 1000000]);
     setReset(true);
     setIsDisabled(true);
@@ -107,32 +102,11 @@ const MarketPlaceAside = ({
         <div
           className={toggle.gearBox ? styles.open__item : styles.close__item}
         >
-          <FormControl fullWidth>
-            <InputLabel id="gearBox">GearBox</InputLabel>
-
-            <Select
-              labelId="gearBox"
-              id="gearBox"
-              value={value}
-              label="gearBox"
-              onChange={selectHandler}
-            >
-              <MenuItem value="Automatic">Automatic</MenuItem>
-              <MenuItem value="Manual">Manual</MenuItem>
-            </Select>
-          </FormControl>
+          <GearBoxAside value={value} onChange={selectHandler} />
         </div>
       </li>
       <li>
-        <Button
-          className={styles["item__reset-button"]}
-          onClick={resetHandler}
-          sx={{ mt: "1rem" }}
-          variant="contained"
-          disabled={isDisabled}
-        >
-          Reset
-        </Button>
+        <ButtonReset onClick={resetHandler} disabled={isDisabled} />
       </li>
     </ul>
   );

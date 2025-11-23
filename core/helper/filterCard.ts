@@ -6,8 +6,10 @@ export const filterCards = (
   gearBox: string,
   reset: boolean
 ): FetcherResponse[] => {
-  let result = [...cars];
+  const data = cars;
 
+  console.log(price);
+  let result = [...cars];
   if (!cars.length) return [];
 
   if (price && price.length === 2) {
@@ -17,12 +19,9 @@ export const filterCards = (
         (item) => item.price >= minPrice && item.price <= maxPrice
       );
     }
-  }
-
-  if (gearBox) {
+  } else if (gearBox) {
     result = result.filter((item) => item.gearbox === gearBox);
-  }
-  if (reset) return cars;
+  } else if (reset) return data;
 
   return result;
 };

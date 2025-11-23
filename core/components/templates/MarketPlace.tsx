@@ -26,8 +26,10 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   const [gearBox, setGearBox] = useState<string>("");
   const [reset, setReset] = useState<boolean>(false);
   const [asideVisible, setAsideVisible] = useState<boolean>(false);
+  //! States
 
   const { totalPage, cars } = pageHandler({ page, carData: profile });
+
 
   useEffect(() => {
     window.addEventListener("mousedown", listener);
@@ -37,7 +39,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   useEffect(() => {
     initialPage(page, setPage);
   }, [page]);
-  //! States
 
   const asideContentRef = useRef<HTMLDivElement>(null);
 
@@ -51,6 +52,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
 
   const listener = (e: MouseEvent) =>
     clickHandler({ e, asideVisible, asideContentRef, setAsideVisible });
+
 
   return (
     <section className={styles.container}>
