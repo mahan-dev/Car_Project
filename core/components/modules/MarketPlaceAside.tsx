@@ -32,12 +32,14 @@ const MarketPlaceAside = ({
 }: AsideProps) => {
   const [range, setRange] = useState<number[]>([0, 1000000]);
   const [value, setValue] = useState<string>("");
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [toggle, setToggle] = useState<{ [key: string]: boolean }>({});
 
   const changeHandler = (event: Event, newValue: number[]) => {
     if (Array.isArray(newValue)) {
       setRange(newValue);
       setPrice(range);
+      setIsDisabled(false);
     }
   };
 
@@ -45,6 +47,7 @@ const MarketPlaceAside = ({
     const { value } = e.target;
     setValue(value);
     setGearBox(value);
+    setIsDisabled(false);
   };
 
   const clickHandler = (e: MouseEvent<HTMLDivElement>) => {
@@ -60,6 +63,7 @@ const MarketPlaceAside = ({
     setPrice([0, 1000000]);
     setRange([0, 1000000]);
     setReset(true);
+    setIsDisabled(true);
   };
 
   return (
@@ -118,15 +122,14 @@ const MarketPlaceAside = ({
             </Select>
           </FormControl>
         </div>
-
-       
       </li>
       <li>
-         <Button
+        <Button
           className={styles["item__reset-button"]}
           onClick={resetHandler}
           sx={{ mt: "1rem" }}
           variant="contained"
+          disabled={isDisabled}
         >
           Reset
         </Button>

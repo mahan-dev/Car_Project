@@ -50,6 +50,10 @@ const profileSchema = new Schema<ProfileInterface>(
       type: String,
       enum: ["suv", "sedan", "coupe", "hatchback", "convertible", "sport"],
     },
+    published: {
+      type: Boolean,
+      default: false,
+    },
 
     userId: {
       type: Schema.Types.ObjectId,

@@ -9,8 +9,6 @@ const page = async () => {
   await connectDb();
   const session = await getServerSession(authOptions);
   const [profiles] = await userProfiles(session);
-  console.log(profiles);
-
   return <MyProfilesPage profiles={profiles} />;
 };
 
