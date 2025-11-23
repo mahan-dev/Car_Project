@@ -24,22 +24,10 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   const [page, setPage] = useState<number>(1);
   const [price, setPrice] = useState<number[]>([0, 0]);
   const [gearBox, setGearBox] = useState<string>("");
+  const [reset, setReset] = useState<boolean>(false);
   const [asideVisible, setAsideVisible] = useState<boolean>(false);
+
   const { totalPage, cars } = pageHandler({ page, carData: profile });
-  //! States
-
-  const asideContentRef = useRef<HTMLDivElement>(null);
-
-  const filteredCars: FilteredCars = filterCards(price, cars, gearBox);
-
-  const asideHandler = () => {
-    const status = !asideVisible;
-    setAsideVisible(status);
-    document.body.style.overflow = status ? "hidden" : "auto";
-  };
-
-  const listener = (e: MouseEvent) =>
-    clickHandler({ e, asideVisible, asideContentRef, setAsideVisible });
 
   useEffect(() => {
     window.addEventListener("mousedown", listener);
@@ -49,6 +37,20 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   useEffect(() => {
     initialPage(page, setPage);
   }, [page]);
+  //! States
+
+  const asideContentRef = useRef<HTMLDivElement>(null);
+
+  const filteredCars: FilteredCars = filterCards(price, cars, gearBox, reset);
+
+  const asideHandler = () => {
+    const status = !asideVisible;
+    setAsideVisible(status);
+    document.body.style.overflow = status ? "hidden" : "auto";
+  };
+
+  const listener = (e: MouseEvent) =>
+    clickHandler({ e, asideVisible, asideContentRef, setAsideVisible });
 
   return (
     <section className={styles.container}>
@@ -67,6 +69,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
                 setPrice={setPrice}
                 asideVisible={asideVisible}
                 setGearBox={setGearBox}
+                setReset={setReset}
               />
             </div>
           </aside>

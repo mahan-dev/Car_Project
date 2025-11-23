@@ -16,7 +16,7 @@
         border-bottom: none;
     }
    
-     &:nth-last-of-type(-n + 2){
+     &:nth-last-of-type(-n + 1){
         border-bottom: none;
      }
 }
@@ -48,4 +48,8 @@
     padding: 2rem;
     border-radius: 0.375rem;
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.item__reset-button {
+    width: 100%;
 }

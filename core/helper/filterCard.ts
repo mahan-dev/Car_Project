@@ -3,7 +3,8 @@ import { FetcherResponse } from "@/helper/dataFetcher";
 export const filterCards = (
   price: number[],
   cars: FetcherResponse[],
-  gearBox: string
+  gearBox: string,
+  reset: boolean
 ): FetcherResponse[] => {
   let result = [...cars];
 
@@ -21,6 +22,7 @@ export const filterCards = (
   if (gearBox) {
     result = result.filter((item) => item.gearbox === gearBox);
   }
+  if (reset) return cars;
 
   return result;
 };

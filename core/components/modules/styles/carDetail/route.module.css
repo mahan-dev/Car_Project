@@ -24,3 +24,7 @@
     padding: 1rem;
 
 }
+.description {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}

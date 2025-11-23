@@ -8,6 +8,7 @@ import React, {
 import styles from "@/modules/styles/marketPlaceAside/route.module.css";
 import { FaFilter } from "react-icons/fa6";
 import {
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -20,12 +21,14 @@ interface AsideProps {
   setPrice: Dispatch<SetStateAction<number[]>>;
   setGearBox: Dispatch<SetStateAction<string>>;
   asideVisible: boolean;
+  setReset: Dispatch<SetStateAction<boolean>>;
 }
 
 const MarketPlaceAside = ({
   setPrice,
   setGearBox,
   asideVisible,
+  setReset,
 }: AsideProps) => {
   const [range, setRange] = useState<number[]>([0, 1000000]);
   const [value, setValue] = useState<string>("");
@@ -50,6 +53,13 @@ const MarketPlaceAside = ({
       ...prev,
       [name]: prev[name] ? !prev[name] : true,
     }));
+  };
+
+  const resetHandler = () => {
+    setValue("");
+    setPrice([0, 1000000]);
+    setRange([0, 1000000]);
+    setReset(true);
   };
 
   return (
@@ -108,6 +118,18 @@ const MarketPlaceAside = ({
             </Select>
           </FormControl>
         </div>
+
+       
+      </li>
+      <li>
+         <Button
+          className={styles["item__reset-button"]}
+          onClick={resetHandler}
+          sx={{ mt: "1rem" }}
+          variant="contained"
+        >
+          Reset
+        </Button>
       </li>
     </ul>
   );

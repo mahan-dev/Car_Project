@@ -37,16 +37,16 @@ const CarDetail = ({ data }: CarDetail) => {
       </h2>
       <CarContent data={data} title={"performance"} />
 
-      <h2 className={styles.container__title}>
-        Info
-        <LuBadgeInfo />
-      </h2>
       {description && (
-        <div className={styles.description}>
-          Description :<p>{description}</p>
-        </div>
-
-        
+        <>
+          <h2 className={styles.container__title}>
+            Info
+            <LuBadgeInfo />
+          </h2>
+          <div className={styles.description}>
+            Description :<p>{description}</p>
+          </div>
+        </>
       )}
     </div>
   );
