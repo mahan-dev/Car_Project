@@ -14,7 +14,13 @@ export const clickHandler = ({
 }: ClickHandler) => {
   if (!asideVisible) return;
   const content = asideContentRef.current;
-  const target = e.target as Node;
+  const target = e.target as HTMLElement;
+
+  const muiPopoverSelector = ".MuiPopover-root, .MuiMenu-root, .MuiMenu-paper";
+
+  if (target.closest(muiPopoverSelector)) {
+    return;
+  }
 
   if (content && !content.contains(target)) {
     setAsideVisible(false);
