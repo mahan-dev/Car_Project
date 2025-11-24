@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { Button, Card, Typography } from "@mui/material";
 import { FetcherResponse } from "@/helper/dataFetcher";
@@ -10,7 +10,7 @@ import { pageHandler } from "@/helper/carPerPage";
 import StarCard from "@/elements/StarCard";
 import { WhishListHook } from "@/hooks/WhishList";
 import { usePathname, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+
 
 interface RoomCardProps {
   data: { data: FetcherResponse[] } | FetcherResponse[];
@@ -18,10 +18,6 @@ interface RoomCardProps {
 }
 const RoomCard = ({ page, data }: RoomCardProps) => {
 
-
-  const [click, setClick] = useState<boolean>(false)
-  const session = useSession();
-  
   const carData = Array.isArray(data) ? data : data.data;
   const { cars } = pageHandler({ page, carData });
 

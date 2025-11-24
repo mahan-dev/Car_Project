@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import styles from "@/modules/styles/marketPlaceAside/route.module.css";
 import { FaFilter } from "react-icons/fa6";
-import { Button, Slider } from "@mui/material";
+import { Slider } from "@mui/material";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import GearBoxAside from "@/modules/GearBoxAside";
 import ButtonReset from "@/elements/ButtonReset";
@@ -16,14 +16,12 @@ interface AsideProps {
   setPrice: Dispatch<SetStateAction<number[]>>;
   setGearBox: Dispatch<SetStateAction<string>>;
   asideVisible: boolean;
-  setReset: Dispatch<SetStateAction<boolean>>;
 }
 
 const MarketPlaceAside = ({
   setPrice,
   setGearBox,
   asideVisible,
-  setReset,
 }: AsideProps) => {
   const [range, setRange] = useState<number[]>([0, 1000000]);
   const [value, setValue] = useState<string>("");
@@ -57,7 +55,7 @@ const MarketPlaceAside = ({
     setValue("");
     setPrice([0, 0]);
     setRange([0, 1000000]);
-    setReset(true);
+    setGearBox("")
     setIsDisabled(true);
   };
 

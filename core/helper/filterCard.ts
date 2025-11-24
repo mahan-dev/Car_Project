@@ -1,12 +1,9 @@
 import { FetcherResponse } from "@/helper/dataFetcher";
-import { Dispatch, SetStateAction } from "react";
 
 export const filterCards = (
   price: number[],
   cars: FetcherResponse[],
   gearBox: string,
-  reset: boolean,
-  setReset: Dispatch<SetStateAction<boolean>>
 ): FetcherResponse[] => {
   let result = [...cars];
 
@@ -23,11 +20,6 @@ export const filterCards = (
 
   if (gearBox) {
     result = result.filter((item) => item.gearbox === gearBox);
-  }
-
-  if (reset) {
-    setReset(false);
-    return cars;
   }
 
   return result;

@@ -45,8 +45,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
     price,
     cars,
     gearBox,
-    reset,
-    setReset
   );
 
   const asideHandler = () => {
@@ -75,7 +73,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
                 setPrice={setPrice}
                 asideVisible={asideVisible}
                 setGearBox={setGearBox}
-                setReset={setReset}
               />
             </div>
           </aside>
