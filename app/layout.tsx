@@ -8,6 +8,7 @@ import Provider from "@/core/provider/Provider";
 const roboto = Roboto({
   weight: "400",
   subsets: ["latin"],
+  fallback: ["Helvetica", "Arial", "sans-serif"],
 });
 
 export const metadata: Metadata = {

@@ -18,9 +18,7 @@ export const clickHandler = ({
 
   const muiPopoverSelector = ".MuiPopover-root, .MuiMenu-root, .MuiMenu-paper";
 
-  if (target.closest(muiPopoverSelector)) {
-    return;
-  }
+  if (target.closest(muiPopoverSelector)) return;
 
   if (content && !content.contains(target)) {
     setAsideVisible(false);
