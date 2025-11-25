@@ -24,7 +24,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   const [page, setPage] = useState<number>(1);
   const [price, setPrice] = useState<number[]>([0, 0]);
   const [gearBox, setGearBox] = useState<string>("");
-  const [reset, setReset] = useState<boolean>(false);
+  const [debounce, setDebounce] = useState<number[]>([0, 0]);
   const [asideVisible, setAsideVisible] = useState<boolean>(false);
   //! States
 
@@ -39,13 +39,21 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
     initialPage(page, setPage);
   }, [page]);
 
+  useEffect(() => {
+    debounceHandler();
+  }, [price]);
+
+  const debounceHandler = () => {
+    const timer = setTimeout(() => {
+      setDebounce(price);
+    }, 600);
+
+    return () => clearTimeout(timer);
+  };
+
   const asideContentRef = useRef<HTMLDivElement>(null);
 
-  const filteredCars: FilteredCars = filterCards(
-    price,
-    cars,
-    gearBox,
-  );
+  const filteredCars: FilteredCars = filterCards(debounce, cars, gearBox);
 
   const asideHandler = () => {
     const status = !asideVisible;
@@ -70,6 +78,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
               ref={asideContentRef}
             >
               <MarketPlaceAside
+                price={price}
                 setPrice={setPrice}
                 asideVisible={asideVisible}
                 setGearBox={setGearBox}

@@ -1,9 +1,11 @@
+"use client";
 import React, {
   ChangeEvent,
   MouseEvent,
   Dispatch,
   SetStateAction,
   useState,
+  useCallback,
 } from "react";
 import styles from "@/modules/styles/marketPlaceAside/route.module.css";
 import { FaFilter } from "react-icons/fa6";
@@ -13,6 +15,7 @@ import GearBoxAside from "@/modules/GearBoxAside";
 import ButtonReset from "@/elements/ButtonReset";
 
 interface AsideProps {
+  price: number[];
   setPrice: Dispatch<SetStateAction<number[]>>;
   setGearBox: Dispatch<SetStateAction<string>>;
   asideVisible: boolean;
@@ -26,12 +29,12 @@ const MarketPlaceAside = ({
   const [range, setRange] = useState<number[]>([0, 1000000]);
   const [value, setValue] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
   const [toggle, setToggle] = useState<{ [key: string]: boolean }>({});
 
   const changeHandler = (event: Event, newValue: number[]) => {
     if (Array.isArray(newValue)) {
-      setRange(newValue);
-      setPrice(range);
+      setPrice(newValue);
       setIsDisabled(false);
     }
   };
@@ -47,7 +50,7 @@ const MarketPlaceAside = ({
     const name = e.currentTarget.dataset.name;
     setToggle((prev) => ({
       ...prev,
-      [name]: prev[name] ? !prev[name] : true,
+      [name]: !prev[name],
     }));
   };
 
@@ -55,8 +58,9 @@ const MarketPlaceAside = ({
     setValue("");
     setPrice([0, 0]);
     setRange([0, 1000000]);
-    setGearBox("")
+    setGearBox("");
     setIsDisabled(true);
+    setToggle({});
   };
 
   return (
@@ -80,7 +84,8 @@ const MarketPlaceAside = ({
             value={range}
             min={0}
             max={1000000}
-            onChange={changeHandler}
+            onChange={(e, v) => setRange(v as number[])}
+            onChangeCommitted={changeHandler}
             valueLabelDisplay="auto"
             getAriaLabel={() => "Price range"}
             disableSwap

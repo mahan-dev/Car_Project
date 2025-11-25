@@ -10,8 +10,12 @@ import { BsFillBookmarkHeartFill } from "react-icons/bs";
 import { FaSquarePlus } from "react-icons/fa6";
 import { IoExit } from "react-icons/io5";
 import { signOut } from "next-auth/react";
+import { MdPendingActions } from "react-icons/md";
 
-const AsideContent = () => {
+interface AsideProps {
+  isAdmin: boolean;
+}
+const AsideContent = ({ isAdmin }: AsideProps) => {
   const url = "/dashboard/";
 
   return (
@@ -46,6 +50,16 @@ const AsideContent = () => {
           Whish list
         </Link>
       </li>
+
+      {isAdmin && (
+        <li>
+          <Link href={`${url}admin`}>
+            <MdPendingActions />
+            Pending
+          </Link>
+        </li>
+      )}
+
       <li>
         <Link href={""} onClick={() => signOut()}>
           <IoExit />

@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema<userInterface>({
     type: String,
     required: true,
   },
+  role: {
+    type: String,
+    default: "USER",
+  },
 });
 
 export const UserModel: Model<userInterface> =
