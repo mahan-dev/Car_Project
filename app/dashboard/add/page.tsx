@@ -1,5 +1,5 @@
-import AddCar from '@/core/components/templates/AddCarPage';
-import React from 'react';
+import AddCar from '@/templates/AddCarPage';
+
 
 const page = () => {
     return <AddCar />
