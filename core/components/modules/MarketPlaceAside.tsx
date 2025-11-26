@@ -5,7 +5,7 @@ import React, {
   Dispatch,
   SetStateAction,
   useState,
-  useCallback,
+  useRef,
 } from "react";
 import styles from "@/modules/styles/marketPlaceAside/route.module.css";
 import { FaFilter } from "react-icons/fa6";
@@ -13,6 +13,8 @@ import { Slider } from "@mui/material";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import GearBoxAside from "@/modules/GearBoxAside";
 import ButtonReset from "@/elements/ButtonReset";
+import { onClickHandler } from "@/helper/MarketPlaceAside/clickHandler";
+import { resetHandler } from "@/helper/marketPlaceAside/resetHandler";
 
 interface AsideProps {
   price: number[];
@@ -30,7 +32,7 @@ const MarketPlaceAside = ({
   const [value, setValue] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-  const [toggle, setToggle] = useState<{ [key: string]: boolean }>({});
+  const toggleRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const changeHandler = (event: Event, newValue: number[]) => {
     if (Array.isArray(newValue)) {
@@ -47,20 +49,18 @@ const MarketPlaceAside = ({
   };
 
   const clickHandler = (e: MouseEvent<HTMLDivElement>) => {
-    const name = e.currentTarget.dataset.name;
-    setToggle((prev) => ({
-      ...prev,
-      [name]: !prev[name],
-    }));
+    onClickHandler(e, toggleRef);
   };
 
-  const resetHandler = () => {
-    setValue("");
-    setPrice([0, 0]);
-    setRange([0, 1000000]);
-    setGearBox("");
-    setIsDisabled(true);
-    setToggle({});
+  const onReset = () => {
+    resetHandler({
+      setValue,
+      setPrice,
+      setRange,
+      setGearBox,
+      setIsDisabled,
+      toggleRef,
+    });
   };
 
   return (
@@ -79,7 +79,12 @@ const MarketPlaceAside = ({
           Price Range
           <KeyboardArrowDownRoundedIcon />
         </div>
-        <div className={toggle.price ? styles.open__item : styles.close__item}>
+        <div
+          ref={(el) => {
+            toggleRef.current["price"] = el;
+          }}
+          className={styles.close__item}
+        >
           <Slider
             value={range}
             min={0}
@@ -103,13 +108,17 @@ const MarketPlaceAside = ({
           <KeyboardArrowDownRoundedIcon />
         </div>
         <div
-          className={toggle.gearBox ? styles.open__item : styles.close__item}
+          ref={(el) => {
+            console.log(el);
+            toggleRef.current["gearBox"] = el;
+          }}
+          className={styles.close__item}
         >
           <GearBoxAside value={value} onChange={selectHandler} />
         </div>
       </li>
       <li>
-        <ButtonReset onClick={resetHandler} disabled={isDisabled} />
+        <ButtonReset onClick={onReset} disabled={isDisabled} />
       </li>
     </ul>
   );
