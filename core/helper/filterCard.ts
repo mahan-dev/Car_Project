@@ -3,7 +3,7 @@ import { FetcherResponse } from "@/helper/dataFetcher";
 export const filterCards = (
   price: number[],
   cars: FetcherResponse[],
-  gearBox: string,
+  gearBox: string
 ): FetcherResponse[] => {
   let result = [...cars];
 
@@ -12,9 +12,10 @@ export const filterCards = (
   if (price && price.length === 2) {
     const [minPrice, maxPrice] = price;
     if (!(minPrice === 0 && maxPrice === 0)) {
-      result = result.filter(
-        (item) => item.price >= minPrice && item.price <= maxPrice
-      );
+      result = result.filter((item) => {
+        const price = +item.price;
+        return price >= minPrice && price <= maxPrice;
+      });
     }
   }
 

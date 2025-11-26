@@ -1,7 +1,7 @@
-import AddCar from "@/core/components/modules/AddCar";
+import AddCar from "@/modules/AddCar";
 import { FetcherResponse } from "@/helper/dataFetcher";
-import { Profile } from "@/core/models/profile";
-import { connectDb } from "@/core/utils/connectDb";
+import { Profile } from "@/models/profile";
+import { connectDb } from "@/utils/connectDb";
 
 interface ProfileDetailProps {
   params: Promise<{ profileId: string }>;

@@ -22,11 +22,13 @@ interface AddCarProps {
   profile?: FetcherResponse;
 }
 const AddCar = ({ title, profile }: AddCarProps) => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(
+    profile?.image ?? null
+  );
   const [loading, setLoading] = useState<boolean>(false);
 
   const { watch, setValue, reset, register, control } = useForm<AddForm>({
-    defaultValues: defaultHandler(profile)
+    defaultValues: defaultHandler(profile),
   });
 
   const profileData = watch();
