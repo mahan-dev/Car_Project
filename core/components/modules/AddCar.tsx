@@ -13,10 +13,9 @@ import ImageElement from "@/elements/ImageElement";
 import DeleteButton from "@/elements/DeleteButton";
 import Loader from "@/components/loader/Loader";
 import toast from "react-hot-toast";
-
-import dayjs from "dayjs";
 import DatePicker from "@/elements/DatePicker";
-import { FetcherResponse } from "@/core/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/dataFetcher";
+import { defaultHandler } from "@/constants/addCar/addCar";
 
 interface AddCarProps {
   title: string;
@@ -27,19 +26,7 @@ const AddCar = ({ title, profile }: AddCarProps) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const { watch, setValue, reset, register, control } = useForm<AddForm>({
-    defaultValues: {
-      model_make_id: profile ? profile.model_make_id : "",
-      model_name: profile ? profile.model_name : "",
-      year: profile ? profile.year : "",
-      cylinder: profile ? profile.cylinder : "",
-      price: profile ? profile.price : "",
-      gearbox: profile ? profile.gearbox : "",
-      category: profile ? profile.category : "",
-      engine: profile ? profile.engine : "",
-      description: profile ? profile.description : "",
-      imageUrl: profile ? profile.imageUrl : "",
-      addDate: dayjs(),
-    },
+    defaultValues: defaultHandler(profile)
   });
 
   const profileData = watch();

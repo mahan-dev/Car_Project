@@ -1,4 +1,6 @@
-export const inputProps = [
+import { FetcherResponse } from "@/helper/dataFetcher";
+import dayjs from "dayjs";
+const inputProps = [
   {
     name: "year",
     title: "Car year",
@@ -34,7 +36,7 @@ export const inputProps = [
   },
 ];
 
-export const categoryName = [
+const categoryName = [
   "suv",
   "sedan",
   "coupe",
@@ -42,3 +44,19 @@ export const categoryName = [
   "convertible",
   "sport",
 ];
+
+const defaultHandler = (profile?: FetcherResponse) => ({
+  model_make_id: profile?.model_make_id ?? "",
+  model_name: profile?.model_name ?? "",
+  year: profile?.model_name ?? "",
+  cylinder: profile?.cylinder ?? "",
+  price: profile?.price ?? "",
+  gearbox: profile?.gearbox ?? "",
+  category: profile?.category ?? "",
+  engine: profile?.engine ?? "",
+  description: profile?.description ?? "",
+  imageUrl: profile?.imageUrl ?? "",
+  addDate: dayjs(),
+});
+
+export { inputProps, categoryName, defaultHandler };
