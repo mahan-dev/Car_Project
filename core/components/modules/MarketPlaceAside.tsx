@@ -13,7 +13,7 @@ import { Slider } from "@mui/material";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import GearBoxAside from "@/modules/GearBoxAside";
 import ButtonReset from "@/elements/ButtonReset";
-import { onClickHandler } from "@/helper/MarketPlaceAside/clickHandler";
+import { onClickHandler } from "@/helper/marketPlaceAside/clickHandler";
 import { resetHandler } from "@/helper/marketPlaceAside/resetHandler";
 
 interface AsideProps {
