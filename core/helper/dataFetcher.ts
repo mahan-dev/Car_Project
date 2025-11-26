@@ -5,8 +5,14 @@ export interface FetcherResponse {
   model_name: string;
   image?: string;
   _id?: string;
-  price: number;
+  price: string;
   gearbox: string;
+  category: string;
+  year: string;
+  cylinder: string;
+  engine: string;
+  description: string;
+  imageUrl: string;
 }
 export interface Car {
   Models: FetcherResponse[];

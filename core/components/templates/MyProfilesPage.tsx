@@ -2,10 +2,11 @@
 import React from "react";
 import Image from "next/image";
 import { ProfileProps } from "@/helper/myProfiles";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 
 import styles from "@/templates/styles/myProfiles/route.module.css";
 import { usePathname, useRouter } from "next/navigation";
+import { FaEdit } from "react-icons/fa";
 
 interface ProfileInterface {
   profiles: ProfileProps;
@@ -19,17 +20,21 @@ const MyProfilesPage = ({ profiles: { profiles } }: ProfileInterface) => {
     }
   };
 
+  const editHandler = (id: string) => {
+    router.push(`/dashboard/my-profiles/${id}`);
+  };
+
   return (
     <Grid container spacing={2}>
       {profiles.map((item, index) => (
         <Grid key={index} size={{ xs: 6, md: 4 }}>
-          <div
-            className={styles.container}
-            onClick={() =>
-              clickHandler(item.model_make_id, item.model_name, item._id)
-            }
-          >
-            <div className={styles.container__image}>
+          <div className={styles.container}>
+            <div
+              className={styles.container__image}
+              onClick={() =>
+                clickHandler(item.model_make_id, item.model_name, item._id)
+              }
+            >
               <Image
                 src={item.image}
                 alt={"cardPic"}
@@ -40,9 +45,19 @@ const MyProfilesPage = ({ profiles: { profiles } }: ProfileInterface) => {
               />
             </div>
             <div className={styles.container__description}>
-              <p>year: {item.year}</p>
+              <div className={styles.description__info}>
+                <p>year: {item.year}</p>
 
-              <p>type: {item.category} </p>
+                <p>type: {item.category} </p>
+              </div>
+
+              <Button
+                sx={{ minWidth: "auto", width: "50px", padding: "0.2rem" }}
+                variant="outlined"
+                onClick={() => editHandler(item._id)}
+              >
+                <FaEdit />
+              </Button>
             </div>
           </div>
         </Grid>

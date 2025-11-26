@@ -109,7 +109,6 @@ const MarketPlaceAside = ({
         </div>
         <div
           ref={(el) => {
-            console.log(el);
             toggleRef.current["gearBox"] = el;
           }}
           className={styles.close__item}

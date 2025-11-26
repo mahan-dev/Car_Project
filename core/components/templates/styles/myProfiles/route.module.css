@@ -1,7 +1,6 @@
 .container {
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     border-radius: 0.3rem;
-    cursor: pointer;
     transition: 0.3s ease-in-out all;
 
     &:hover {
@@ -13,7 +12,7 @@
 .container__image {
     width: 100%;
     position: relative;
-
+    cursor: pointer;
     height: 200px;
 
     img {
@@ -23,17 +22,24 @@
 }
 
 .container__description {
-    display:flex ;
-    flex-direction: column;
-    gap: 0.3rem;
-
+    display: flex;
+    justify-content: space-between;
     padding: 0.7rem;
+    align-items: flex-end;
 
-    p{
+
+
+    p {
         width: fit-content;
         background: black;
         color: white;
         padding: 0.2rem 0.5rem;
         border-radius: 0.375rem;
     }
+}
+
+.description__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }

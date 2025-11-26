@@ -16,24 +16,28 @@ import toast from "react-hot-toast";
 
 import dayjs from "dayjs";
 import DatePicker from "@/elements/DatePicker";
+import { FetcherResponse } from "@/core/helper/dataFetcher";
 
 interface AddCarProps {
   title: string;
+  profile?: FetcherResponse;
 }
-const AddCar = ({ title }: AddCarProps) => {
+const AddCar = ({ title, profile }: AddCarProps) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   const { watch, setValue, reset, register, control } = useForm<AddForm>({
     defaultValues: {
-      model_make_id: "",
-      model_name: "",
-      year: "",
-      cylinder: "",
-      gearbox: "",
-      engine: "",
-      description: "",
-      imageUrl: "",
+      model_make_id: profile ? profile.model_make_id : "",
+      model_name: profile ? profile.model_name : "",
+      year: profile ? profile.year : "",
+      cylinder: profile ? profile.cylinder : "",
+      price: profile ? profile.price : "",
+      gearbox: profile ? profile.gearbox : "",
+      category: profile ? profile.category : "",
+      engine: profile ? profile.engine : "",
+      description: profile ? profile.description : "",
+      imageUrl: profile ? profile.imageUrl : "",
       addDate: dayjs(),
     },
   });
@@ -92,12 +96,33 @@ const AddCar = ({ title }: AddCarProps) => {
           <Loader />
         </div>
       ) : (
-        <Button
-          type="submit"
-          sx={{ width: "100%", mt: "2rem", bgcolor: "black", color: "white" }}
-        >
-          Submit
-        </Button>
+        <>
+          {profile ? (
+            <Button
+              type="submit"
+              sx={{
+                width: "100%",
+                mt: "2rem",
+                bgcolor: "black",
+                color: "white",
+              }}
+            >
+              Edit
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              sx={{
+                width: "100%",
+                mt: "2rem",
+                bgcolor: "black",
+                color: "white",
+              }}
+            >
+              Submit
+            </Button>
+          )}
+        </>
       )}
     </form>
   );
