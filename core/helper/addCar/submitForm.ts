@@ -29,7 +29,6 @@ export const submitFormHandler = async ({
   const duration = {
     duration: 2000,
   };
-
   if (
     !model_make_id ||
     !model_name ||
@@ -51,7 +50,6 @@ export const submitFormHandler = async ({
     toast.error("Error  Manual | Automatic");
     return;
   }
-
 
   if (isNaN(+year)) {
     toast.error("years should be number");

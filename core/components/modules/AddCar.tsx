@@ -5,17 +5,18 @@ import styles from "@/modules/styles/addCar/route.module.css";
 import { alpha, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { AddForm } from "@/modules/interface/FormValues";
-import { submitFormHandler } from "@/helper/submitForm";
+import { submitFormHandler } from "@/helper/addCar/submitForm";
 import TextInput from "@/modules/TextInput";
 
 import ImageElement from "@/elements/ImageElement";
 
 import DeleteButton from "@/elements/DeleteButton";
-import Loader from "@/components/loader/Loader";
+import Loader from "@/loader/Loader";
 import toast from "react-hot-toast";
 import DatePicker from "@/elements/DatePicker";
 import { FetcherResponse } from "@/helper/dataFetcher";
 import { defaultHandler } from "@/constants/addCar/addCar";
+import axios from "axios";
 
 interface AddCarProps {
   title: string;
@@ -36,18 +37,22 @@ const AddCar = ({ title, profile }: AddCarProps) => {
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const res = await submitFormHandler({
-      profileData: {
-        ...profileData,
-        imageUrl,
-      },
-      setLoading,
-    });
+    if (profileData) {
+      axios.post("/api/profile/edit", profileData);
+    } else {
+      const res = await submitFormHandler({
+        profileData: {
+          ...profileData,
+          imageUrl,
+        },
+        setLoading,
+      });
 
-    if (res) {
-      toast.success("Done");
-      reset();
-      setImageUrl("");
+      if (res) {
+        toast.success("Done");
+        reset();
+        setImageUrl("");
+      }
     }
   };
 
