@@ -12,6 +12,7 @@ interface CarDetail {
 }
 const CarDetail = ({ data }: CarDetail) => {
   if (!data) return;
+
   const { description } = data;
   return (
     <div className={styles.container}>

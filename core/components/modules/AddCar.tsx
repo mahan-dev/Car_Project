@@ -38,7 +38,13 @@ const AddCar = ({ title, profile }: AddCarProps) => {
     e.preventDefault();
 
     if (profileData) {
-      axios.post("/api/profile/edit", profileData);
+      const { status } = await axios.patch<FetcherResponse>(
+        "/api/profile/edit",
+        profileData
+      );
+      if (status === 200) {
+        toast.success("done");
+      }
     } else {
       const res = await submitFormHandler({
         profileData: {

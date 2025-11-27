@@ -55,7 +55,8 @@ const defaultHandler = (profile?: FetcherResponse) => ({
   category: profile?.category ?? "",
   engine: profile?.engine ?? "",
   description: profile?.description ?? "",
-  imageUrl: profile?.imageUrl ?? "",
+  imageUrl: profile?.image ?? "",
+  _id: profile?._id ?? "",
   addDate: dayjs(),
 });
 

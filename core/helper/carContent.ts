@@ -5,8 +5,6 @@ interface DataProps {
   data: { [key: string]: string } | ProfileInterface;
 }
 export const dataHandler = ({ data }: DataProps) => {
-
-  
   const {
     model_transmission_type,
     model_drive,

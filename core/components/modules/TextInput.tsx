@@ -60,6 +60,7 @@ const TextInput = ({ register, control, setValue }: TextProps) => {
           ) : (
             <textarea
               className={styles.content__description}
+              {...register(nameHandler(item.name))}
               name="description"
               onChange={(e) => setValue("description", e.target.value)}
             />

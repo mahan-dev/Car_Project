@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Dayjs } from "dayjs";
 
 export interface FetcherResponse {
   model_make_id: string;
@@ -13,6 +14,7 @@ export interface FetcherResponse {
   engine: string;
   description: string;
   imageUrl: string;
+  addDate: Dayjs;
 }
 export interface Car {
   Models: FetcherResponse[];

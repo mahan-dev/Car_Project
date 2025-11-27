@@ -50,7 +50,7 @@ export const POST = async (req: Request) => {
       gearbox,
       engine,
       cylinder: +cylinder,
-      description,
+      description: description.trim(),
       image: imageUrl,
       category,
       addDate,

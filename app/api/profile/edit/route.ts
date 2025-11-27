@@ -5,14 +5,15 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
 import { Profile } from "@/models/profile";
 import { UserModel } from "@/models/user";
+import { Types } from "mongoose";
 
-export const POST = async (req: Request) => {
+export const PATCH = async (req: Request) => {
   try {
     await connectDb();
     const {
       model_make_id,
       model_name,
-      image,
+      imageUrl,
       price,
       gearbox,
       category,
@@ -20,7 +21,8 @@ export const POST = async (req: Request) => {
       cylinder,
       engine,
       description,
-      imageUrl,
+      addDate,
+      _id,
     }: FetcherResponse = await req.json();
 
     const session = await getServerSession(authOptions);
@@ -37,19 +39,36 @@ export const POST = async (req: Request) => {
         { status: "Failed", error: "user not found" },
         { status: 404 }
       );
-    await Profile.create({
+
+    const profile = await Profile.findOne({ _id });
+    console.log(profile);
+
+    const userId = user._id as Types.ObjectId;
+    const profileId = profile.userId as Types.ObjectId;
+
+    if (!userId.equals(profileId))
+      return NextResponse.json(
+        { status: "Failed", error: "your access denied" },
+        { status: 403 }
+      );
+    console.log(imageUrl);
+
+    const res = Object.assign(profile, {
       model_make_id,
       model_name,
-      image,
-      price: +price,
+      image: imageUrl,
+      price,
       gearbox,
       category,
-      year: +year,
-      cylinder: +cylinder,
-      engine: +engine,
-      description,
-      imageUrl,
+      year,
+      cylinder,
+      engine,
+      description: description.trim(),
+      addDate,
     });
+    await profile.save();
+    console.log(res);
+    console.log("bellow");
 
     return NextResponse.json(
       { status: "Success", message: "Profile Edited" },
