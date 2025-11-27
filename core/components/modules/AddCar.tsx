@@ -12,11 +12,11 @@ import ImageElement from "@/elements/ImageElement";
 
 import DeleteButton from "@/elements/DeleteButton";
 import Loader from "@/loader/Loader";
-import toast from "react-hot-toast";
 import DatePicker from "@/elements/DatePicker";
 import { FetcherResponse } from "@/helper/dataFetcher";
 import { defaultHandler } from "@/constants/addCar/addCar";
-import axios from "axios";
+import { editHandler } from "@/helper/addCar/editHandler";
+import { onSubmit } from "@/helper/addCar/submitHandler";
 
 interface AddCarProps {
   title: string;
@@ -38,27 +38,9 @@ const AddCar = ({ title, profile }: AddCarProps) => {
     e.preventDefault();
 
     if (profileData) {
-      const { status } = await axios.patch<FetcherResponse>(
-        "/api/profile/edit",
-        profileData
-      );
-      if (status === 200) {
-        toast.success("done");
-      }
+      editHandler(profileData);
     } else {
-      const res = await submitFormHandler({
-        profileData: {
-          ...profileData,
-          imageUrl,
-        },
-        setLoading,
-      });
-
-      if (res) {
-        toast.success("Done");
-        reset();
-        setImageUrl("");
-      }
+      onSubmit({ profileData, imageUrl, setLoading, setImageUrl, reset });
     }
   };
 
