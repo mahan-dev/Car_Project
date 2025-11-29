@@ -5,9 +5,14 @@ import { connectDb } from "@/utils/connectDb";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-export const DELETE = async () => {
+interface DeleteProps {
+  params: Promise<{ removeId: string }>;
+}
+export const DELETE = async (req: Request, context: DeleteProps) => {
   try {
     await connectDb();
+
+    const { removeId } = await context.params;
 
     const session = await getServerSession(authOptions);
     if (!session)
@@ -24,8 +29,7 @@ export const DELETE = async () => {
       );
 
     console.log(user._id);
-    const res = await Profile.deleteOne({ userId: user._id });
-    console.log("🛬 ~ route.ts:25 -> res: ", res);
+    await Profile.deleteOne({ _id: removeId });
 
     return NextResponse.json({
       status: "Success",

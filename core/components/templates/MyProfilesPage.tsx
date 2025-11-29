@@ -27,13 +27,18 @@ const MyProfilesPage = ({ profiles: { profiles }, role }: ProfileInterface) => {
     router.push(`/dashboard/my-profiles/${id}`);
   };
 
-
-  const deleteHandler = async () => {
-    const { status } = await axios.delete(`/api/admin/remove`);
+  const deleteHandler = async (id: string) => {
+    const { status } = await axios.delete(`/api/admin/remove/${id}`);
     if (status === 200) router.refresh();
-  
   };
 
+  const publishHandler = async (id: string) => {
+    console.log("hi");
+    console.log(id);
+
+    const res = await axios.get(`/api/admin/${id}`);
+    console.log(res);
+  };
   return (
     <Grid container spacing={2}>
       {profiles.map((item, index) => (
@@ -81,10 +86,18 @@ const MyProfilesPage = ({ profiles: { profiles }, role }: ProfileInterface) => {
                     marginTop: "1.5rem",
                   }}
                 >
-                  <Button variant="outlined" onClick={deleteHandler}>
+                  <Button
+                    variant="outlined"
+                    onClick={() => deleteHandler(item._id)}
+                  >
                     Delete
                   </Button>
-                  <Button variant="outlined">Publish</Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() => publishHandler(item._id)}
+                  >
+                    Publish
+                  </Button>
                 </div>
               )}
             </div>
