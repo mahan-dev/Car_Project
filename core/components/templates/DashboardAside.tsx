@@ -6,7 +6,7 @@ import { RiDashboard3Fill } from "react-icons/ri";
 
 interface DashboardAsideProps {
   children: React.ReactNode;
-  isAdmin?: boolean;
+  isAdmin?: "ADMIN" | "USER";
 }
 const DashboardAside = async ({ children, isAdmin }: DashboardAsideProps) => {
   return (

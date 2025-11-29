@@ -13,7 +13,7 @@ import { signOut } from "next-auth/react";
 import { MdPendingActions } from "react-icons/md";
 
 interface AsideProps {
-  isAdmin: boolean;
+  isAdmin: "ADMIN" | "USER";
 }
 const AsideContent = ({ isAdmin }: AsideProps) => {
   const url = "/dashboard/";

@@ -33,11 +33,7 @@ const MyProfilesPage = ({ profiles: { profiles }, role }: ProfileInterface) => {
   };
 
   const publishHandler = async (id: string) => {
-    console.log("hi");
-    console.log(id);
-
-    const res = await axios.get(`/api/admin/${id}`);
-    console.log(res);
+    await axios.get(`/api/admin/${id}`);
   };
   return (
     <Grid container spacing={2}>
