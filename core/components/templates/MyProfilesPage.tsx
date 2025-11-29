@@ -7,13 +7,16 @@ import { Button, Grid } from "@mui/material";
 import styles from "@/templates/styles/myProfiles/route.module.css";
 import { usePathname, useRouter } from "next/navigation";
 import { FaEdit } from "react-icons/fa";
+import axios from "axios";
 
 interface ProfileInterface {
   profiles: ProfileProps;
+  role: "ADMIN" | "USER";
 }
-const MyProfilesPage = ({ profiles: { profiles } }: ProfileInterface) => {
+const MyProfilesPage = ({ profiles: { profiles }, role }: ProfileInterface) => {
   const router = useRouter();
   const pathName = usePathname();
+
   const clickHandler = (make: string, model: string, id: string) => {
     if (pathName.includes("my-profiles")) {
       router.push(`/marketplace/detail/${make}/${model}/${id}`);
@@ -22,6 +25,13 @@ const MyProfilesPage = ({ profiles: { profiles } }: ProfileInterface) => {
 
   const editHandler = (id: string) => {
     router.push(`/dashboard/my-profiles/${id}`);
+  };
+
+
+  const deleteHandler = async () => {
+    const { status } = await axios.delete(`/api/admin/remove`);
+    if (status === 200) router.refresh();
+  
   };
 
   return (
@@ -51,13 +61,32 @@ const MyProfilesPage = ({ profiles: { profiles } }: ProfileInterface) => {
                 <p>type: {item.category} </p>
               </div>
 
-              <Button
-                sx={{ minWidth: "auto", width: "50px", padding: "0.2rem" }}
-                variant="outlined"
-                onClick={() => editHandler(item._id)}
-              >
-                <FaEdit />
-              </Button>
+              {role === "USER" && (
+                <Button
+                  sx={{ minWidth: "auto", width: "50px", padding: "0.2rem" }}
+                  variant="outlined"
+                  onClick={() => editHandler(item._id)}
+                >
+                  <FaEdit />
+                </Button>
+              )}
+
+              {role === "ADMIN" && (
+                <div
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    gap: "1rem",
+                    justifyContent: "center",
+                    marginTop: "1.5rem",
+                  }}
+                >
+                  <Button variant="outlined" onClick={deleteHandler}>
+                    Delete
+                  </Button>
+                  <Button variant="outlined">Publish</Button>
+                </div>
+              )}
             </div>
           </div>
         </Grid>
