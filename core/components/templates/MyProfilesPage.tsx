@@ -8,14 +8,17 @@ import styles from "@/templates/styles/myProfiles/route.module.css";
 import { usePathname, useRouter } from "next/navigation";
 import { FaEdit } from "react-icons/fa";
 import axios from "axios";
+import { FetcherResponse } from "@/core/helper/dataFetcher";
 
 interface ProfileInterface {
-  profiles: ProfileProps;
-  role: "ADMIN" | "USER";
+  profiles: ProfileProps | FetcherResponse[];
+  role?: "ADMIN" | "USER";
 }
-const MyProfilesPage = ({ profiles: { profiles }, role }: ProfileInterface) => {
+const MyProfilesPage = ({ profiles, role }: ProfileInterface) => {
   const router = useRouter();
   const pathName = usePathname();
+
+  const data = Array.isArray(profiles) ? profiles : profiles.profiles;
 
   const clickHandler = (make: string, model: string, id: string) => {
     if (pathName.includes("my-profiles")) {
@@ -37,7 +40,7 @@ const MyProfilesPage = ({ profiles: { profiles }, role }: ProfileInterface) => {
   };
   return (
     <Grid container spacing={2}>
-      {profiles.map((item, index) => (
+      {data.map((item, index) => (
         <Grid key={index} size={{ xs: 6, md: 4 }}>
           <div className={styles.container}>
             <div
