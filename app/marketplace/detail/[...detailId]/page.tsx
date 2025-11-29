@@ -29,7 +29,7 @@ const page = async ({ params }: pageInterface) => {
 
   const data: resultInterface = JSON.parse(JSON.stringify(profile));
 
-  return <CarDetailsPage data={data} />;
+  return <CarDetailsPage data={data} marketPlace={true} />;
 };
 
 export default page;

@@ -8,10 +8,11 @@ import { Typography } from "@mui/material";
 import { ProfileInterface } from "@/models/interface/profileSchema";
 
 interface CarDetails {
-  data: { [key: string]: string } & Partial<ProfileInterface>;
+  data: { [key: string]: string } | ProfileInterface;
+  marketPlace?: boolean;
 }
 
-const CarDetailsPage = ({ data }: CarDetails) => {
+const CarDetailsPage = ({ data, marketPlace }: CarDetails) => {
   const { model_name, model_make_id } = data || {};
 
   const carImage = !data.image
@@ -32,7 +33,7 @@ const CarDetailsPage = ({ data }: CarDetails) => {
             />
           </div>
 
-          <CarDetail data={data} />
+          <CarDetail data={data} marketPlace={marketPlace} />
         </>
       )}
       {!data && (

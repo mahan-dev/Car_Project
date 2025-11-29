@@ -9,8 +9,9 @@ import { sp } from "@/utils/numberFormatter";
 
 interface CarDetail {
   data: { [key: string]: string } | ProfileInterface;
+  marketPlace: boolean;
 }
-const CarDetail = ({ data }: CarDetail) => {
+const CarDetail = ({ data, marketPlace }: CarDetail) => {
   if (!data) return;
 
   const { description } = data;
@@ -32,11 +33,15 @@ const CarDetail = ({ data }: CarDetail) => {
       </h2>
       <CarContent data={data} title={"specification"} />
 
-      <h2 className={styles.container__title}>
-        Performance
-        <FiSettings />
-      </h2>
-      <CarContent data={data} title={"performance"} />
+      {!marketPlace && (
+        <>
+          <h2 className={styles.container__title}>
+            Performance
+            <FiSettings />
+          </h2>
+          <CarContent data={data} title={"performance"} />
+        </>
+      )}
 
       {description && (
         <>
