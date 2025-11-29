@@ -4,9 +4,9 @@ import AddCar from "@/modules/AddCar";
 
 const AddCarPage = () => {
   return (
-    <section>
+    <>
       <AddCar title={"Add Car"} />
-    </section>
+    </>
   );
 };
 

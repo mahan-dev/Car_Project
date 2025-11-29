@@ -30,7 +30,7 @@ const TextInput = ({ register, control, setValue }: TextProps) => {
   const nameHandler = (name: string): keyof AddForm => {
     return name as keyof AddForm;
   };
-  
+
   return (
     <div className={styles.container__main}>
       {inputProps.map((item) => (
@@ -68,7 +68,8 @@ const TextInput = ({ register, control, setValue }: TextProps) => {
         </div>
       ))}
 
-      <div style={{ marginTop: "3rem" }}>
+      <div className={styles.main__content}>
+        Car Type
         <FormControl sx={{ width: "100%" }}>
           <InputLabel id="category_label">Category</InputLabel>
 

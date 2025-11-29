@@ -5,14 +5,14 @@ import { connectDb } from "@/utils/connectDb";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-interface PutProps {
+interface GetProps {
   params: Promise<{ profileId: string }>;
 }
-export const GET = async (req: Request, context: PutProps) => {
+export const GET = async (req: Request, { params }: GetProps) => {
   try {
     await connectDb();
 
-    const { profileId } = await context.params;
+    const { profileId } = await params;
 
     const session = await getServerSession(authOptions);
     if (!session)

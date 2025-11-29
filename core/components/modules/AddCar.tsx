@@ -1,11 +1,10 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import styles from "@/modules/styles/addCar/route.module.css";
 import { alpha, Button, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { AddForm } from "@/modules/interface/FormValues";
-import { submitFormHandler } from "@/helper/addCar/submitForm";
 import TextInput from "@/modules/TextInput";
 
 import ImageElement from "@/elements/ImageElement";
@@ -34,18 +33,22 @@ const AddCar = ({ title, profile }: AddCarProps) => {
 
   const profileData = watch();
 
-  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (profileData) {
-      editHandler(profileData);
+  const submitHandler = async () => {
+    if (profile) {
+      await editHandler(profileData);
     } else {
-      onSubmit({ profileData, imageUrl, setLoading, setImageUrl, reset });
+      await onSubmit({ profileData, imageUrl, setLoading, setImageUrl, reset });
     }
   };
 
   return (
-    <form onSubmit={submitHandler} className={styles.container}>
+    <form
+      onSubmit={(e: React.FormEvent) => {
+        e.preventDefault();
+        submitHandler();
+      }}
+      className={styles.container}
+    >
       <Typography
         className={styles.container__title}
         sx={{
