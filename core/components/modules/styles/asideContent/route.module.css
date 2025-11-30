@@ -4,6 +4,7 @@
     gap: 0.5rem;
 
     li a {
+        width: 100%;
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -17,9 +18,10 @@
 
 .list li:last-child {
     color: red;
+
     &:hover {
-       background: rgba(255, 0, 0, 0.15);
-        
+        background: rgba(255, 0, 0, 0.15);
+
     }
 }
 
@@ -38,5 +40,23 @@
 
 .list li:hover {
     background: #d7d7d792;
-    
+
+}
+
+.list__isAdmin {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+ .list li .list__status svg {
+        color: red;
+        font-size: 0.8rem ;
+    }
+
+.list__status{
+    display: flex;
+    margin-left: auto;
+
+   
 }

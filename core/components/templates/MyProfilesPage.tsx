@@ -2,17 +2,17 @@
 import React from "react";
 import Image from "next/image";
 import { ProfileProps } from "@/helper/myProfiles";
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 
 import styles from "@/templates/styles/myProfiles/route.module.css";
 import { usePathname, useRouter } from "next/navigation";
-import { FaEdit } from "react-icons/fa";
-import axios from "axios";
+
 import { FetcherResponse } from "@/core/helper/dataFetcher";
+import MyProfileButton from "@/elements/MyProfileButton";
 
 interface ProfileInterface {
   profiles: ProfileProps | FetcherResponse[];
-  role?: "ADMIN" | "USER";
+  role: "ADMIN" | "USER";
 }
 const MyProfilesPage = ({ profiles, role }: ProfileInterface) => {
   const router = useRouter();
@@ -26,18 +26,6 @@ const MyProfilesPage = ({ profiles, role }: ProfileInterface) => {
     }
   };
 
-  const editHandler = (id: string) => {
-    router.push(`/dashboard/my-profiles/${id}`);
-  };
-
-  const deleteHandler = async (id: string) => {
-    const { status } = await axios.delete(`/api/admin/remove/${id}`);
-    if (status === 200) router.refresh();
-  };
-
-  const publishHandler = async (id: string) => {
-    await axios.get(`/api/admin/${id}`);
-  };
   return (
     <Grid container spacing={2}>
       {data.map((item, index) => (
@@ -65,40 +53,7 @@ const MyProfilesPage = ({ profiles, role }: ProfileInterface) => {
                 <p>type: {item.category} </p>
               </div>
 
-              {role === "USER" && (
-                <Button
-                  sx={{ minWidth: "auto", width: "50px", padding: "0.2rem" }}
-                  variant="outlined"
-                  onClick={() => editHandler(item._id)}
-                >
-                  <FaEdit />
-                </Button>
-              )}
-
-              {role === "ADMIN" && (
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    gap: "1rem",
-                    justifyContent: "center",
-                    marginTop: "1.5rem",
-                  }}
-                >
-                  <Button
-                    variant="outlined"
-                    onClick={() => deleteHandler(item._id)}
-                  >
-                    Delete
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    onClick={() => publishHandler(item._id)}
-                  >
-                    Publish
-                  </Button>
-                </div>
-              )}
+              <MyProfileButton role={role} data={item._id} />
             </div>
           </div>
         </Grid>

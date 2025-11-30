@@ -11,11 +11,13 @@ import { FaSquarePlus } from "react-icons/fa6";
 import { IoExit } from "react-icons/io5";
 import { signOut } from "next-auth/react";
 import { MdPendingActions } from "react-icons/md";
+import { GiPlainCircle } from "react-icons/gi";
 
 interface AsideProps {
   isAdmin: "ADMIN" | "USER";
+  profile: number;
 }
-const AsideContent = ({ isAdmin }: AsideProps) => {
+const AsideContent = ({ isAdmin, profile }: AsideProps) => {
   const url = "/dashboard/";
 
   return (
@@ -52,16 +54,21 @@ const AsideContent = ({ isAdmin }: AsideProps) => {
       </li>
 
       {isAdmin && (
-        <li>
+        <li className={styles.list__isAdmin}>
           <Link href={"/admin"}>
             <MdPendingActions />
             Pending
+            {profile >= 1 && (
+              <div className={styles.list__status}>
+                <GiPlainCircle />
+              </div>
+            )}
           </Link>
         </li>
       )}
 
       <li>
-        <Link href={""} onClick={() => signOut()}>
+        <Link href={"/signin"} onClick={() => signOut()}>
           <IoExit />
           Exit
         </Link>
