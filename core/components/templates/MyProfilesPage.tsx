@@ -12,7 +12,7 @@ import MyProfileButton from "@/elements/MyProfileButton";
 
 interface ProfileInterface {
   profiles: ProfileProps | FetcherResponse[];
-  role: "ADMIN" | "USER";
+  role?: "ADMIN" | "USER";
 }
 const MyProfilesPage = ({ profiles, role }: ProfileInterface) => {
   const router = useRouter();
