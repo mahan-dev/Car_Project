@@ -1,13 +1,13 @@
 "use client";
 import React from "react";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { ProfileProps } from "@/helper/myProfiles";
 import { Grid } from "@mui/material";
 
 import styles from "@/templates/styles/myProfiles/route.module.css";
-import { usePathname, useRouter } from "next/navigation";
 
-import { FetcherResponse } from "@/core/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/dataFetcher";
 import MyProfileButton from "@/elements/MyProfileButton";
 
 interface ProfileInterface {

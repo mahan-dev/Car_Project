@@ -1,11 +1,8 @@
+import SettingPage from "@/templates/SettingPage";
 import React from "react";
 
 const page = () => {
-  return (
-    <div>
-      <h2>hi</h2>
-    </div>
-  );
+  return <SettingPage />;
 };
 
 export default page;

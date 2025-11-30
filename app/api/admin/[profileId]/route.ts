@@ -32,8 +32,17 @@ export const GET = async (req: Request, { params }: GetProps) => {
     profile.published = true;
     await profile.save();
 
-    return NextResponse.json({ status: "Success", message: "Approved" });
+    return NextResponse.json(
+      { status: "Success", message: "Approved" },
+      { status: 200 }
+    );
   } catch {
-    console.log("hi");
+    return NextResponse.json(
+      {
+        status: "Failed",
+        error: "something went wrong",
+      },
+      { status: 500 }
+    );
   }
 };

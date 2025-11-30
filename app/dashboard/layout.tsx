@@ -9,9 +9,9 @@ import { connectDb } from "@/utils/connectDb";
 const layout = async ({ children }: PropsWithChildren) => {
   await connectDb();
   const session = await getServerSession(authOptions);
+  if (!session) redirect("/signup");
   const user = await UserModel.findOne({ email: session.user.email });
 
-  if (!session) redirect("/signup");
   return <DashboardAside isAdmin={user.role}>{children}</DashboardAside>;
 };
 
