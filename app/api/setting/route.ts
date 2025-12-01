@@ -6,7 +6,8 @@ import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
 interface PostProps {
-  value: string;
+  password: string;
+  newPassword: string;
 }
 
 export const POST = async (req: Request) => {
@@ -14,9 +15,9 @@ export const POST = async (req: Request) => {
     await connectDb();
     console.log("hi1");
     const res: PostProps = await req.json();
-    const { value } = res;
+    const { password, newPassword } = res;
 
-    console.log(value);
+    console.log(password, newPassword);
 
     const session = await getServerSession(authOptions);
     if (!session)
@@ -30,23 +31,24 @@ export const POST = async (req: Request) => {
 
     const email = session.user.email;
     const user = await UserModel.findOne({ email });
+
     if (!user)
       return NextResponse.json(
         { status: "Failed", error: "account not found" },
         { status: 404 }
       );
 
-    // const isPassword = await verifyPassword(value, user.password);
-    // if (!isPassword)
-    //   return NextResponse.json(
-    //     {
-    //       status: "Failed",
-    //       error: "Incorrect Password",
-    //     },
-    //     { status: 422 }
-    //   );
+    const isPassword = await verifyPassword(password, user.password);
+    if (!isPassword)
+      return NextResponse.json(
+        {
+          status: "Failed",
+          error: "Incorrect Password",
+        },
+        { status: 422 }
+      );
 
-    user.password = await hashPassword(value);
+    user.password = await hashPassword(newPassword);
     await user.save();
 
     return NextResponse.json(

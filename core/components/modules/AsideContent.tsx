@@ -53,7 +53,7 @@ const AsideContent = ({ isAdmin, profile }: AsideProps) => {
         </Link>
       </li>
 
-      {isAdmin && (
+      {isAdmin === "ADMIN" && (
         <li className={styles.list__isAdmin}>
           <Link href={"/admin"}>
             <MdPendingActions />

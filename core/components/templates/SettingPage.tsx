@@ -1,12 +1,15 @@
 "use client";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 import { Button, TextField } from "@mui/material";
 
-import axios from "axios";
-import { useSession } from "next-auth/react";
+import styles from "@/templates/styles/settingPage/route.module.css";
+import { submitHandler } from "@/core/helper/submitHandler";
 
 const SettingPage = () => {
-  const [value, setValue] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
   const session = useSession();
@@ -19,35 +22,47 @@ const SettingPage = () => {
     if (session.status === "authenticated") setEmail(session.data.user.email);
   };
 
-
-  const clickHandler = async () => {
-    await axios.post<string>("/api/setting/", {value});
+  const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const res = await submitHandler(password, newPassword, {
+      setPassword,
+      setNewPassword,
+    });
+    console.log(res);
   };
+
+  type FormElement = FormEvent<HTMLFormElement>;
 
   return (
     <form
-      onSubmit={(e) => {
+      onSubmit={(e: FormElement) => {
         e.preventDefault();
+        onSubmitHandler(e);
       }}
+      className={styles.form}
     >
       <div>
         Email:
         <p> {email}</p>
       </div>
 
-      <div>
-        Password:
-        <p> {email}</p>
-      </div>
-
       <TextField
         type="text"
-        value={value}
+        value={password}
         onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setValue(e.target.value)
+          setPassword(e.target.value)
         }
+        placeholder="Current Password"
       />
-      <Button type="submit" variant="outlined" onClick={clickHandler}>
+      <TextField
+        type="text"
+        value={newPassword}
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setNewPassword(e.target.value)
+        }
+        placeholder="New Password"
+      />
+      <Button type="submit" variant="outlined" sx={{width:"100%"}}>
         Submit
       </Button>
     </form>
