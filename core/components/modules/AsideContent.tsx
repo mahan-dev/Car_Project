@@ -14,8 +14,8 @@ import { MdPendingActions } from "react-icons/md";
 import { GiPlainCircle } from "react-icons/gi";
 
 interface AsideProps {
-  isAdmin: "ADMIN" | "USER";
-  profile: number;
+  isAdmin?: "ADMIN" | "USER";
+  profile?: number;
 }
 const AsideContent = ({ isAdmin, profile }: AsideProps) => {
   const url = "/dashboard/";

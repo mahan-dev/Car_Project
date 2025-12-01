@@ -62,8 +62,8 @@ const SettingPage = () => {
         }
         placeholder="New Password"
       />
-      <Button type="submit" variant="outlined" sx={{width:"100%"}}>
-        Submit
+      <Button type="submit" variant="outlined" sx={{mt:"2rem"}}>
+        Change Password
       </Button>
     </form>
   );

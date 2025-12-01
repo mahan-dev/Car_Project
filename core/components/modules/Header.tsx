@@ -1,5 +1,11 @@
 "use client";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -13,10 +19,19 @@ import SearchBox from "@/elements/SearchBox";
 import { useQuery } from "@tanstack/react-query";
 import { SearchQuery } from "@/helper/SearchQueryFunction";
 
+import { IoMenu } from "react-icons/io5";
+import { IoClose } from "react-icons/io5";
+
 interface HeaderProps {
   data: Session;
+  isClicked: boolean;
+  clickHandler: () => void;
 }
-const Header = ({ data }: HeaderProps) => {
+const Header = ({
+  data,
+  isClicked,
+  clickHandler,
+}: HeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
   const [debouncedValue, setDebouncedValue] = useState<string>("");
@@ -43,9 +58,18 @@ const Header = ({ data }: HeaderProps) => {
       <div className={styles.header__left}>
         {data ? (
           <>
-            <Link href={"/dashboard"}>
-              <RiAccountBoxFill className={styles.header__account} />
-            </Link>
+            <div className={styles.header__account}>
+              <Link href={"/dashboard"}>
+                <RiAccountBoxFill />
+              </Link>
+            </div>
+
+            <div
+              className={styles.left__menu}
+              onClick={clickHandler}
+            >
+              {isClicked ? <IoClose /> : <IoMenu />}
+            </div>
           </>
         ) : (
           <>
