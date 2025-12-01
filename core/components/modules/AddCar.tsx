@@ -52,11 +52,8 @@ const AddCar = ({ title, profile }: AddCarProps) => {
       <Typography
         className={styles.container__title}
         sx={{
-          backgroundColor: alpha("#000000", 0.2),
-          color: "black",
           fontSize: "1.3rem",
           fontWeight: "600",
-          borderRadius: "0.3rem",
         }}
         component={"h2"}
       >

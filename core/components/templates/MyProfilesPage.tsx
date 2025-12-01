@@ -25,6 +25,11 @@ const MyProfilesPage = ({ profiles, role }: ProfileInterface) => {
       router.push(`/marketplace/detail/${make}/${model}/${id}`);
     }
   };
+  
+  if (!Array.isArray(profiles) && !profiles.profiles.length) {
+    console.log("first");
+    return <h2 className={styles.notFound}>Empty </h2>;
+  }
 
   return (
     <Grid container spacing={2}>

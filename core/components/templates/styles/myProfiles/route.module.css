@@ -45,3 +45,13 @@
     flex-direction: column;
     gap: 0.5rem;
 }
+
+
+.notFound {
+    display: flex;
+    justify-content: center;
+    background: rgba(255, 0, 0, 0.21);
+    color: red;
+    font-size: 1.4rem;
+    border-radius: 0.3rem;
+}
