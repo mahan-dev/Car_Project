@@ -1,3 +1,4 @@
+"use client"
 import React, { SetStateAction, useState } from "react";
 import {
   Collapse,

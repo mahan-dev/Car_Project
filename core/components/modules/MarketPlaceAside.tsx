@@ -11,10 +11,11 @@ import styles from "@/modules/styles/marketPlaceAside/route.module.css";
 import { FaFilter } from "react-icons/fa6";
 import { Slider } from "@mui/material";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
-import GearBoxAside from "@/modules/GearBoxAside";
+import GearBoxAside from "@/core/components/elements/GearBoxAside";
 import ButtonReset from "@/elements/ButtonReset";
 import { onClickHandler } from "@/helper/marketPlaceAside/clickHandler";
 import { resetHandler } from "@/helper/marketPlaceAside/resetHandler";
+import CarTypeAside from "@/elements/CarTypeAside";
 
 interface AsideProps {
   price: number[];
@@ -30,6 +31,7 @@ const MarketPlaceAside = ({
 }: AsideProps) => {
   const [range, setRange] = useState<number[]>([0, 1000000]);
   const [value, setValue] = useState<string>("");
+  const [type, setType] = useState<string>("");
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const toggleRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -43,9 +45,15 @@ const MarketPlaceAside = ({
 
   const selectHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    setType(type);
     setValue(value);
     setGearBox(value);
     setIsDisabled(false);
+  };
+
+  const carTypeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setType(value);
   };
 
   const clickHandler = (e: MouseEvent<HTMLDivElement>) => {
@@ -116,6 +124,26 @@ const MarketPlaceAside = ({
           <GearBoxAside value={value} onChange={selectHandler} />
         </div>
       </li>
+
+      <li className={styles.list__item}>
+        <div
+          className={styles.list__item__header}
+          data-name="type"
+          onClick={clickHandler}
+        >
+          Car Type
+          <KeyboardArrowDownRoundedIcon />
+        </div>
+        <div
+          ref={(el) => {
+            toggleRef.current["type"] = el;
+          }}
+          className={styles.close__item}
+        >
+          <CarTypeAside value={type} onChange={carTypeHandler} />
+        </div>
+      </li>
+
       <li>
         <ButtonReset onClick={onReset} disabled={isDisabled} />
       </li>

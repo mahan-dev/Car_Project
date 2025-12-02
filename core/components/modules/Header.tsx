@@ -1,8 +1,6 @@
 "use client";
 import React, {
   ChangeEvent,
-  Dispatch,
-  SetStateAction,
   useEffect,
   useState,
 } from "react";
@@ -52,10 +50,6 @@ const Header = ({ data, isClicked, clickHandler }: HeaderProps) => {
   return (
     <>
       <div className={styles.header__left}>
-        {(() => {
-          console.log("rendering header");
-          return null;
-        })()}
         {data ? (
           <>
             <div className={styles.header__account}>

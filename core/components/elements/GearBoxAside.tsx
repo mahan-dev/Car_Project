@@ -1,3 +1,4 @@
+"use client";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React, { ChangeEvent } from "react";
 
