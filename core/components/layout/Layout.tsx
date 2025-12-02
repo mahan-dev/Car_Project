@@ -1,13 +1,14 @@
 "use client";
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { useSession } from "next-auth/react";
 
 import styles from "@/layout/styles/layout.module.css";
 
 import { Container } from "@mui/material";
-import Header from "@/core/components/modules/Header";
+import Header from "@/modules/Header";
 import AsideContent from "@/modules/AsideContent";
+import { clickOutside } from "@/helper/layout/clickOutside";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -21,20 +22,15 @@ const Layout = ({ children }: LayoutProps) => {
   const clickHandler = () => {
     setIsClicked(!isClicked);
   };
-  const clickOutside = (e: MouseEvent) => {
-    if (!isClicked) return;
-    if (!asideRef.current) return;
-
-    asideRef.current.classList.toggle(styles["show-aside"]);
-    asideRef.current.classList.toggle(styles["hide-aside"]);
-
-    if (asideRef.current && !asideRef.current.contains(e.target as HTMLElement))
-      setIsClicked(false);
-  };
 
   useEffect(() => {
-    document.addEventListener("mousedown", clickOutside);
-    return () => removeEventListener("mousedown", clickOutside);
+    document.addEventListener("mousedown", (e: MouseEvent) =>
+      clickOutside({ e, isClicked, asideRef, setIsClicked })
+    );
+    return () =>
+      removeEventListener("mousedown", (e: MouseEvent) =>
+        clickOutside({ e, isClicked, asideRef, setIsClicked })
+      );
   }, [isClicked]);
 
   return (

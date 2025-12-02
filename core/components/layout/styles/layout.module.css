@@ -71,7 +71,7 @@
 
 .show-aside {
     display: block;
-    padding: 0.4rem;
+    
     position: absolute;
     z-index: 6;
     top: 10%;
@@ -79,7 +79,9 @@
     background: white;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
     
-    
+    ul{
+        margin: 0.2rem;
+    }
 
 }
 

@@ -34,7 +34,7 @@ const MarketPlaceAside = ({
 
   const toggleRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  const changeHandler = (event: Event, newValue: number[]) => {
+  const changeHandler = (_event: Event, newValue: number[]) => {
     if (Array.isArray(newValue)) {
       setPrice(newValue);
       setIsDisabled(false);

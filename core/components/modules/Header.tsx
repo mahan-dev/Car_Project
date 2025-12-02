@@ -27,11 +27,7 @@ interface HeaderProps {
   isClicked: boolean;
   clickHandler: () => void;
 }
-const Header = ({
-  data,
-  isClicked,
-  clickHandler,
-}: HeaderProps) => {
+const Header = ({ data, isClicked, clickHandler }: HeaderProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const [value, setValue] = useState<string>("");
   const [debouncedValue, setDebouncedValue] = useState<string>("");
@@ -56,6 +52,10 @@ const Header = ({
   return (
     <>
       <div className={styles.header__left}>
+        {(() => {
+          console.log("rendering header");
+          return null;
+        })()}
         {data ? (
           <>
             <div className={styles.header__account}>
@@ -64,10 +64,7 @@ const Header = ({
               </Link>
             </div>
 
-            <div
-              className={styles.left__menu}
-              onClick={clickHandler}
-            >
+            <div className={styles.left__menu} onClick={clickHandler}>
               {isClicked ? <IoClose /> : <IoMenu />}
             </div>
           </>
