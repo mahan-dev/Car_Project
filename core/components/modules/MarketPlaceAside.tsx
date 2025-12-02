@@ -16,6 +16,7 @@ import ButtonReset from "@/elements/ButtonReset";
 import { onClickHandler } from "@/helper/marketPlaceAside/clickHandler";
 import { resetHandler } from "@/helper/marketPlaceAside/resetHandler";
 import CarTypeAside from "@/elements/CarTypeAside";
+import { useSearchParams } from "next/navigation";
 
 interface AsideProps {
   price: number[];
@@ -29,9 +30,12 @@ const MarketPlaceAside = ({
   setGearBox,
   asideVisible,
 }: AsideProps) => {
+  const searchParams = useSearchParams();
+  const gearBoxUrl = searchParams.get("gearBox") || "";
+  const carTypeUrl = searchParams.get("category") || "";
   const [range, setRange] = useState<number[]>([0, 1000000]);
-  const [value, setValue] = useState<string>("");
-  const [type, setType] = useState<string>("");
+  const [value, setValue] = useState<string>(gearBoxUrl);
+  const [type, setType] = useState<string>(carTypeUrl);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const toggleRef = useRef<{ [key: string]: HTMLDivElement | null }>({});

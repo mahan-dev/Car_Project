@@ -1,5 +1,6 @@
 "use client";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import Link from "next/link";
 import React, { ChangeEvent } from "react";
 
 interface GearBoxAsideInterface {
@@ -19,8 +20,26 @@ const GearBoxAside = ({ value, onChange }: GearBoxAsideInterface) => {
           label="gearBox"
           onChange={onChange}
         >
-          <MenuItem value="Automatic">Automatic</MenuItem>
-          <MenuItem value="Manual">Manual</MenuItem>
+          <MenuItem value="Automatic">
+            <Link
+              href={{
+                pathname: "/marketplace",
+                query: { gearBox: "Automatic" },
+              }}
+            >
+              Automatic
+            </Link>
+          </MenuItem>
+          <MenuItem value="Manual">
+            <Link
+              href={{
+                pathname: "/marketplace",
+                query: { gearBox: "Manual" },
+              }}
+            >
+              Manual
+            </Link>
+          </MenuItem>
         </Select>
       </FormControl>
     </>
