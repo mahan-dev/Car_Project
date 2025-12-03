@@ -17,62 +17,82 @@ import { onClickHandler } from "@/helper/marketPlaceAside/clickHandler";
 import { resetHandler } from "@/helper/marketPlaceAside/resetHandler";
 import CarTypeAside from "@/elements/CarTypeAside";
 import { useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
 
 interface AsideProps {
   price: number[];
   setPrice: Dispatch<SetStateAction<number[]>>;
-  setGearBox: Dispatch<SetStateAction<string>>;
   asideVisible: boolean;
 }
 
-const MarketPlaceAside = ({
-  setPrice,
-  setGearBox,
-  asideVisible,
-}: AsideProps) => {
+const MarketPlaceAside = ({ setPrice, asideVisible }: AsideProps) => {
   const searchParams = useSearchParams();
   const gearBoxUrl = searchParams.get("gearBox") || "";
   const carTypeUrl = searchParams.get("category") || "";
   const [range, setRange] = useState<number[]>([0, 1000000]);
-  const [value, setValue] = useState<string>(gearBoxUrl);
-  const [type, setType] = useState<string>(carTypeUrl);
+  // const [value, setValue] = useState<string>(gearBoxUrl);
+  // const [type, setType] = useState<string>(carTypeUrl);
+
+  const { watch, setValue, reset } = useForm({
+    defaultValues: {
+      gearBox: gearBoxUrl || "",
+      category: carTypeUrl || "",
+      range: [0, 1000000],
+      priceRange: [0, 1000000],
+    },
+  });
+
+  const inputData = watch();
+
+  // const [select, setSelect] = useState({
+  //   gearBox: gearBoxUrl || "",
+  //   category: carTypeUrl || "",
+  //   priceRange: [0, 1000000],
+  // });
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const toggleRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  const changeHandler = (_event: Event, newValue: number[]) => {
+  const changeHandler = (
+    e: ChangeEvent<HTMLInputElement>,
+    newValue: number[]
+  ) => {
+    console.log(e.target.name);
     if (Array.isArray(newValue)) {
-      setPrice(newValue);
+      setValue("priceRange", newValue);
       setIsDisabled(false);
     }
   };
 
-  const selectHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setType(type);
-    setValue(value);
-    setGearBox(value);
+  console.log(inputData.gearBox)
+  const selectHandler = (e: ChangeEvent<HTMLInputElement>, v?: number[]) => {
+    console.log(v);
+
+    const { value, name } = e.target;
+    console.log(name);
+    const inputName = name as keyof typeof inputData;
+    console.log(inputData);
+    console.log(value)
+
+    setValue(inputName, value);
+
     setIsDisabled(false);
   };
 
-  const carTypeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    setType(value);
-  };
 
   const clickHandler = (e: MouseEvent<HTMLDivElement>) => {
     onClickHandler(e, toggleRef);
   };
 
   const onReset = () => {
-    resetHandler({
-      setValue,
-      setPrice,
-      setRange,
-      setGearBox,
-      setIsDisabled,
-      toggleRef,
+    reset();
+    reset({
+      gearBox: "",
+      category: "",
+      priceRange: [0, 1000000],
     });
+    resetHandler({toggleRef})
+
   };
 
   return (
@@ -98,10 +118,12 @@ const MarketPlaceAside = ({
           className={styles.close__item}
         >
           <Slider
-            value={range}
+            name="priceRange"
+            value={inputData.priceRange}
             min={0}
             max={1000000}
-            onChange={(e, v) => setRange(v as number[])}
+            onChange={(_, v) => setValue("priceRange", v as number[])}
+            // onChange={(e, v) => selectHandler(e as , v)}
             onChangeCommitted={changeHandler}
             valueLabelDisplay="auto"
             getAriaLabel={() => "Price range"}
@@ -125,7 +147,7 @@ const MarketPlaceAside = ({
           }}
           className={styles.close__item}
         >
-          <GearBoxAside value={value} onChange={selectHandler} />
+          <GearBoxAside value={inputData.gearBox} onChange={selectHandler} />
         </div>
       </li>
 
@@ -144,7 +166,7 @@ const MarketPlaceAside = ({
           }}
           className={styles.close__item}
         >
-          <CarTypeAside value={type} onChange={carTypeHandler} />
+          <CarTypeAside value={inputData.category} onChange={selectHandler} />
         </div>
       </li>
 

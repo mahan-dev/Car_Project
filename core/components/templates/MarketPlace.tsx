@@ -23,7 +23,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   //! States
   const [page, setPage] = useState<number>(1);
   const [price, setPrice] = useState<number[]>([0, 0]);
-  const [gearBox, setGearBox] = useState<string>("");
+
   const [debounce, setDebounce] = useState<number[]>([0, 0]);
   const [asideVisible, setAsideVisible] = useState<boolean>(false);
   //! States
@@ -52,9 +52,11 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   };
 
   const asideContentRef = useRef<HTMLDivElement>(null);
+  
 
-  const filteredCars: FilteredCars = filterCards(debounce, cars, gearBox);
-
+  // const filteredCars: FilteredCars = filterCards({debounce, cars, gearBox});
+  // console.log(filteredCars)
+ 
   const asideHandler = () => {
     const status = !asideVisible;
     setAsideVisible(status);
@@ -81,7 +83,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
                 price={price}
                 setPrice={setPrice}
                 asideVisible={asideVisible}
-                setGearBox={setGearBox}
               />
             </div>
           </aside>
@@ -90,7 +91,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
             {!asideVisible ? <FilterListRoundedIcon /> : <CloseRoundedIcon />}
           </div>
           <div className={styles.container__content}>
-            <RoomCard data={filteredCars} page={1} />
+            <RoomCard data={cars} page={1} />
             <div className={styles.container__pagination}>
               <Pagination
                 count={totalPage}

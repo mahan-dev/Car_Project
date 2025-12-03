@@ -1,6 +1,6 @@
 "use client";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent } from "react";
 
 interface GearBoxAsideInterface {
@@ -8,6 +8,13 @@ interface GearBoxAsideInterface {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 const GearBoxAside = ({ value, onChange }: GearBoxAsideInterface) => {
+
+
+  console.log(value)
+  const router = useRouter()
+  const selectHandler = (gearBox: string) => {
+    router.push(`/marketplace?gearBox=${gearBox}`)
+  }
   return (
     <>
       <FormControl fullWidth>
@@ -18,27 +25,14 @@ const GearBoxAside = ({ value, onChange }: GearBoxAsideInterface) => {
           id="gearBox"
           value={value}
           label="gearBox"
+          name="gearBox"
           onChange={onChange}
         >
-          <MenuItem value="Automatic">
-            <Link
-              href={{
-                pathname: "/marketplace",
-                query: { gearBox: "Automatic" },
-              }}
-            >
-              Automatic
-            </Link>
+          <MenuItem value="Automatic" id="Automatic" onClick={() => selectHandler("Automatic")}>
+          Automatic
           </MenuItem>
-          <MenuItem value="Manual">
-            <Link
-              href={{
-                pathname: "/marketplace",
-                query: { gearBox: "Manual" },
-              }}
-            >
-              Manual
-            </Link>
+          <MenuItem value="Manual" onClick={() => selectHandler("Manual")}>
+            Manual
           </MenuItem>
         </Select>
       </FormControl>

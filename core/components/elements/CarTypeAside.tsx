@@ -18,6 +18,7 @@ const CarTypeAside = ({ value, onChange }: TypeProps) => {
           labelId="type"
           id="type"
           label="type"
+          name="category"
           value={value}
           onChange={onChange}
         >

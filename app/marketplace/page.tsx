@@ -2,6 +2,9 @@ import React from "react";
 import MarketPlace from "@/templates/MarketPlace";
 import { Profile } from "@/models/profile";
 import { connectDb } from "@/utils/connectDb";
+import { filterCards } from "@/helper/filterCard";
+import { FetcherResponse } from "@/helper/dataFetcher";
+
 
 interface MarketPlaceProps {
   searchParams: Promise<{ category: string; gearBox: string }>;
@@ -12,14 +15,16 @@ const MarketPlacePage = async ({ searchParams }: MarketPlaceProps) => {
   await connectDb();
   const profile = await Profile.find({ published: true });
 
+  const finalData: FetcherResponse[] = JSON.parse(JSON.stringify(profile));
+  console.log(profile)
 
-  let finalData = profile;
 
-  if (category)
-    finalData = profile.filter((item) => item.category === category);
-  if (gearBox) finalData = profile.filter((item) => item.gearbox === gearBox);
+  const res = filterCards({category, gearBox, finalData});
+  console.log(res)
 
-  return <MarketPlace profile={JSON.parse(JSON.stringify(finalData))} />;
+
+
+  return <MarketPlace profile={res} />;
 };
 
 export default MarketPlacePage;
