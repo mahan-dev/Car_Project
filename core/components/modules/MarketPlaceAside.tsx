@@ -16,12 +16,15 @@ import ButtonReset from "@/elements/ButtonReset";
 import { onClickHandler } from "@/helper/marketPlaceAside/clickHandler";
 import { resetHandler } from "@/helper/marketPlaceAside/resetHandler";
 import CarTypeAside from "@/elements/CarTypeAside";
-import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import SearchParamsHandler from "@/core/helper/searchParamsHandler";
+import SearchParamsHandler from "@/helper/searchParamsHandler";
+import { AsideUseForm } from "@/helper/marketPlaceAside/asideUseForm";
+import { useSearchParams } from "next/navigation";
+import { FetcherResponse } from "@/helper/dataFetcher";
+import { filterCards } from "@/core/helper/filterCard";
 
 interface AsideProps {
-  price: number[];
+  profile: FetcherResponse[];
   setPrice: Dispatch<SetStateAction<number[]>>;
   asideVisible: boolean;
 }
@@ -34,27 +37,19 @@ export interface FormFields {
   priceRange: number[];
 }
 
-const MarketPlaceAside = ({ setPrice, asideVisible }: AsideProps) => {
-  const searchParams = useSearchParams();
-  const gearBoxUrl = searchParams.get("gearBox") ?? "";
-  const carTypeUrl = searchParams.get("category") ?? "";
-
-  const minPrice = searchParams.get("priceRange-min") ?? 0;
-  const maxPrice = searchParams.get("priceRange-max") ?? 1000000;
-
+const MarketPlaceAside = ({ profile, setPrice, asideVisible }: AsideProps) => {
+  const { defaultValues } = AsideUseForm();
   const { watch, setValue, reset } = useForm({
-    defaultValues: {
-      gearBox: gearBoxUrl,
-      category: carTypeUrl,
-      debounceValue: [0, 1000000],
-      range: [0, 1000000],
-      priceRange: [minPrice, maxPrice],
-    },
+    defaultValues,
   });
 
   const inputData = watch();
 
-  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const searParams = useSearchParams();
+  console.log();
+  const [isDisabled, setIsDisabled] = useState<boolean>(
+    searParams.size > 1 ? false : true
+  );
 
   const toggleRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
@@ -93,7 +88,10 @@ const MarketPlaceAside = ({ setPrice, asideVisible }: AsideProps) => {
       category: "",
       priceRange: [0, 1000000],
     });
+    setIsDisabled(true);
     resetHandler({ toggleRef });
+    filterCards({ finalData: profile });
+    window.location.href = "/marketplace?page=1";
   };
 
   return (

@@ -28,6 +28,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   const [asideVisible, setAsideVisible] = useState<boolean>(false);
   //! States
 
+  const asideContentRef = useRef<HTMLDivElement>(null);
   const { totalPage, cars } = pageHandler({ page, carData: profile });
 
   useEffect(() => {
@@ -51,10 +52,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
     return () => clearTimeout(timer);
   };
 
-  const asideContentRef = useRef<HTMLDivElement>(null);
-
-  const filteredCars: FilteredCars = filterCards({ debounce, cars });
-
   const asideHandler = () => {
     const status = !asideVisible;
     setAsideVisible(status);
@@ -64,6 +61,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   const listener = (e: MouseEvent) =>
     clickHandler({ e, asideVisible, asideContentRef, setAsideVisible });
 
+  const filteredCars: FilteredCars = filterCards({ debounce, cars });
   return (
     <section className={styles.container}>
       <div className={styles.container__main}>
@@ -77,7 +75,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
             ref={asideContentRef}
           >
             <MarketPlaceAside
-              price={price}
+              profile={profile}
               setPrice={setPrice}
               asideVisible={asideVisible}
             />
@@ -101,22 +99,22 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
             </div>
           </div>
         )}
-      {!filteredCars.length && (
-        <Typography
-          sx={{
-            width: "100%",
-            
-            display: "flex",
-            justifyContent: "center",
-            fontSize: "1.3rem",
-            fontWeight: "600",
-          }}
-          variant="h2"
-        >
-          {" "}
-          nothing found 🙁
-        </Typography>
-      )}
+        {!filteredCars.length && (
+          <Typography
+            sx={{
+              width: "100%",
+
+              display: "flex",
+              justifyContent: "center",
+              fontSize: "1.3rem",
+              fontWeight: "600",
+            }}
+            variant="h2"
+          >
+            {" "}
+            nothing found 🙁
+          </Typography>
+        )}
       </div>
     </section>
   );
