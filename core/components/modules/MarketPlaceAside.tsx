@@ -19,9 +19,10 @@ import CarTypeAside from "@/elements/CarTypeAside";
 import { useForm } from "react-hook-form";
 import SearchParamsHandler from "@/helper/searchParamsHandler";
 import { AsideUseForm } from "@/helper/marketPlaceAside/asideUseForm";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FetcherResponse } from "@/helper/dataFetcher";
 import { filterCards } from "@/core/helper/filterCard";
+import { filterKeys } from "@/constants/marketPlaceAside/constants";
 
 interface AsideProps {
   profile: FetcherResponse[];
@@ -46,10 +47,12 @@ const MarketPlaceAside = ({ profile, setPrice, asideVisible }: AsideProps) => {
   const inputData = watch();
 
   const searParams = useSearchParams();
-  console.log();
-  const [isDisabled, setIsDisabled] = useState<boolean>(
-    searParams.size > 1 ? false : true
-  );
+
+ 
+
+  const isFilter = filterKeys.some((item) => searParams.get(item));
+
+  const [isDisabled, setIsDisabled] = useState<boolean>(!isFilter);
 
   const toggleRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
@@ -81,6 +84,7 @@ const MarketPlaceAside = ({ profile, setPrice, asideVisible }: AsideProps) => {
     onClickHandler(e, toggleRef);
   };
 
+  const router = useRouter();
   const onReset = () => {
     reset();
     reset({
@@ -91,7 +95,7 @@ const MarketPlaceAside = ({ profile, setPrice, asideVisible }: AsideProps) => {
     setIsDisabled(true);
     resetHandler({ toggleRef });
     filterCards({ finalData: profile });
-    window.location.href = "/marketplace?page=1";
+    router.push("/marketplace?page=1");
   };
 
   return (
