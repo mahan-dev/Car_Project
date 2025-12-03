@@ -18,6 +18,7 @@ import { resetHandler } from "@/helper/marketPlaceAside/resetHandler";
 import CarTypeAside from "@/elements/CarTypeAside";
 import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
+import SearchParamsHandler from "@/core/helper/searchParamsHandler";
 
 interface AsideProps {
   price: number[];
@@ -25,60 +26,61 @@ interface AsideProps {
   asideVisible: boolean;
 }
 
+export interface FormFields {
+  gearBox: string;
+  category: string;
+  debounceValue: number[];
+  range: number[];
+  priceRange: number[];
+}
+
 const MarketPlaceAside = ({ setPrice, asideVisible }: AsideProps) => {
   const searchParams = useSearchParams();
-  const gearBoxUrl = searchParams.get("gearBox") || "";
-  const carTypeUrl = searchParams.get("category") || "";
-  const [range, setRange] = useState<number[]>([0, 1000000]);
-  // const [value, setValue] = useState<string>(gearBoxUrl);
-  // const [type, setType] = useState<string>(carTypeUrl);
+  const gearBoxUrl = searchParams.get("gearBox") ?? "";
+  const carTypeUrl = searchParams.get("category") ?? "";
+
+  const minPrice = searchParams.get("priceRange-min") ?? 0;
+  const maxPrice = searchParams.get("priceRange-max") ?? 1000000;
 
   const { watch, setValue, reset } = useForm({
     defaultValues: {
-      gearBox: gearBoxUrl || "",
-      category: carTypeUrl || "",
+      gearBox: gearBoxUrl,
+      category: carTypeUrl,
+      debounceValue: [0, 1000000],
       range: [0, 1000000],
-      priceRange: [0, 1000000],
+      priceRange: [minPrice, maxPrice],
     },
   });
 
   const inputData = watch();
 
-  // const [select, setSelect] = useState({
-  //   gearBox: gearBoxUrl || "",
-  //   category: carTypeUrl || "",
-  //   priceRange: [0, 1000000],
-  // });
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
   const toggleRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
+  const { setParam } = SearchParamsHandler();
   const changeHandler = (
     e: ChangeEvent<HTMLInputElement>,
     newValue: number[]
   ) => {
-    console.log(e.target.name);
     if (Array.isArray(newValue)) {
       setValue("priceRange", newValue);
+      setPrice(newValue);
       setIsDisabled(false);
+      setParam("priceRange", newValue);
     }
   };
 
-  console.log(inputData.gearBox)
-  const selectHandler = (e: ChangeEvent<HTMLInputElement>, v?: number[]) => {
-    console.log(v);
-
+  const selectHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-    console.log(name);
+
     const inputName = name as keyof typeof inputData;
-    console.log(inputData);
-    console.log(value)
 
     setValue(inputName, value);
+    setParam(inputName, value);
 
     setIsDisabled(false);
   };
-
 
   const clickHandler = (e: MouseEvent<HTMLDivElement>) => {
     onClickHandler(e, toggleRef);
@@ -91,8 +93,7 @@ const MarketPlaceAside = ({ setPrice, asideVisible }: AsideProps) => {
       category: "",
       priceRange: [0, 1000000],
     });
-    resetHandler({toggleRef})
-
+    resetHandler({ toggleRef });
   };
 
   return (
@@ -119,11 +120,10 @@ const MarketPlaceAside = ({ setPrice, asideVisible }: AsideProps) => {
         >
           <Slider
             name="priceRange"
-            value={inputData.priceRange}
+            value={inputData.priceRange as number[]}
             min={0}
             max={1000000}
             onChange={(_, v) => setValue("priceRange", v as number[])}
-            // onChange={(e, v) => selectHandler(e as , v)}
             onChangeCommitted={changeHandler}
             valueLabelDisplay="auto"
             getAriaLabel={() => "Price range"}

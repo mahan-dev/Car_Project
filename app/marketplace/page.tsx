@@ -5,7 +5,6 @@ import { connectDb } from "@/utils/connectDb";
 import { filterCards } from "@/helper/filterCard";
 import { FetcherResponse } from "@/helper/dataFetcher";
 
-
 interface MarketPlaceProps {
   searchParams: Promise<{ category: string; gearBox: string }>;
 }
@@ -16,13 +15,8 @@ const MarketPlacePage = async ({ searchParams }: MarketPlaceProps) => {
   const profile = await Profile.find({ published: true });
 
   const finalData: FetcherResponse[] = JSON.parse(JSON.stringify(profile));
-  console.log(profile)
 
-
-  const res = filterCards({category, gearBox, finalData});
-  console.log(res)
-
-
+  const res = filterCards({ category, gearBox, finalData });
 
   return <MarketPlace profile={res} />;
 };

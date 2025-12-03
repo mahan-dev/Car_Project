@@ -52,11 +52,9 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   };
 
   const asideContentRef = useRef<HTMLDivElement>(null);
-  
 
-  // const filteredCars: FilteredCars = filterCards({debounce, cars, gearBox});
-  // console.log(filteredCars)
- 
+  const filteredCars: FilteredCars = filterCards({ debounce, cars });
+
   const asideHandler = () => {
     const status = !asideVisible;
     setAsideVisible(status);
@@ -68,30 +66,30 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
 
   return (
     <section className={styles.container}>
-      {!!cars.length ? (
-        <div className={styles.container__main}>
-          <aside
-            className={`${
-              asideVisible ? styles.show__aside : styles.main__aside
-            }`}
+      <div className={styles.container__main}>
+        <aside
+          className={`${
+            asideVisible ? styles.show__aside : styles.main__aside
+          }`}
+        >
+          <div
+            style={{ display: asideVisible ? "block" : "" }}
+            ref={asideContentRef}
           >
-            <div
-              style={{ display: asideVisible ? "block" : "" }}
-              ref={asideContentRef}
-            >
-              <MarketPlaceAside
-                price={price}
-                setPrice={setPrice}
-                asideVisible={asideVisible}
-              />
-            </div>
-          </aside>
-
-          <div className={styles.main__filter} onClick={asideHandler}>
-            {!asideVisible ? <FilterListRoundedIcon /> : <CloseRoundedIcon />}
+            <MarketPlaceAside
+              price={price}
+              setPrice={setPrice}
+              asideVisible={asideVisible}
+            />
           </div>
+        </aside>
+
+        <div className={styles.main__filter} onClick={asideHandler}>
+          {!asideVisible ? <FilterListRoundedIcon /> : <CloseRoundedIcon />}
+        </div>
+        {!!filteredCars.length && (
           <div className={styles.container__content}>
-            <RoomCard data={cars} page={1} />
+            <RoomCard data={filteredCars} page={1} />
             <div className={styles.container__pagination}>
               <Pagination
                 count={totalPage}
@@ -102,10 +100,12 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
               />
             </div>
           </div>
-        </div>
-      ) : (
+        )}
+      {!filteredCars.length && (
         <Typography
           sx={{
+            width: "100%",
+            
             display: "flex",
             justifyContent: "center",
             fontSize: "1.3rem",
@@ -117,6 +117,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
           nothing found 🙁
         </Typography>
       )}
+      </div>
     </section>
   );
 };
