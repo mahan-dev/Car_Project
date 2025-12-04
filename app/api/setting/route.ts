@@ -13,11 +13,10 @@ interface PostProps {
 export const POST = async (req: Request) => {
   try {
     await connectDb();
-    console.log("hi1");
+
     const res: PostProps = await req.json();
     const { password, newPassword } = res;
 
-    console.log(password, newPassword);
 
     const session = await getServerSession(authOptions);
     if (!session)

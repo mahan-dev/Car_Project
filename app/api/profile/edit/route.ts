@@ -41,7 +41,7 @@ export const PATCH = async (req: Request) => {
       );
 
     const profile = await Profile.findOne({ _id });
-    console.log(profile);
+
 
     const userId = user._id as Types.ObjectId;
     const profileId = profile.userId as Types.ObjectId;
@@ -51,9 +51,9 @@ export const PATCH = async (req: Request) => {
         { status: "Failed", error: "your access denied" },
         { status: 403 }
       );
-    console.log(imageUrl);
 
-    const res = Object.assign(profile, {
+
+     Object.assign(profile, {
       model_make_id,
       model_name,
       image: imageUrl,
@@ -67,8 +67,6 @@ export const PATCH = async (req: Request) => {
       addDate,
     });
     await profile.save();
-    console.log(res);
-    console.log("bellow");
 
     return NextResponse.json(
       { status: "Success", message: "Profile Edited" },

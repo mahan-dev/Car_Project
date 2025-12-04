@@ -8,7 +8,6 @@ import { pageHandler } from "@/helper/carPerPage";
 import { paginationHandler } from "@/helper/paginationHandler";
 import { initialPage } from "@/helper/initialPage";
 import MarketPlaceAside from "@/modules/MarketPlaceAside";
-import { filterCards } from "@/helper/filterCard";
 import FilterListRoundedIcon from "@mui/icons-material/FilterListRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { clickHandler } from "@/helper/MarketClickHandler";
@@ -17,14 +16,13 @@ interface MarketPlaceInterface {
   profile: FetcherResponse[];
 }
 
-type FilteredCars = FetcherResponse[] | { data: FetcherResponse[] };
 
 const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   //! States
   const [page, setPage] = useState<number>(1);
-  const [price, setPrice] = useState<number[]>([0, 0]);
 
-  const [debounce, setDebounce] = useState<number[]>([0, 0]);
+
+
   const [asideVisible, setAsideVisible] = useState<boolean>(false);
   //! States
 
@@ -40,17 +38,8 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
     initialPage(page, setPage);
   }, [page]);
 
-  useEffect(() => {
-    debounceHandler();
-  }, [price]);
 
-  const debounceHandler = () => {
-    const timer = setTimeout(() => {
-      setDebounce(price);
-    }, 600);
 
-    return () => clearTimeout(timer);
-  };
 
   const asideHandler = () => {
     const status = !asideVisible;
@@ -61,7 +50,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   const listener = (e: MouseEvent) =>
     clickHandler({ e, asideVisible, asideContentRef, setAsideVisible });
 
-  const filteredCars: FilteredCars = filterCards({ debounce, cars });
+
   return (
     <section className={styles.container}>
       <div className={styles.container__main}>
@@ -76,7 +65,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
           >
             <MarketPlaceAside
               profile={profile}
-              setPrice={setPrice}
               asideVisible={asideVisible}
             />
           </div>
@@ -85,9 +73,9 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
         <div className={styles.main__filter} onClick={asideHandler}>
           {!asideVisible ? <FilterListRoundedIcon /> : <CloseRoundedIcon />}
         </div>
-        {!!filteredCars.length && (
+        {!!cars.length && (
           <div className={styles.container__content}>
-            <RoomCard data={filteredCars} page={1} />
+            <RoomCard data={cars} page={1} />
             <div className={styles.container__pagination}>
               <Pagination
                 count={totalPage}
@@ -99,7 +87,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
             </div>
           </div>
         )}
-        {!filteredCars.length && (
+        {!cars.length && (
           <Typography
             sx={{
               width: "100%",

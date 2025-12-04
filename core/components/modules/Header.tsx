@@ -63,14 +63,14 @@ const Header = ({ data, isClicked, clickHandler }: HeaderProps) => {
             </div>
           </>
         ) : (
-          <>
+          <div className={styles.left__content}>
             <Link href={"/"}>
               <Image src={steeringWheel} width={20} height={20} alt="" />
             </Link>
             <Button href="/signin" sx={{ color: "white", bgcolor: "black" }}>
               Sign in
             </Button>
-          </>
+          </div>
         )}
       </div>
 

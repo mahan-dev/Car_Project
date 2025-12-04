@@ -1,7 +1,6 @@
 import { FetcherResponse } from "@/helper/dataFetcher";
 
 interface FilterProps {
-  debounce?: number[];
   category?: string;
   price?: number[];
   gearBox?: string;
@@ -9,7 +8,6 @@ interface FilterProps {
   finalData?: FetcherResponse[];
 }
 export const filterCards = ({
-  debounce,
   category,
   price,
   cars,

@@ -3,8 +3,8 @@ export const searchParamsHandler = (params) => {
     .filter(([key]) => key.includes("priceRange"))
     .map(([_, value]) => +value);
 
-  const min = res[0];
-  const max = res[1];
+  const min = res[0] ?? 0;
+  const max = res[1] ?? 1000000;
   return {
     price: [min, max],
   };

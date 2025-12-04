@@ -27,7 +27,6 @@ import { filterKeys } from "@/constants/marketPlaceAside/constants";
 
 interface AsideProps {
   profile: FetcherResponse[];
-  setPrice: Dispatch<SetStateAction<number[]>>;
   asideVisible: boolean;
 }
 
@@ -39,7 +38,7 @@ export interface FormFields {
   priceRange: number[];
 }
 
-const MarketPlaceAside = ({ profile, setPrice, asideVisible }: AsideProps) => {
+const MarketPlaceAside = ({ profile, asideVisible }: AsideProps) => {
   const { defaultValues } = AsideUseForm();
   const { watch, setValue, reset } = useForm({
     defaultValues,

@@ -28,7 +28,6 @@ export const DELETE = async (req: Request, context: DeleteProps) => {
         { status: 404 }
       );
 
-    console.log(user._id);
     await Profile.deleteOne({ _id: removeId });
 
     return NextResponse.json({

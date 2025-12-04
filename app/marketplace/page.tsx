@@ -4,8 +4,7 @@ import { Profile } from "@/models/profile";
 import { connectDb } from "@/utils/connectDb";
 import { filterCards } from "@/helper/filterCard";
 import { FetcherResponse } from "@/helper/dataFetcher";
-import SearchParamsHandler from "@/core/helper/searchParamsHandler";
-import { searchParamsHandler } from "@/core/helper/marketPlace/searchParamHandler";
+import { searchParamsHandler } from "@/helper/marketPlace/searchParamHandler";
 
 interface MarketPlaceProps {
   searchParams: Promise<{
@@ -24,6 +23,7 @@ const MarketPlacePage = async ({ searchParams }: MarketPlaceProps) => {
 
   await connectDb();
   const profile = await Profile.find({ published: true });
+
 
   const finalData: FetcherResponse[] = JSON.parse(JSON.stringify(profile));
 

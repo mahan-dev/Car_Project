@@ -26,6 +26,11 @@
     }
 }
 
+.left__content {
+    display: flex;
+    gap: 1rem;
+}
+
 .header__account svg {
     font-size: 1.5rem;
 }
@@ -51,6 +56,7 @@
 
 .footer {
     display: flex;
+    flex-wrap: wrap;
     margin: 2rem 0;
     padding: 1rem;
     gap: 2rem;
@@ -101,4 +107,20 @@
         cursor: pointer;
     }
 
+}
+
+@media only screen and (max-width: 576px) {
+    .header {
+        font-size: 0.9rem;
+        padding: 0.3rem;
+    }
+    .left__content {
+    & a:first-child{
+
+        display: none;
+    }
+    & a:nth-child(2) {
+        font-size: 0.8rem;
+    }
+}
 }
