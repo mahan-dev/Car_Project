@@ -10,14 +10,14 @@ const SearchParamsHandler = () => {
     if (Array.isArray(value)) {
       const [minPrice, maxPrice] = value;
 
-      params.set(`${inputName}-min`, String(minPrice));
-      params.set(`${inputName}-max`, String(maxPrice));
+      params.set(`${inputName}-min`, String([minPrice]));
+      params.set(`${inputName}-max`, String([maxPrice]));
       params.set("page", "1");
     } else {
       params.set(inputName, value);
       params.set("page", "1");
     }
-    console.log(params);
+
     router.push(`/marketplace?${params.toString()}`);
   };
   return { setParam };

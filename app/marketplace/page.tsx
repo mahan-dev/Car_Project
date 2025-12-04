@@ -4,19 +4,30 @@ import { Profile } from "@/models/profile";
 import { connectDb } from "@/utils/connectDb";
 import { filterCards } from "@/helper/filterCard";
 import { FetcherResponse } from "@/helper/dataFetcher";
+import SearchParamsHandler from "@/core/helper/searchParamsHandler";
+import { searchParamsHandler } from "@/core/helper/marketPlace/searchParamHandler";
 
 interface MarketPlaceProps {
-  searchParams: Promise<{ category: string; gearBox: string }>;
+  searchParams: Promise<{
+    category: string;
+    gearBox: string;
+    "priceRange-min": number[];
+    "priceRange-max": number[];
+  }>;
 }
 
 const MarketPlacePage = async ({ searchParams }: MarketPlaceProps) => {
+  const params = await searchParams;
   const { category, gearBox } = await searchParams;
+
+  const { price } = searchParamsHandler(params);
+
   await connectDb();
   const profile = await Profile.find({ published: true });
 
   const finalData: FetcherResponse[] = JSON.parse(JSON.stringify(profile));
 
-  const res = filterCards({ category, gearBox, finalData });
+  const res = filterCards({ category, gearBox, price, finalData });
 
   return <MarketPlace profile={res} />;
 };

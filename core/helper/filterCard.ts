@@ -3,6 +3,7 @@ import { FetcherResponse } from "@/helper/dataFetcher";
 interface FilterProps {
   debounce?: number[];
   category?: string;
+  price?: number[];
   gearBox?: string;
   cars?: FetcherResponse[];
   finalData?: FetcherResponse[];
@@ -10,6 +11,7 @@ interface FilterProps {
 export const filterCards = ({
   debounce,
   category,
+  price,
   cars,
   gearBox,
   finalData,
@@ -18,8 +20,8 @@ export const filterCards = ({
 
   if (!!cars?.length && !!finalData?.length) return;
 
-  if (debounce && debounce.length === 2) {
-    const [minPrice, maxPrice] = debounce;
+  if (price && price.length === 2) {
+    const [minPrice, maxPrice] = price;
     if (!(minPrice === 0 && maxPrice === 0)) {
       result = result.filter((item) => {
         const price = +item.price;

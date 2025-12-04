@@ -6,6 +6,7 @@ import React, {
   SetStateAction,
   useState,
   useRef,
+  useEffect,
 } from "react";
 import styles from "@/modules/styles/marketPlaceAside/route.module.css";
 import { FaFilter } from "react-icons/fa6";
@@ -48,8 +49,6 @@ const MarketPlaceAside = ({ profile, setPrice, asideVisible }: AsideProps) => {
 
   const searParams = useSearchParams();
 
- 
-
   const isFilter = filterKeys.some((item) => searParams.get(item));
 
   const [isDisabled, setIsDisabled] = useState<boolean>(!isFilter);
@@ -62,8 +61,7 @@ const MarketPlaceAside = ({ profile, setPrice, asideVisible }: AsideProps) => {
     newValue: number[]
   ) => {
     if (Array.isArray(newValue)) {
-      setValue("priceRange", newValue);
-      setPrice(newValue);
+      setValue("priceRange", newValue); 
       setIsDisabled(false);
       setParam("priceRange", newValue);
     }
@@ -97,6 +95,7 @@ const MarketPlaceAside = ({ profile, setPrice, asideVisible }: AsideProps) => {
     filterCards({ finalData: profile });
     router.push("/marketplace?page=1");
   };
+
 
   return (
     <ul className={`${asideVisible ? styles.list__visible : styles.list}`}>
