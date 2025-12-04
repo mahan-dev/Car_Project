@@ -26,16 +26,20 @@ export interface CarDetail {
 
 const Base_Url = "https://www.carqueryapi.com/api/0.3/?cmd=getModels&make=";
 
+const revalidate = 604800;
+
 export const dataFetcher = async () => {
   try {
-    const [bmwData, audiData] = await Promise.all([
-      axios.get<Car>(`${Base_Url}bmw`),
-      axios.get<Car>(`${Base_Url}audi`),
+    const [bmwData, audiData]: Car[] = await Promise.all([
+      fetch(`${Base_Url}bmw`, { next: { revalidate } }).then((res) =>
+        res.json()
+      ),
+      fetch(`${Base_Url}audi`, { next: { revalidate } }).then((res) =>
+        res.json()
+      ),
     ]);
 
-    const bmwRes = bmwData.data;
-    const audiRes = audiData.data;
-    const data = [...(bmwRes.Models || []), ...(audiRes.Models || [])];
+    const data = [...(bmwData.Models || []), ...(audiData.Models || [])];
 
     return {
       data: data,
@@ -47,9 +51,13 @@ export const dataFetcher = async () => {
 
 export const carDetail = async (make: string, model: string) => {
   try {
-    const { data } = await axios.get<CarDetail>(
-      `https://www.carqueryapi.com/api/0.3/?&cmd=getTrims&make=${make}&model=${model}`
+    const res = await fetch(
+      `https://www.carqueryapi.com/api/0.3/?&cmd=getTrims&make=${make}&model=${model}`,
+      {
+        cache: "no-store",
+      }
     );
+    const data: CarDetail = await res.json();
     return data.Trims[0];
   } catch (error) {
     console.log(error);
