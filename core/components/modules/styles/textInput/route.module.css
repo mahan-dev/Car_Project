@@ -2,7 +2,7 @@
     width: fit-content;
     display: flex;
     flex-direction: column;
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
 .main__content{
     width: 100%;
