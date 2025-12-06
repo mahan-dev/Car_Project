@@ -7,7 +7,7 @@ import React, {
   useRef,
 } from "react";
 import styles from "@/layout/styles/layout.module.css";
-import { FetcherResponse } from "@/core/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import SearchResult from "./SearchResult";
 import { searchClick } from "@/core/helper/searchBoxClick";
 

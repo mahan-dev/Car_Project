@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "@/elements/styles/searchResult/route.module.css";
-import { FetcherResponse } from "@/core/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import { useRouter } from "next/navigation";
 
 interface SearchProps {
