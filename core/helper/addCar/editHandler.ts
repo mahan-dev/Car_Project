@@ -2,7 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 import { AddForm } from "@/modules/interface/FormValues";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 
 export const editHandler = async (profileData: AddForm) => {
   const { status } = await axios.patch<FetcherResponse>(

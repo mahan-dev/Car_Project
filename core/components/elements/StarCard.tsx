@@ -4,7 +4,7 @@ import React, { Dispatch, SetStateAction } from "react";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import { whishListHandler } from "@/helper/whishList";
 import { isInWhishList } from "@/helper/isInWhishList";
 import { GoStarFill } from "react-icons/go";

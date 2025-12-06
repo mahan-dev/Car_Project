@@ -1,4 +1,4 @@
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import { Dispatch, SetStateAction } from "react";
 
 interface WhishListProps {

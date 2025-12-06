@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 
 export const WhishListHook = () => {
   const [whishList, setWhishList] = useState<FetcherResponse[]>(() => {
@@ -13,5 +13,3 @@ export const WhishListHook = () => {
     setWhishList,
   };
 };
-
-

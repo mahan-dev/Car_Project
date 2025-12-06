@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { Button, Card, Typography } from "@mui/material";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import styles from "@/modules/styles/roomCard/route.module.css";
 
 import { TbListDetails } from "react-icons/tb";
@@ -11,13 +11,11 @@ import StarCard from "@/elements/StarCard";
 import { WhishListHook } from "@/hooks/WhishList";
 import { usePathname, useRouter } from "next/navigation";
 
-
 interface RoomCardProps {
   data: { data: FetcherResponse[] } | FetcherResponse[];
   page?: number;
 }
 const RoomCard = ({ page, data }: RoomCardProps) => {
-
   const carData = Array.isArray(data) ? data : data.data;
   const { cars } = pageHandler({ page, carData });
 

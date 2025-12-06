@@ -1,4 +1,4 @@
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 
 export const isInWhishList = (modelName: string, makeId: string): boolean => {
   const getList: FetcherResponse[] =

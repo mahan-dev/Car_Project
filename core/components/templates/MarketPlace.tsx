@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import RoomCard from "@/modules/RoomCard";
 import styles from "@/templates/styles/marketPlace/route.module.css";
 import { Pagination, Typography } from "@mui/material";
@@ -16,12 +16,9 @@ interface MarketPlaceInterface {
   profile: FetcherResponse[];
 }
 
-
 const MarketPlace = ({ profile }: MarketPlaceInterface) => {
   //! States
   const [page, setPage] = useState<number>(1);
-
-
 
   const [asideVisible, setAsideVisible] = useState<boolean>(false);
   //! States
@@ -38,9 +35,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
     initialPage(page, setPage);
   }, [page]);
 
-
-
-
   const asideHandler = () => {
     const status = !asideVisible;
     setAsideVisible(status);
@@ -49,7 +43,6 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
 
   const listener = (e: MouseEvent) =>
     clickHandler({ e, asideVisible, asideContentRef, setAsideVisible });
-
 
   return (
     <section className={styles.container}>
@@ -63,10 +56,7 @@ const MarketPlace = ({ profile }: MarketPlaceInterface) => {
             style={{ display: asideVisible ? "block" : "" }}
             ref={asideContentRef}
           >
-            <MarketPlaceAside
-              profile={profile}
-              asideVisible={asideVisible}
-            />
+            <MarketPlaceAside profile={profile} asideVisible={asideVisible} />
           </div>
         </aside>
 

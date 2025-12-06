@@ -12,7 +12,7 @@ import ImageElement from "@/elements/ImageElement";
 import DeleteButton from "@/elements/DeleteButton";
 import Loader from "@/loader/Loader";
 import DatePicker from "@/elements/DatePicker";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import { defaultHandler } from "@/constants/addCar/addCar";
 import { editHandler } from "@/helper/addCar/editHandler";
 import { onSubmit } from "@/helper/addCar/submitHandler";

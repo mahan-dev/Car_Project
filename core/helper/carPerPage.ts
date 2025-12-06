@@ -1,4 +1,4 @@
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 
 interface PageInterface {
   page: number;

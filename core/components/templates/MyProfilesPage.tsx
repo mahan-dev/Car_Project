@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 
 import styles from "@/templates/styles/myProfiles/route.module.css";
 
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import MyProfileButton from "@/elements/MyProfileButton";
 
 interface ProfileInterface {

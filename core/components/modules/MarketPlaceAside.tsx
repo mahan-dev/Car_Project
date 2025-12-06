@@ -1,13 +1,5 @@
 "use client";
-import React, {
-  ChangeEvent,
-  MouseEvent,
-  Dispatch,
-  SetStateAction,
-  useState,
-  useRef,
-  useEffect,
-} from "react";
+import React, { ChangeEvent, MouseEvent, useState, useRef } from "react";
 import styles from "@/modules/styles/marketPlaceAside/route.module.css";
 import { FaFilter } from "react-icons/fa6";
 import { Slider } from "@mui/material";
@@ -21,7 +13,7 @@ import { useForm } from "react-hook-form";
 import SearchParamsHandler from "@/helper/searchParamsHandler";
 import { AsideUseForm } from "@/helper/marketPlaceAside/asideUseForm";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import { filterCards } from "@/core/helper/filterCard";
 import { filterKeys } from "@/constants/marketPlaceAside/constants";
 
@@ -60,7 +52,7 @@ const MarketPlaceAside = ({ profile, asideVisible }: AsideProps) => {
     newValue: number[]
   ) => {
     if (Array.isArray(newValue)) {
-      setValue("priceRange", newValue); 
+      setValue("priceRange", newValue);
       setIsDisabled(false);
       setParam("priceRange", newValue);
     }
@@ -94,7 +86,6 @@ const MarketPlaceAside = ({ profile, asideVisible }: AsideProps) => {
     filterCards({ finalData: profile });
     router.push("/marketplace?page=1");
   };
-
 
   return (
     <ul className={`${asideVisible ? styles.list__visible : styles.list}`}>

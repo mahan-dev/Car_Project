@@ -3,7 +3,7 @@ import MarketPlace from "@/templates/MarketPlace";
 import { Profile } from "@/models/profile";
 import { connectDb } from "@/utils/connectDb";
 import { filterCards } from "@/helper/filterCard";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import { searchParamsHandler } from "@/helper/marketPlace/searchParamHandler";
 
 interface MarketPlaceProps {

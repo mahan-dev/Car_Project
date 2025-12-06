@@ -1,12 +1,11 @@
 "use client";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import RoomCard from "@/modules/RoomCard";
 import { Button, Typography } from "@mui/material";
 import React from "react";
 const WhishList = () => {
   const data: FetcherResponse[] = JSON.parse(localStorage.getItem("whishList"));
 
-  
   if (!data?.length)
     return (
       <div>
@@ -37,7 +36,7 @@ const WhishList = () => {
       </div>
     );
 
-  return <div>{data && <RoomCard  data={data} />}</div>;
+  return <div>{data && <RoomCard data={data} />}</div>;
 };
 
 export default WhishList;
