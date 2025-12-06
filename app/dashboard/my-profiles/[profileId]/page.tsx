@@ -1,5 +1,5 @@
 import AddCar from "@/modules/AddCar";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import { Profile } from "@/models/profile";
 import { connectDb } from "@/utils/connectDb";
 
