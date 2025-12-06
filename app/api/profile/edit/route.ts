@@ -1,5 +1,5 @@
 import { connectDb } from "@/utils/connectDb";
-import { FetcherResponse } from "@/helper/dataFetcher";
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/authOptions";
@@ -42,7 +42,6 @@ export const PATCH = async (req: Request) => {
 
     const profile = await Profile.findOne({ _id });
 
-
     const userId = user._id as Types.ObjectId;
     const profileId = profile.userId as Types.ObjectId;
 
@@ -52,8 +51,7 @@ export const PATCH = async (req: Request) => {
         { status: 403 }
       );
 
-
-     Object.assign(profile, {
+    Object.assign(profile, {
       model_make_id,
       model_name,
       image: imageUrl,
