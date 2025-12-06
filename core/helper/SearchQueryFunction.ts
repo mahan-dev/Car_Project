@@ -1,5 +1,7 @@
-import { dataFetcher, FetcherResponse } from "@/helper/dataFetcher";
 import toast from "react-hot-toast";
+
+import { FetcherResponse } from "@/helper/interface/dataFetcher/interface";
+import { dataFetcher } from "@/helper/dataFetcher";
 
 const carModels: string[] = ["bmw", "audi"];
 export const SearchQuery = async (
